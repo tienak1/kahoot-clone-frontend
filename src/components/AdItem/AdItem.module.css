@@ -1,0 +1,16 @@
+h5 {
+  font-weight: bold;
+}
+
+.card-left {
+  border: 1px solid red;
+}
+
+.card-right {
+  border: 1px solid blue;
+}
+
+.card-wrapper {
+  display: flex;
+  background-color: red !important;
+}
