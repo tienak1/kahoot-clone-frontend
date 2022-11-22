@@ -6,14 +6,24 @@ export default class NavbarTemplate extends Component {
   render() {
     return (
       <div>
-        <header className="bg-dark text-white p-3 nav">
+        <header
+          className="bg-white text-dark p-3 nav"
+          style={{
+            fontWeight: "bold",
+            boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+          }}
+        >
           <NavLink
             to="/"
             className={({ isActive }) =>
               isActive ? "nav-link bg-white text-dark" : "nav-link"
             }
           >
-            Home
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Kahoot_Logo.svg/2560px-Kahoot_Logo.svg.png"
+              alt=""
+              width={80}
+            />
           </NavLink>
 
           <NavLink
@@ -41,7 +51,7 @@ export default class NavbarTemplate extends Component {
             Login
           </NavLink>
         </header>
-        <div className="content" style={{ minHeight: "75vh" }}>
+        <div className="content" style={{}}>
           <Outlet />
         </div>
         <Footer />
