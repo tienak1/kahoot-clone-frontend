@@ -1,10 +1,25 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
+import GoogleLogin from "react-google-login";
 
 export default function Login() {
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log(e.target);
+  const [loginData, setLoginData] = useState(
+    localStorage.getItem("loginData")
+      ? JSON.parse(localStorage.getItem("loginData"))
+      : null
+  );
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dataLogin = {
+    email,
+    password,
   };
+  const pass = (googleData) => {
+    console.log(googleData);
+  };
+  const failure = (googleData) => console.log(googleData);
+  console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID);
   return (
     <div className="container-fluid" style={{ backgroundColor: "#eaeaea" }}>
       <div className="row">
@@ -33,6 +48,7 @@ export default function Login() {
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="name@domain.com"
+                onChange={(e) => setEmail(e.target.value)}
               />
               {/* <div>
                 <small className="text-danger mx-2">ID is required</small>
@@ -51,6 +67,7 @@ export default function Login() {
                 className="form-control qz-text-input"
                 id="exampleInputPassword1"
                 placeholder="at least 6 characters"
+                onChange={(e) => setPassword(e.target.value)}
               />
               {/* <div>
                 <small className="text-danger mx-2">
@@ -62,26 +79,31 @@ export default function Login() {
               </div> */}
             </div>
 
-            <button
-              type="submit"
-              className="btn btn-success w-100 mt-4"
-              onClick={(e) => handleLogin(e)}
-            >
+            <button type="button" className="btn btn-success w-100 mt-4">
               Log in
             </button>
             <h6 className="text-center my-2">or</h6>
             <button
               type="submit"
               className="btn btn-white w-100"
-              style={{ border: "1px solid black" }}
+              // style={{ border: "1px solid black" }}
             >
-              <img
-                src="https://play-lh.googleusercontent.com/aFWiT2lTa9CYBpyPjfgfNHd0r5puwKRGj2rHpdPTNrz2N9LXgN_MbLjePd1OTc0E8Rl1"
-                alt=""
-                style={{ width: "10%" }}
-              />
-              Continue With Google
+              {loginData ? (
+                <div>
+                  <h3>You logged in as {loginData.email}</h3>
+                  <button>Log Out</button>
+                </div>
+              ) : (
+                <GoogleLogin
+                  clientId="288813152175-ncbjomls3niek02psr1pn6kogln59m63.apps.googleusercontent.com"
+                  buttonText="Continue with Google"
+                  onSuccess={pass}
+                  onFailure={failure}
+                  cookiePolicy={"single_host_origin"}
+                />
+              )}
             </button>
+
             <div className="mt-3 float-right text-center">
               <p>
                 Don't have an account?&nbsp;
