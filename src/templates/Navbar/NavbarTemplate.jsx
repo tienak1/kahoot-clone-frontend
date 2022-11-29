@@ -97,7 +97,7 @@ class NavbarTemplate extends Component {
                   </li>
                   <li>
                     <NavLink
-                      to="/creatgroup"
+                      to="/creategroup"
                       className={({ isActive }) =>
                         isActive ? "nav-link bg-white text-dark" : "nav-link"
                       }
@@ -122,7 +122,7 @@ class NavbarTemplate extends Component {
                   color: "#fff",
                 }}
               >
-                <i class="fa-solid fa-user"></i>
+                <i className="fa-solid fa-user"></i>
               </div>
             ) : (
               ""

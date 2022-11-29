@@ -14,6 +14,7 @@ import Thunk from "redux-thunk";
 import { legacy_createStore, applyMiddleware } from "redux";
 import { Provider, useSelector } from "react-redux";
 import reducers from "./reducers";
+import Group from "./components/Group/Group";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -29,7 +30,7 @@ root.render(
           <Route path="/signup" element={<Registration />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Home />} />
-          <Route path="/creategroup" element={<Home />} />
+          <Route path="/creategroup" element={<Group />} />
         </Route>
       </Routes>
     </BrowserRouter>
