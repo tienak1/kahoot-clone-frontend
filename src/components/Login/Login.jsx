@@ -9,6 +9,8 @@ import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 
 import { GoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
 
 const required = (value) => {
   if (!value) {
@@ -74,7 +76,19 @@ class Login extends Component {
     }
   }
   responseGoogleSuccess = (response) => {
-    console.log(response);
+    const userObject = jwt_decode(response.credential);
+    console.log(userObject);
+    localStorage.setItem('user', JSON.stringify(userObject));
+    const { name, sub, picture } = userObject;
+    const doc = {
+      _id: sub,
+      _type: 'user',
+      email: email,
+      name: name,
+    };
+    // client.createIfNotExists(doc).then(() => {
+    //   navigate('/', { replace: true });
+    // });
     this.setState({ isLoggedIn: true });
   };
 
@@ -170,11 +184,15 @@ class Login extends Component {
                 }}
               />
               <h6 className="text-center my-2">or</h6>
-              <GoogleLogin
-                onSuccess={this.responseGoogleSuccess}
-                onError={this.responseGoogleError}
-                useOneTap
+              <GoogleOAuthProvider 
+                clientId={`${process.env.REACT_APP_GCLIENT_ID}`}
+                >
+                <GoogleLogin
+                  onSuccess={this.responseGoogleSuccess}
+                  onError={this.responseGoogleError}
+                  useOneTap
               />
+              </GoogleOAuthProvider>
               <div className="mt-3 float-right text-center">
                 <p>
                   Don't have an account?&nbsp;
