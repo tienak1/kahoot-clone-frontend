@@ -1,12 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 export default function Group() {
-  const [listUser, setListUser] = useState([]);
   const accessToken = JSON.parse(localStorage.getItem("email"))["accessToken"];
+  const username = JSON.parse(localStorage.getItem("email"))["username"];
+  const [listUser, setListUser] = useState([]);
+  const [newUsername, setNewUsername] = useState("");
+  const [listNewUser, setListNewUser] = useState([]);
+  const [nameOfGroup, setNameOfGroup] = useState("");
+  const [listGroup, setListGroup] = useState([]);
 
-  const getAllUsers = () => {
+  useEffect(() => {
+    // GET ALL USERS
     axios({
       url: "http://localhost:8000/api/getuser",
       method: "GET",
@@ -14,9 +20,19 @@ export default function Group() {
     })
       .then((res) => setListUser(res.data))
       .catch((err) => console.err(err));
-  };
 
-  useEffect(getAllUsers, []);
+    // GET ALL GROUP
+    axios({
+      url: "http://localhost:8000/api/getgroup",
+      method: "PUT",
+      data: {
+        username: username,
+      },
+      headers: { Authorization: "Bearer " + accessToken },
+    })
+      .then((res) => setListGroup(res.data.content))
+      .catch((err) => console.err(err));
+  }, []);
 
   const renderListUser = () => {
     return listUser.map((item) => (
@@ -35,9 +51,113 @@ export default function Group() {
     ));
   };
 
-  const handleAddUser = (user) => {};
+  const renderListNewUser = () => {
+    return listNewUser.map((item, index) => {
+      return (
+        <div className="col-3" key={index}>
+          <input
+            className="form-control mb-3"
+            type="text"
+            placeholder={item}
+            id={index}
+            name={item}
+            disabled
+            style={{
+              backgroundColor: "#FFDFD3",
+              color: "#white",
+              fontWeight: "bold",
+            }}
+          />
+        </div>
+      );
+    });
+  };
 
-  const handleCreateNewGroup = () => {};
+  const handleCreateNewGroup = () => {
+    axios({
+      url: "http://localhost:8000/api/creategroup",
+      method: "PUT",
+      data: {
+        username: username,
+        listNewUser: listNewUser,
+        nameofgroup: nameOfGroup,
+      },
+      headers: { Authorization: "Bearer " + accessToken },
+    })
+      .then((res) => {
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const renderListGroup = () => {
+    let listGroupArray = Object.entries(listGroup);
+    return listGroupArray.map((item) => {
+      return (
+        <button
+          className="btn ms-2"
+          style={{
+            backgroundColor: "#20c997",
+            color: "#fff",
+            fontWeight: "bold",
+          }}
+          data-bs-toggle="collapse"
+          data-bs-target={`#${item[1].name}`}
+          aria-expanded="false"
+          aria-controls={item[1].name}
+          key={item[1].id}
+        >
+          {item[1].name}
+        </button>
+      );
+    });
+  };
+
+  //   <div className="collapse mt-2" id="collapseGroupName1">
+  //             <div className="card ">
+  //               <div className="card-header">Group Name 1</div>
+  //               <div className="card-body"></div>
+  //             </div>
+  //           </div>
+  const renderGroupDetail = () => {
+    let listGroupArray = Object.entries(listGroup);
+    return listGroupArray.map((item) => {
+      return (
+        <div
+          className={`collapse mt-2 ${item[1].name}`}
+          id={item[1].name}
+          key={item[1].id}
+        >
+          <div className="card ">
+            <div
+              className="card-header bg-danger text-white display-6"
+              style={{
+                fontWeight: "bold",
+              }}
+            >
+              Group: {item[1].name}
+            </div>
+            <div className="card-body">
+              <h3 className="mb-4">owner: {item[1].owner}</h3>
+              <p
+                className="text-warning"
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "30px",
+                }}
+              >
+                Member
+              </p>
+              {item[1].listUser.map((user) => (
+                <p className="list-group-item">{user}</p>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    });
+  };
+
   return (
     <div className="container my-5">
       <div className="row">
@@ -63,21 +183,9 @@ export default function Group() {
             <i className="fa fa-plus ms-2"></i>
           </button>
           {/* Create a new group */}
+
           {/* Display all group of user  */}
-          <button
-            className="btn ms-2"
-            style={{
-              backgroundColor: "#20c997",
-              color: "#fff",
-              fontWeight: "bold",
-            }}
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseGroupName1"
-            aria-expanded="false"
-            aria-controls="collapseGroupName1"
-          >
-            Group Name 1
-          </button>
+          {renderListGroup()}
           {/* Display all group of user  */}
 
           {/* Create a new group FORM  */}
@@ -92,6 +200,7 @@ export default function Group() {
                     id="nameofgroup"
                     name="nameofgroup"
                     placeholder="name of group"
+                    onChange={(e) => setNameOfGroup(e.target.value)}
                   />
                   <input
                     className="form-control mb-3"
@@ -110,26 +219,24 @@ export default function Group() {
                         name="adduser"
                         aria-label="Disabled input example"
                         list="listuser"
+                        onChange={(e) => {
+                          setNewUsername(e.target.value);
+                        }}
                       />
-                      <input
-                        className="form-control mb-3"
-                        type="text"
-                        placeholder="username1"
-                        id="username1.id"
-                        name="username1.id"
-                        aria-label="Disabled input example"
-                        list="listuser"
-                        disabled
-                      />
-                      {handleAddUser}
                     </div>
                     <div className="col-2">
                       <input
-                        type="submit"
+                        type="button"
                         className="btn btn-danger w-100"
                         value="add"
+                        onClick={() => {
+                          setListNewUser([...listNewUser, newUsername]);
+                          document.querySelector("#adduser").value = null;
+                        }}
                       />
                     </div>
+
+                    <div className="row">{renderListNewUser()}</div>
                   </div>
 
                   <datalist id="listuser">
@@ -139,12 +246,13 @@ export default function Group() {
                   </datalist>
 
                   <button
-                    type="submit"
+                    type="button"
                     className="btn"
                     style={{
                       color: "#fff",
                       backgroundColor: "#ffc107",
                     }}
+                    onClick={() => handleCreateNewGroup()}
                   >
                     Create
                   </button>
@@ -157,9 +265,10 @@ export default function Group() {
           <div className="collapse mt-2" id="collapseGroupName1">
             <div className="card ">
               <div className="card-header">Group Name 1</div>
-              <div className="card-body">{renderListUser()}</div>
+              <div className="card-body"></div>
             </div>
           </div>
+          {renderGroupDetail()}
         </div>
       </div>
     </div>

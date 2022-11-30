@@ -31,6 +31,7 @@ root.render(
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Home />} />
           <Route path="/creategroup" element={<Group />} />
+          <Route path="/group" element={<Group />} />
         </Route>
       </Routes>
     </BrowserRouter>
