@@ -1,15 +1,17 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 export default function Group() {
-  const accessToken = JSON.parse(localStorage.getItem("email"))["accessToken"];
-  const username = JSON.parse(localStorage.getItem("email"))["username"];
+  const accessToken = JSON.parse(localStorage.getItem("user"))["accessToken"];
+  const username = JSON.parse(localStorage.getItem("user"))["username"];
   const [listUser, setListUser] = useState([]);
   const [newUsername, setNewUsername] = useState("");
   const [listNewUser, setListNewUser] = useState([]);
   const [nameOfGroup, setNameOfGroup] = useState("");
   const [listGroup, setListGroup] = useState([]);
+  const [role, setRole] = useState("");
+  const [usernameChange, setUsernameChange] = useState("");
 
   useEffect(() => {
     // GET ALL USERS
@@ -32,7 +34,23 @@ export default function Group() {
     })
       .then((res) => setListGroup(res.data.content))
       .catch((err) => console.err(err));
-  }, []);
+
+    // CHANGE ROLE OF USER
+    axios({
+      url: "http://localhost:8000/api/changerole",
+      method: "PUT",
+      data: {
+        usernameChange: usernameChange,
+        role: role,
+      },
+      headers: { Authorization: "Bearer " + accessToken },
+    })
+      .then((res) => {
+        // setRole(res.data.content.role);
+        return <Navigate to="/creategroup" />;
+      })
+      .catch((err) => console.log(err));
+  }, [role]);
 
   const renderListUser = () => {
     return listUser.map((item) => (
@@ -113,12 +131,7 @@ export default function Group() {
     });
   };
 
-  //   <div className="collapse mt-2" id="collapseGroupName1">
-  //             <div className="card ">
-  //               <div className="card-header">Group Name 1</div>
-  //               <div className="card-body"></div>
-  //             </div>
-  //           </div>
+  console.log(listUser);
   const renderGroupDetail = () => {
     let listGroupArray = Object.entries(listGroup);
     return listGroupArray.map((item) => {
@@ -149,7 +162,33 @@ export default function Group() {
                 Member
               </p>
               {item[1].listUser.map((user) => (
-                <p className="list-group-item">{user}</p>
+                <li
+                  className="list-group-item d-flex justify-content-start align-items-start"
+                  key={item.id}
+                >
+                  <div className="ms-3 me-auto">
+                    <div className="fw-bold">{user}</div>
+                    <p>
+                      role:{" "}
+                      <span>
+                        {listUser.map((item) => {
+                          if (item.username === user) return item.role;
+                        }) || "student"}
+                      </span>
+                    </p>
+                  </div>
+                  <select
+                    className="btn btn-create align-items-center py-2"
+                    onChange={(e) => {
+                      setRole(e.target.value);
+                      setUsernameChange(user);
+                    }}
+                  >
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="assistant">Assistant</option>
+                  </select>
+                </li>
               ))}
             </div>
           </div>
