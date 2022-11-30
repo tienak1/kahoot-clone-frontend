@@ -127,6 +127,21 @@ class NavbarTemplate extends Component {
             ) : (
               ""
             )}
+            {isLoggedIn ? (
+              <button
+                className="text-white bg-dark"
+                style={{
+                  margin: "0 10px",
+                  padding: "10px 20px",
+                  borderRadius: "30px",
+                }}
+                onClick={() => localStorage.removeItem("user")}
+              >
+                Log Out
+              </button>
+            ) : (
+              ""
+            )}
           </div>
         </header>
         <div className="content">
