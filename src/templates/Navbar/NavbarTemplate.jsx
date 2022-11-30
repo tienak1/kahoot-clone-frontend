@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, Navigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 
 class NavbarTemplate extends Component {
@@ -135,7 +135,10 @@ class NavbarTemplate extends Component {
                   padding: "10px 20px",
                   borderRadius: "30px",
                 }}
-                onClick={() => localStorage.removeItem("user")}
+                onClick={() => {
+                  localStorage.removeItem("user");
+                  return <Navigate to="/" />;
+                }}
               >
                 Log Out
               </button>
