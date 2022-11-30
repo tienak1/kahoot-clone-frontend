@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 export default function Group() {
   const [listUser, setListUser] = useState([]);
+  const [newUsername, setNewUsername] = useState("");
+  const [listNewUser, setListNewUser] = useState([]);
+  const [nameOfGroup, setNameOfGroup] = useState("");
   const accessToken = JSON.parse(localStorage.getItem("email"))["accessToken"];
 
   const getAllUsers = () => {
@@ -16,7 +19,25 @@ export default function Group() {
       .catch((err) => console.err(err));
   };
 
+  const getAllGroup = () => {
+    const username = JSON.parse(localStorage.getItem("email"))["username"];
+    axios({
+      url: "http://localhost:8000/api/group",
+      method: "GET",
+      data: {
+        username: username,
+      },
+      headers: { Authorization: "Bearer " + accessToken },
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(getAllUsers, []);
+
+  useEffect(getAllGroup, []);
 
   const renderListUser = () => {
     return listUser.map((item) => (
@@ -35,9 +56,46 @@ export default function Group() {
     ));
   };
 
-  const handleAddUser = (user) => {};
+  const renderListNewUser = () => {
+    return listNewUser.map((item, index) => {
+      return (
+        <div className="col-3" key={index}>
+          <input
+            className="form-control mb-3"
+            type="text"
+            placeholder={item}
+            id={index}
+            name={item}
+            disabled
+            style={{
+              backgroundColor: "#FFDFD3",
+              color: "#white",
+              fontWeight: "bold",
+            }}
+          />
+        </div>
+      );
+    });
+  };
 
-  const handleCreateNewGroup = () => {};
+  const handleCreateNewGroup = () => {
+    const username = JSON.parse(localStorage.getItem("email"))["username"];
+    axios({
+      url: "http://localhost:8000/api/creategroup",
+      method: "PUT",
+      data: {
+        username: username,
+        listNewUser: listNewUser,
+        nameofgroup: nameOfGroup,
+      },
+      headers: { Authorization: "Bearer " + accessToken },
+    })
+      .then((res) => {
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="container my-5">
       <div className="row">
@@ -92,6 +150,7 @@ export default function Group() {
                     id="nameofgroup"
                     name="nameofgroup"
                     placeholder="name of group"
+                    onChange={(e) => setNameOfGroup(e.target.value)}
                   />
                   <input
                     className="form-control mb-3"
@@ -110,26 +169,24 @@ export default function Group() {
                         name="adduser"
                         aria-label="Disabled input example"
                         list="listuser"
+                        onChange={(e) => {
+                          setNewUsername(e.target.value);
+                        }}
                       />
-                      <input
-                        className="form-control mb-3"
-                        type="text"
-                        placeholder="username1"
-                        id="username1.id"
-                        name="username1.id"
-                        aria-label="Disabled input example"
-                        list="listuser"
-                        disabled
-                      />
-                      {handleAddUser}
                     </div>
                     <div className="col-2">
                       <input
-                        type="submit"
+                        type="button"
                         className="btn btn-danger w-100"
                         value="add"
+                        onClick={() => {
+                          setListNewUser([...listNewUser, newUsername]);
+                          document.querySelector("#adduser").value = null;
+                        }}
                       />
                     </div>
+
+                    <div className="row">{renderListNewUser()}</div>
                   </div>
 
                   <datalist id="listuser">
@@ -139,12 +196,13 @@ export default function Group() {
                   </datalist>
 
                   <button
-                    type="submit"
+                    type="button"
                     className="btn"
                     style={{
                       color: "#fff",
                       backgroundColor: "#ffc107",
                     }}
+                    onClick={() => handleCreateNewGroup()}
                   >
                     Create
                   </button>
