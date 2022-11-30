@@ -12,3 +12,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.btn-create {
+  background-color: rgb(19, 104, 206);
+  color: #fff;
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 25%) 0px -4px inset;
+}
+
+/* .btn-create:hover {
+  background-color: rgb(18, 96, 190);
+  box-shadow: rgb(0 0 0 / 25%) 0px -2px inset;
+  color: #fff;
+} */
+
+.dropdown-toggle::after {
+  content: none !important;
+}

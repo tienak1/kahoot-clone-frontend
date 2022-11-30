@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Navigate } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -64,7 +64,7 @@ class Login extends Component {
         })
         .catch(() => {
           this.setState({
-            loading: false
+            loading: false,
           });
         });
     } else {
@@ -129,7 +129,10 @@ class Login extends Component {
                 />
               </div>
               <div className="form-group">
-                <label className="qz-form-label" htmlFor="exampleInputPassword1">
+                <label
+                  className="qz-form-label"
+                  htmlFor="exampleInputPassword1"
+                >
                   Password
                 </label>
                 <Input
@@ -147,7 +150,6 @@ class Login extends Component {
               <button
                 disabled={this.state.loading}
                 className="btn btn-success w-100 mt-4"
-                
               >
                 {this.state.loading && (
                   <span className="spinner-border spinner-border-sm"></span>
@@ -194,7 +196,7 @@ function mapStateToProps(state) {
   const { message } = state.message;
   return {
     isLoggedIn,
-    message
+    message,
   };
 }
 
