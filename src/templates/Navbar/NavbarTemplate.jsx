@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Outlet, NavLink } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 
-export default class NavbarTemplate extends Component {
+class NavbarTemplate extends Component {
   render() {
+    let { isLoggedIn } = this.props;
     return (
       <div>
         <header
@@ -26,32 +28,108 @@ export default class NavbarTemplate extends Component {
             />
           </NavLink>
 
-          <NavLink
-            to="/play"
-            className={({ isActive }) =>
-              isActive ? "nav-link bg-white text-dark" : "nav-link"
-            }
+          <div
+            className="nav-wrapper"
+            style={{
+              width: "92%",
+              display: "flex",
+              justifyContent: "flex-end",
+              alignItems: "center",
+            }}
           >
-            Play
-          </NavLink>
-          <NavLink
-            to="/signup"
-            className={({ isActive }) =>
-              isActive ? "nav-link bg-white text-dark" : "nav-link"
-            }
-          >
-            Sign Up
-          </NavLink>
-          <NavLink
-            to="/login"
-            className={({ isActive }) =>
-              isActive ? "nav-link bg-white text-dark" : "nav-link"
-            }
-          >
-            Login
-          </NavLink>
+            <NavLink
+              to="/play"
+              className={({ isActive }) =>
+                isActive ? "nav-link bg-white text-dark" : "nav-link"
+              }
+            >
+              Play
+            </NavLink>
+            <NavLink
+              to="/signup"
+              className={({ isActive }) =>
+                isActive ? "nav-link bg-white text-dark" : "nav-link"
+              }
+            >
+              Sign Up
+            </NavLink>
+            {!isLoggedIn ? (
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  isActive ? "nav-link bg-white text-dark" : "nav-link"
+                }
+              >
+                Login
+              </NavLink>
+            ) : (
+              ""
+            )}
+            {/* {isLoggedIn ? (
+              <NavLink
+                to="/logout"
+                className={({ isActive }) =>
+                  isActive
+                    ? "nav-link bg-white text-dark text-right"
+                    : "nav-link "
+                }
+              >
+                Logout
+              </NavLink>
+            ) : (
+              ""
+            )} */}
+            {isLoggedIn ? (
+              <div className="dropdown">
+                <button
+                  className="btn btn-create dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Create
+                </button>
+                <ul className="dropdown-menu">
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Kahoot!
+                    </a>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/creategroup"
+                      className={({ isActive }) =>
+                        isActive ? "nav-link bg-white text-dark" : "nav-link"
+                      }
+                    >
+                      Group
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              ""
+            )}
+            {isLoggedIn ? (
+              <div
+                className="user-wrapper"
+                style={{
+                  marginLeft: "12px",
+                  fontSize: "20px",
+                  backgroundColor: "rgb(19, 104, 206)",
+                  padding: "6px 12px",
+                  borderRadius: "50%",
+                  color: "#fff",
+                }}
+              >
+                <i className="fa-solid fa-user"></i>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
         </header>
-        <div className="content" style={{}}>
+        <div className="content">
           <Outlet />
         </div>
         <Footer />
@@ -59,3 +137,9 @@ export default class NavbarTemplate extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.auth.isLoggedIn,
+});
+
+export default connect(mapStateToProps)(NavbarTemplate);

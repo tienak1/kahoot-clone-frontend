@@ -10,14 +10,16 @@ import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Login/Login";
 import Registration from "./components/Registration/Registration";
 import NavbarTemplate from "./templates/Navbar/NavbarTemplate";
-import Thunk from 'redux-thunk';
-import { legacy_createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import reducers from './reducers';
+import Thunk from "redux-thunk";
+import { legacy_createStore, applyMiddleware } from "redux";
+import { Provider, useSelector } from "react-redux";
+import reducers from "./reducers";
+import Group from "./components/Group/Group";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const store = legacy_createStore(reducers, {}, applyMiddleware(Thunk));
+
 root.render(
   <Provider store={store}>
     <BrowserRouter>
@@ -27,6 +29,8 @@ root.render(
           <Route path="/play" />
           <Route path="/signup" element={<Registration />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Home />} />
+          <Route path="/creategroup" element={<Group />} />
         </Route>
       </Routes>
     </BrowserRouter>
