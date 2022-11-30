@@ -3,13 +3,16 @@ import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 export default function Group() {
+  const accessToken = JSON.parse(localStorage.getItem("email"))["accessToken"];
+  const username = JSON.parse(localStorage.getItem("email"))["username"];
   const [listUser, setListUser] = useState([]);
   const [newUsername, setNewUsername] = useState("");
   const [listNewUser, setListNewUser] = useState([]);
   const [nameOfGroup, setNameOfGroup] = useState("");
-  const accessToken = JSON.parse(localStorage.getItem("email"))["accessToken"];
+  const [listGroup, setListGroup] = useState([]);
 
-  const getAllUsers = () => {
+  useEffect(() => {
+    // GET ALL USERS
     axios({
       url: "http://localhost:8000/api/getuser",
       method: "GET",
@@ -17,27 +20,19 @@ export default function Group() {
     })
       .then((res) => setListUser(res.data))
       .catch((err) => console.err(err));
-  };
 
-  const getAllGroup = () => {
-    const username = JSON.parse(localStorage.getItem("email"))["username"];
+    // GET ALL GROUP
     axios({
-      url: "http://localhost:8000/api/group",
-      method: "GET",
+      url: "http://localhost:8000/api/getgroup",
+      method: "PUT",
       data: {
         username: username,
       },
       headers: { Authorization: "Bearer " + accessToken },
     })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  useEffect(getAllUsers, []);
-
-  useEffect(getAllGroup, []);
+      .then((res) => setListGroup(res.data.content))
+      .catch((err) => console.err(err));
+  }, []);
 
   const renderListUser = () => {
     return listUser.map((item) => (
@@ -79,7 +74,6 @@ export default function Group() {
   };
 
   const handleCreateNewGroup = () => {
-    const username = JSON.parse(localStorage.getItem("email"))["username"];
     axios({
       url: "http://localhost:8000/api/creategroup",
       method: "PUT",
@@ -94,6 +88,74 @@ export default function Group() {
         window.location.reload();
       })
       .catch((err) => console.log(err));
+  };
+
+  const renderListGroup = () => {
+    let listGroupArray = Object.entries(listGroup);
+    return listGroupArray.map((item) => {
+      return (
+        <button
+          className="btn ms-2"
+          style={{
+            backgroundColor: "#20c997",
+            color: "#fff",
+            fontWeight: "bold",
+          }}
+          data-bs-toggle="collapse"
+          data-bs-target={`#${item[1].name}`}
+          aria-expanded="false"
+          aria-controls={item[1].name}
+          key={item[1].id}
+        >
+          {item[1].name}
+        </button>
+      );
+    });
+  };
+
+  //   <div className="collapse mt-2" id="collapseGroupName1">
+  //             <div className="card ">
+  //               <div className="card-header">Group Name 1</div>
+  //               <div className="card-body"></div>
+  //             </div>
+  //           </div>
+  const renderGroupDetail = () => {
+    let listGroupArray = Object.entries(listGroup);
+    return listGroupArray.map((item) => {
+      return (
+        <div
+          className={`collapse mt-2 ${item[1].name}`}
+          id={item[1].name}
+          key={item[1].id}
+        >
+          <div className="card ">
+            <div
+              className="card-header bg-danger text-white display-6"
+              style={{
+                fontWeight: "bold",
+              }}
+            >
+              Group: {item[1].name}
+            </div>
+            <div className="card-body">
+              <h3 className="mb-4">owner: {item[1].owner}</h3>
+              <p
+                className="text-warning"
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "30px",
+                }}
+              >
+                Member
+              </p>
+              {item[1].listUser.map((user) => (
+                <p className="list-group-item">{user}</p>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    });
   };
 
   return (
@@ -121,21 +183,9 @@ export default function Group() {
             <i className="fa fa-plus ms-2"></i>
           </button>
           {/* Create a new group */}
+
           {/* Display all group of user  */}
-          <button
-            className="btn ms-2"
-            style={{
-              backgroundColor: "#20c997",
-              color: "#fff",
-              fontWeight: "bold",
-            }}
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseGroupName1"
-            aria-expanded="false"
-            aria-controls="collapseGroupName1"
-          >
-            Group Name 1
-          </button>
+          {renderListGroup()}
           {/* Display all group of user  */}
 
           {/* Create a new group FORM  */}
@@ -215,9 +265,10 @@ export default function Group() {
           <div className="collapse mt-2" id="collapseGroupName1">
             <div className="card ">
               <div className="card-header">Group Name 1</div>
-              <div className="card-body">{renderListUser()}</div>
+              <div className="card-body"></div>
             </div>
           </div>
+          {renderGroupDetail()}
         </div>
       </div>
     </div>
