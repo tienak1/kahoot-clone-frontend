@@ -13,6 +13,8 @@ export default function Group() {
   const [role, setRole] = useState("");
   const [usernameChange, setUsernameChange] = useState("");
 
+  console.log("username", username);
+
   useEffect(() => {
     // GET ALL USERS
     axios({
@@ -103,6 +105,7 @@ export default function Group() {
       headers: { Authorization: "Bearer " + accessToken },
     })
       .then((res) => {
+        console.log(res.data.content);
         window.location.reload();
       })
       .catch((err) => console.log(err));
@@ -110,6 +113,7 @@ export default function Group() {
 
   const renderListGroup = () => {
     let listGroupArray = Object.entries(listGroup);
+    console.log(listGroupArray);
     return listGroupArray.map((item) => {
       return (
         <button
@@ -131,7 +135,6 @@ export default function Group() {
     });
   };
 
-  console.log(listUser);
   const renderGroupDetail = () => {
     let listGroupArray = Object.entries(listGroup);
     return listGroupArray.map((item) => {
