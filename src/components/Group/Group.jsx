@@ -34,6 +34,10 @@ export default function Group() {
       </li>
     ));
   };
+
+  const handleAddUser = (user) => {};
+
+  const handleCreateNewGroup = () => {};
   return (
     <div className="container my-5">
       <div className="row">
@@ -43,6 +47,7 @@ export default function Group() {
         </div>
         <div className="col-6">
           <h4>My Group</h4>
+          {/* Create a new group */}
           <button
             className="btn"
             style={{
@@ -57,7 +62,8 @@ export default function Group() {
             New Group
             <i className="fa fa-plus ms-2"></i>
           </button>
-
+          {/* Create a new group */}
+          {/* Display all group of user  */}
           <button
             className="btn ms-2"
             style={{
@@ -72,16 +78,19 @@ export default function Group() {
           >
             Group Name 1
           </button>
+          {/* Display all group of user  */}
 
+          {/* Create a new group FORM  */}
           <div className="collapse mt-2" id="collapseExample">
             <div className="card ">
               <div className="card-header">Create New Group</div>
               <div className="card-body">
-                <form>
+                <form onSubmit={handleCreateNewGroup}>
                   <input
-                    type="email"
+                    type="text"
                     className="form-control mb-3"
-                    id="exampleFormControlInput1"
+                    id="nameofgroup"
+                    name="nameofgroup"
                     placeholder="name of group"
                   />
                   <input
@@ -97,9 +106,22 @@ export default function Group() {
                         className="form-control mb-3"
                         type="text"
                         placeholder="add user"
+                        id="adduser"
+                        name="adduser"
                         aria-label="Disabled input example"
                         list="listuser"
                       />
+                      <input
+                        className="form-control mb-3"
+                        type="text"
+                        placeholder="username1"
+                        id="username1.id"
+                        name="username1.id"
+                        aria-label="Disabled input example"
+                        list="listuser"
+                        disabled
+                      />
+                      {handleAddUser}
                     </div>
                     <div className="col-2">
                       <input
@@ -130,6 +152,7 @@ export default function Group() {
               </div>
             </div>
           </div>
+          {/* Create a new group FORM  */}
 
           <div className="collapse mt-2" id="collapseGroupName1">
             <div className="card ">
