@@ -8,6 +8,8 @@ import CheckButton from "react-validation/build/button";
 import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 
+import { GoogleLogin } from '@react-oauth/google';
+
 const required = (value) => {
   if (!value) {
     return (
@@ -71,10 +73,18 @@ class Login extends Component {
       });
     }
   }
+  responseGoogleSuccess = (response) => {
+    console.log(response);
+    this.setState({ isLoggedIn: true });
+  };
 
+  // Error Handler
+  responseGoogleError = (response) => {
+    console.log(response);
+  };
   render() {
     const { isLoggedIn, message } = this.props;
-
+    
     if (isLoggedIn) {
       return <Navigate to="/" />; // TODO: redirect to home page
     }
@@ -117,12 +127,6 @@ class Login extends Component {
                   onChange={this.onChangeEmail}
                   validations={[required]}
                 />
-                {/* <div>
-                  <small className="text-danger mx-2">ID is required</small>
-                  <small className="text-danger mx-2">
-                    Enter valid E-mail ID.
-                  </small>
-                </div> */}
               </div>
               <div className="form-group">
                 <label className="qz-form-label" htmlFor="exampleInputPassword1">
@@ -138,14 +142,6 @@ class Login extends Component {
                   onChange={this.onChangePassword}
                   validations={[required]}
                 />
-                {/* <div>
-                  <small className="text-danger mx-2">
-                    Password is required.
-                  </small>
-                  <small className="text-danger mx-2">
-                    Password must be at least 8 characters.
-                  </small>
-                </div> */}
               </div>
 
               <button
@@ -172,18 +168,11 @@ class Login extends Component {
                 }}
               />
               <h6 className="text-center my-2">or</h6>
-              <button
-                type="submit"
-                className="btn btn-white w-100"
-                style={{ border: "1px solid black" }}
-              >
-                <img
-                  src="https://play-lh.googleusercontent.com/aFWiT2lTa9CYBpyPjfgfNHd0r5puwKRGj2rHpdPTNrz2N9LXgN_MbLjePd1OTc0E8Rl1"
-                  alt=""
-                  style={{ width: "10%" }}
-                />
-                Continue With Google
-              </button>
+              <GoogleLogin
+                onSuccess={this.responseGoogleSuccess}
+                onError={this.responseGoogleError}
+                useOneTap
+              />
               <div className="mt-3 float-right text-center">
                 <p>
                   Don't have an account?&nbsp;
