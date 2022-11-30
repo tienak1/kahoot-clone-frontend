@@ -1,12 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Group() {
   const [listUser, setListUser] = useState([]);
+  const accessToken = JSON.parse(localStorage.getItem("email"))["accessToken"];
+
   const getAllUsers = () => {
     axios({
       url: "http://localhost:8000/api/getuser",
       method: "GET",
+      headers: { Authorization: "Bearer " + accessToken },
     })
       .then((res) => setListUser(res.data))
       .catch((err) => console.err(err));
