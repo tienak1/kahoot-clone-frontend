@@ -13,8 +13,6 @@ export default function Group() {
   const [role, setRole] = useState("");
   const [usernameChange, setUsernameChange] = useState("");
 
-  console.log("username", username);
-
   useEffect(() => {
     // GET ALL USERS
     axios({
