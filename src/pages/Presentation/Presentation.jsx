@@ -1,6 +1,6 @@
 import React from "react";
-import { Popconfirm } from "antd";
 import ListPresentation from "../../components/ListPresentation/ListPresentation";
+import ModalPresentation from "../../components/ModalPresentation/ModalPresentation";
 
 export default function Presentation() {
   return (
@@ -19,6 +19,8 @@ export default function Presentation() {
               borderRadius: "2px",
               textDecoration: "none",
             }}
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
           >
             <i className="fa fa-plus p-1"></i>
             New Presentation
@@ -28,6 +30,7 @@ export default function Presentation() {
       {/* List Presentation  */}
       <ListPresentation />
       {/* List Presentation  */}
+      <ModalPresentation />
     </div>
   );
 }

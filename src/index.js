@@ -13,6 +13,7 @@ import { legacy_createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import reducers from "./reducers";
 import Presentation from "./pages/Presentation/Presentation";
+import PresentationDetail from "./pages/PresentationDetail/PresentationDetail";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -31,6 +32,9 @@ root.render(
           <Route path="/creategroup" element={<Group />} />
           <Route path="/group" element={<Group />} />
           <Route path="/presentation" element={<Presentation />} />
+          <Route path="/presentationdetail">
+            <Route path=":name" element={<PresentationDetail />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
