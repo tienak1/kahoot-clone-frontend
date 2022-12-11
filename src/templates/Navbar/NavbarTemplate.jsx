@@ -13,6 +13,7 @@ class NavbarTemplate extends Component {
           style={{
             fontWeight: "bold",
             boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+            marginTop: "-50px",
           }}
         >
           <NavLink
@@ -145,6 +146,22 @@ class NavbarTemplate extends Component {
             ) : (
               ""
             )}
+
+            {/* Presentation Button  */}
+            <NavLink
+              to="/presentation"
+              className="p-2"
+              style={{
+                backgroundColor: "#196CFF",
+                color: "#fff",
+                border: "1px solid #196CFF",
+                borderRadius: "2px",
+                textDecoration: "none",
+              }}
+            >
+              My Presentation
+            </NavLink>
+            {/* Presentation Button  */}
           </div>
         </header>
         <div className="content">

@@ -1,4 +1,5 @@
 import React from "react";
+import "./Navbar.module.css";
 
 export default function Navbar() {
   return (
@@ -9,7 +10,6 @@ export default function Navbar() {
           alt=""
         />
       </div>
-      
     </div>
   );
 }
