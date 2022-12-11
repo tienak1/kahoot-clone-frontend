@@ -29,3 +29,7 @@ code {
 .dropdown-toggle::after {
   content: none !important;
 }
+
+.ant-select-arrow {
+  left: 90% !important;
+}
