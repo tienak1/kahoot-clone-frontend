@@ -16,6 +16,7 @@ import reducers from "./reducers";
 import Presentation from "./pages/Presentation/Presentation";
 import PresentationDetail from "./pages/PresentationDetail/PresentationDetail";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import PlayerHome from "./pages/PlayerHome/PlayerHome";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const store = legacy_createStore(reducers, {}, applyMiddleware(Thunk));
@@ -37,7 +38,11 @@ root.render(
             <Route path="/presentationdetail">
               <Route path=":name" element={<PresentationDetail />} />
             </Route>
+            {/* <Route path="/player" element={<PlayerHome />} />
+            <Route path="/player/play" element={<PlayerHome />} /> */}
           </Route>
+          <Route path="/player" element={<PlayerHome />} />
+          <Route path="/player/play" element={<PlayerHome />} />
         </Routes>
       </BrowserRouter>
     </Provider>
