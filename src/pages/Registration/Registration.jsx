@@ -151,12 +151,13 @@ class Register extends Component {
               className="card qz-card qz-card-rounded qz-card-shadow my-4 mx-4 p-5"
               style={{ margin: "0 auto", border: "none" }}
             >
-              <h3>Sign up.</h3>
+              <h3>Sign up</h3>
               <Form
                 onSubmit={this.handleRegister}
                 ref={(c) => {
                   this.form = c;
                 }}
+                className="w-100"
               >
                 <div className="form-group my-3">
                   <label className="qz-form-label" htmlFor="inputUsername">
