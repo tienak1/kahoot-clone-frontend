@@ -9,7 +9,7 @@ import CheckButton from "react-validation/build/button";
 import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from "@react-oauth/google";
 
 const required = (value) => {
   if (!value) {
@@ -85,7 +85,7 @@ class Login extends Component {
   };
   render() {
     const { isLoggedIn, message } = this.props;
-    
+
     if (isLoggedIn) {
       return <Navigate to="/" />; // TODO: redirect to home page
     }
@@ -94,7 +94,7 @@ class Login extends Component {
       <div className="container-fluid" style={{ backgroundColor: "#eaeaea" }}>
         <div className="row">
           <div
-            className="card qz-card qz-card-rounded qz-card-shadow w-25 p-3 "
+            className="card qz-card qz-card-rounded qz-card-shadow p-3 "
             style={{
               margin: "0 auto",
               border: "none",

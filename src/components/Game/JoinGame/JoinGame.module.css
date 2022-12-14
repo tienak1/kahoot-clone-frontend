@@ -1,0 +1,15 @@
+form {
+  width: 20%;
+  margin: 0 auto;
+}
+
+.content {
+  margin-top: 300px !important;
+  padding-top: 40vh !important;
+}
+
+button {
+  padding: 10px 22px !important;
+  font-weight: bold !important;
+  font-size: 22px !important;
+}

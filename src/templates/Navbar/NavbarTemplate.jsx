@@ -149,7 +149,7 @@ class NavbarTemplate extends Component {
 
             {/* Presentation Button  */}
             <NavLink
-              to="/presentation"
+              to="/myquizes"
               className="p-2"
               style={{
                 backgroundColor: "#196CFF",
