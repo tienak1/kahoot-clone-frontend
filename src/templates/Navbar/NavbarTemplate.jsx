@@ -66,20 +66,6 @@ class NavbarTemplate extends Component {
             ) : (
               ""
             )}
-            {/* {isLoggedIn ? (
-              <NavLink
-                to="/logout"
-                className={({ isActive }) =>
-                  isActive
-                    ? "nav-link bg-white text-dark text-right"
-                    : "nav-link "
-                }
-              >
-                Logout
-              </NavLink>
-            ) : (
-              ""
-            )} */}
             {isLoggedIn ? (
               <div className="dropdown">
                 <button
@@ -138,7 +124,7 @@ class NavbarTemplate extends Component {
                 }}
                 onClick={() => {
                   localStorage.removeItem("user");
-                  return <Navigate to="/" />;
+                  window.location.href = "http://localhost:3000";
                 }}
               >
                 Log Out

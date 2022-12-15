@@ -3,19 +3,19 @@ import axios from "axios";
 const API = axios.create({ baseURL: "http://localhost:8000/api" });
 
 API.interceptors.request.use((req) => {
-  if (localStorage.getItem("profile")) {
+  if (localStorage.getItem("user")) {
     req.headers.Authorization = `Bearer ${
-      JSON.parse(localStorage.getItem("profile")).accessToken
+      JSON.parse(localStorage.getItem("user")).accessToken
     }`;
   }
   return req;
 });
 
-export const fetchUsers = () => API.get("/users");
-export const createUser = (newUser) => API.post("/users", newUser);
+export const fetchUsers = () => API.get("/user");
+export const createUser = (newUser) => API.post("/user", newUser);
 export const updateUser = (id, updatedUser) =>
-  API.patch(`/users/${id}`, updatedUser);
-export const deleteUser = (id) => API.delete(`/users/${id}`);
+  API.patch(`/user/${id}`, updatedUser);
+export const deleteUser = (id) => API.delete(`/user/${id}`);
 
 export const fetchQuizes = () => API.get("/quizes");
 export const fetchPublicQuizes = (page) =>
