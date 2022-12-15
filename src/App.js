@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
-  BrowserRouter,
   Routes,
   Route,
   unstable_HistoryRouter as HistoryRouter,
@@ -34,11 +33,12 @@ export default function App() {
   //   dispatch(createSocket(socket));
   //   return () => socket.disconnect();
   // }, [dispatch]);
-  const socket = io("http://localhost:3000");
-  socket.on("connection", () => {
-    console.log(`You are connected with id: ${socket.id}`);
-  });
-  socket.emit("custom-event", 10, "Hi", { a: "aa" });
+
+  // const socket = io("http://localhost:3001");
+  // socket.on("connection", () => {
+  //   console.log(`You are connected with id: ${socket.id}`);
+  // });
+  // socket.emit("user connected");
 
   return (
     <HistoryRouter history={history}>
