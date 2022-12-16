@@ -31,7 +31,7 @@ export const fetchQuizesBySearch = (searchQuery) =>
 export const fetchTeacherQuizes = (teacherId) =>
   API.get(`/quizes/teacher/${teacherId}`);
 export const fetchQuestions = (quizId) => API.get(`/quizes/${quizId}`);
-export const createQuiz = (newQuiz) => API.post("/quizes/create", newQuiz);
+export const createQuiz = (newQuiz) => API.post("/quizes", newQuiz);
 export const createQuestion = (quizId, newQuestion) =>
   API.post(`/quizes/${quizId}/questions`, newQuestion);
 export const updateQuestion = (quizId, questionId, updatedQuestion) =>

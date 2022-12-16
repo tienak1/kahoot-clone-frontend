@@ -6,12 +6,12 @@ import styles from "./MyQuizes.module.css";
 import { history } from "../../App";
 
 export default function MyQuizes() {
-  const user = JSON.parse(localStorage.getItem("profile"));
+  const user = JSON.parse(localStorage.getItem("user"));
   const dispatch = useDispatch();
   const isLanguageEnglish = true;
   const [quizData, setQuizData] = useState({
     name: "",
-    creatorName: `${user?.result.firstName} ${user?.result.lastName}`,
+    creatorName: `${user?.name}`,
     backgroundImage: "",
     description: "",
     pointsPerQuestion: 1,
@@ -22,7 +22,7 @@ export default function MyQuizes() {
   const [isQuizPublic, setIsQuizPublic] = useState(true);
 
   useEffect(() => {
-    dispatch(getTeacherQuizes(user.result._id));
+    dispatch(getTeacherQuizes(user._id));
   }, [dispatch]);
 
   const { quizes } = useSelector((state) => state.quiz);

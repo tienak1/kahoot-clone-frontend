@@ -63,17 +63,12 @@ export default function App() {
           {/* Route for teacher, assistant  */}
           <Route path="/creategroup" element={<Group />} />
           <Route path="/group" element={<Group />} />
-          {/* Quiz Route  */}
-          {/* Display all quizes */}
+          {/* Quiz Routes  */}
           <Route path="/quizes" exact element={<Quizes />} />
-          {/* Find quizes  */}
           <Route path="/quizes/search" exact element={<Quizes />} />
-
           <Route path="/quizes/:id" exact element={<QuizDetail />} />
-          <Route path="/quizes/create" element={<QuizCreator />} />
           <Route path="/myquizes/:id" exact element={<QuizCreator />} />
           <Route path="/myquizes" exact element={<MyQuizes />} />
-          {/* Quiz Route  */}
           {/* Route for teacher, assistant  */}
         </Route>
         {/* Route for student,player  */}

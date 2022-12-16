@@ -414,7 +414,7 @@ export default function QuizCreator() {
           className={styles["question-options"]}
         >
           <h1>Quiz</h1>
-          <div className={styles["option-label"]}>
+          <div className={styles["option-label"]} style={{ marginTop: "20px" }}>
             <label>{isLanguageEnglish ? "Title" : "Nazwa"}</label>
           </div>
           <input
@@ -422,8 +422,9 @@ export default function QuizCreator() {
             type="text"
             name="name"
             onChange={handleQuizChange}
+            className="form-control"
           />
-          <div className={styles["option-label"]}>
+          <div className={styles["option-label"]} style={{ marginTop: "20px" }}>
             <label>{isLanguageEnglish ? "Description" : "Opis"}</label>
           </div>
           <input
@@ -431,8 +432,9 @@ export default function QuizCreator() {
             type="text"
             name="description"
             onChange={handleQuizChange}
+            className="form-control"
           />
-          <div className={styles["option-label"]}>
+          <div className={styles["option-label"]} style={{ marginTop: "20px" }}>
             <label>
               {isLanguageEnglish ? "Points per question" : "Punkty za pytanie"}
             </label>
@@ -443,8 +445,9 @@ export default function QuizCreator() {
             value={quizData.pointsPerQuestion}
             name="pointsPerQuestion"
             onChange={handleQuizChange}
+            className="form-control"
           />
-          <div className={styles["option-label"]}>
+          <div className={styles["option-label"]} style={{ marginTop: "20px" }}>
             <label>{isLanguageEnglish ? "Access" : "Dostępność quizu"}</label>
           </div>
           <div>
@@ -523,7 +526,7 @@ export default function QuizCreator() {
         >
           <div className={styles.option}>
             <div className={styles["option-label"]}>
-              <img src={questionType} alt="" />
+              <img src={questionType} alt="" className="w-25" />
               <label>
                 {isLanguageEnglish ? "Question type" : "Typ pytania"}
               </label>
@@ -549,7 +552,7 @@ export default function QuizCreator() {
           </div>
           <div className={styles.option}>
             <div className={styles["option-label"]}>
-              <img src={timer} alt="" />
+              <img src={timer} alt="" className="w-25" />
               <label>{isLanguageEnglish ? "Time limit" : "Limit czasu"}</label>
             </div>
             <select
@@ -608,7 +611,7 @@ export default function QuizCreator() {
           </div>
           <div className={styles.option}>
             <div className={styles["option-label"]}>
-              <img src={answerOptions} alt="" />
+              <img src={answerOptions} alt="" className="w-25" />
               <label>
                 {isLanguageEnglish ? "Answer options" : "Opcje odpowiedzi"}
               </label>
