@@ -64,10 +64,15 @@ export default function App() {
           <Route path="/creategroup" element={<Group />} />
           <Route path="/group" element={<Group />} />
           {/* Quiz Routes  */}
+          {/* Display all Quizes  */}
           <Route path="/quizes" exact element={<Quizes />} />
+          {/* Search Quiz  */}
           <Route path="/quizes/search" exact element={<Quizes />} />
+          {/* View Quiz Details  */}
           <Route path="/quizes/:id" exact element={<QuizDetail />} />
+          {/* Edit Question  */}
           <Route path="/myquizes/:id" exact element={<QuizCreator />} />
+          {/* Create new Quizes  */}
           <Route path="/myquizes" exact element={<MyQuizes />} />
           {/* Route for teacher, assistant  */}
         </Route>
