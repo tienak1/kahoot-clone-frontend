@@ -16,7 +16,7 @@ export default function Group() {
   useEffect(() => {
     // GET ALL USERS
     axios({
-      url: "http://localhost:8000/api/getuser",
+      url: "http://localhost:8000/api/user/getuser",
       method: "GET",
       headers: { Authorization: "Bearer " + accessToken },
     })
@@ -37,7 +37,7 @@ export default function Group() {
 
     // CHANGE ROLE OF USER
     axios({
-      url: "http://localhost:8000/api/changerole",
+      url: "http://localhost:8000/api/user/changerole",
       method: "PUT",
       data: {
         usernameChange: usernameChange,

@@ -1,4 +1,4 @@
-import * as api from "../api";
+import * as api from "../api/index";
 import {
   FETCH_ALL_QUIZES,
   FETCH_PUBLIC_QUIZES,
@@ -73,6 +73,7 @@ export const getQuestions = () => async (dispatch) => {
 export const createQuiz = (quiz, history) => async (dispatch) => {
   try {
     const { data } = await api.createQuiz(quiz);
+    console.log(quiz);
     dispatch({ type: CREATE_QUIZ, payload: data });
     history.push(`/myquizes/${data._id}`);
   } catch (error) {

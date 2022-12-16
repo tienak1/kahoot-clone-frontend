@@ -17,13 +17,13 @@ import { useParams } from "react-router-dom";
 import { history } from "../../App";
 
 export default function QuizCreator() {
-  const user = JSON.parse(localStorage.getItem("profile"));
+  const user = JSON.parse(localStorage.getItem("user"));
   const isLanguageEnglish = true;
   const dispatch = useDispatch();
   const { id } = useParams();
   const [quizData, setQuizData] = useState({
     name: "",
-    creatorName: `${user?.result.firstName} ${user?.result.lastName}`,
+    creatorName: `${user?.name}`,
     backgroundImage: "",
     description: "",
     pointsPerQuestion: 1,
@@ -125,11 +125,11 @@ export default function QuizCreator() {
 
   const handleQuestionSubmit = () => {
     if (questionData.question === "") {
-      alert("Wpisz treść pytania");
+      alert("Input the question");
     } else if (!validateAnswerFields()) {
-      alert("Wpisz treść odpowiedzi");
+      alert("Input the answer");
     } else if (!validateCorrectAnswer()) {
-      alert("Wybierz poprawną odpowiedź");
+      alert("Choose the correct answer");
     } else {
       setIsQuestionDataSave(true);
       // if true it means question already exist and is only updated
@@ -252,13 +252,18 @@ export default function QuizCreator() {
   };
 
   if (user === null) {
-    return <h1>Zaloguj się na konto nauczyciela, aby stworzyć quiz</h1>;
-  } else if (user.result.userType !== "Teacher") {
-    return <h1>Quizy mogą tworzyć jedynie nauczyciele</h1>;
+    return <h1>Please login your account to create quiz</h1>;
+  } else if (user.role !== "teacher") {
+    return <h1>Only teacher can create quiz</h1>;
   }
 
   return (
-    <section className={styles.section}>
+    <section
+      className={styles.section}
+      style={{
+        height: "100vh",
+      }}
+    >
       <div className={styles["question-list"]}>
         <div className={styles["quiz-info"]}>
           <h1>
@@ -266,9 +271,7 @@ export default function QuizCreator() {
               ? quizData.name.length > 8
                 ? quizData.name.substring(0, 8) + "..."
                 : quizData.name
-              : isLanguageEnglish
-              ? "Set quiz name"
-              : "Wprowadź nazwę quizu"}
+              : "Set quiz name"}
           </h1>
           <button
             className={styles["quiz-info-button"]}
@@ -295,15 +298,11 @@ export default function QuizCreator() {
             onClick={() => {
               isQuestionDataSave
                 ? addNewQuestion()
-                : alert(
-                    isLanguageEnglish
-                      ? "Save changes in question data first"
-                      : "Zapisz najpierw zmiany w pytaniu"
-                  );
+                : alert("Save changes in question data first");
             }}
             className={styles["add-question-button"]}
           >
-            {isLanguageEnglish ? "Add question" : "Dodaj pytanie"}
+            Add Question
           </button>
         </div>
       </div>
@@ -313,19 +312,11 @@ export default function QuizCreator() {
           name="question"
           value={questionData.question}
           onChange={handleQuestionChange}
-          placeholder={
-            isLanguageEnglish
-              ? "Write your question here"
-              : "Zacznij wpisywać swoje pytanie"
-          }
+          placeholder={"Write your question here"}
           className={styles["question-name"]}
         />
         <div className={styles["image-container"]}>
-          <h3>
-            {isLanguageEnglish
-              ? "Find and upload an image"
-              : "Znajdź i wstaw zdjęcie"}
-          </h3>
+          <h3>{"Find and upload an image"}</h3>
           <div>
             <FileBase
               type="file"
@@ -352,11 +343,7 @@ export default function QuizCreator() {
                 correctAnswerCount < maxCorrectAnswerCount ||
                 questionData.answerList[0].isCorrect
                   ? setCorrectAnswer(0)
-                  : alert(
-                      isLanguageEnglish
-                        ? "You already choose the correct answer"
-                        : "Wybrałeś już poprawną odpowiedź"
-                    );
+                  : alert("You already choose the correct answer");
               }}
               isAnswerCorrect={questionData.answerList[0].isCorrect}
               svg={triangle}
@@ -375,11 +362,7 @@ export default function QuizCreator() {
                 correctAnswerCount < maxCorrectAnswerCount ||
                 questionData.answerList[1].isCorrect
                   ? setCorrectAnswer(1)
-                  : alert(
-                      isLanguageEnglish
-                        ? "You already choose the correct answer"
-                        : "Wybrałeś już poprawną odpowiedź"
-                    );
+                  : alert("You already choose the correct answer");
               }}
               isAnswerCorrect={questionData.answerList[1].isCorrect}
               svg={diamond}
@@ -398,11 +381,7 @@ export default function QuizCreator() {
                     correctAnswerCount < maxCorrectAnswerCount ||
                     questionData.answerList[2].isCorrect
                       ? setCorrectAnswer(2)
-                      : alert(
-                          isLanguageEnglish
-                            ? "You already choose the correct answer"
-                            : "Wybrałeś już poprawną odpowiedź"
-                        );
+                      : alert("You already choose the correct answer");
                   }}
                   isAnswerCorrect={questionData.answerList[2].isCorrect}
                   svg={circle}
@@ -419,11 +398,7 @@ export default function QuizCreator() {
                     correctAnswerCount < maxCorrectAnswerCount ||
                     questionData.answerList[3].isCorrect
                       ? setCorrectAnswer(3)
-                      : alert(
-                          isLanguageEnglish
-                            ? "You already choose the correct answer"
-                            : "Wybrałeś już poprawną odpowiedź"
-                        );
+                      : alert("You already choose the correct answer");
                   }}
                   isAnswerCorrect={questionData.answerList[3].isCorrect}
                   svg={square}
@@ -439,7 +414,7 @@ export default function QuizCreator() {
           className={styles["question-options"]}
         >
           <h1>Quiz</h1>
-          <div className={styles["option-label"]}>
+          <div className={styles["option-label"]} style={{ marginTop: "20px" }}>
             <label>{isLanguageEnglish ? "Title" : "Nazwa"}</label>
           </div>
           <input
@@ -447,8 +422,9 @@ export default function QuizCreator() {
             type="text"
             name="name"
             onChange={handleQuizChange}
+            className="form-control"
           />
-          <div className={styles["option-label"]}>
+          <div className={styles["option-label"]} style={{ marginTop: "20px" }}>
             <label>{isLanguageEnglish ? "Description" : "Opis"}</label>
           </div>
           <input
@@ -456,8 +432,9 @@ export default function QuizCreator() {
             type="text"
             name="description"
             onChange={handleQuizChange}
+            className="form-control"
           />
-          <div className={styles["option-label"]}>
+          <div className={styles["option-label"]} style={{ marginTop: "20px" }}>
             <label>
               {isLanguageEnglish ? "Points per question" : "Punkty za pytanie"}
             </label>
@@ -468,8 +445,9 @@ export default function QuizCreator() {
             value={quizData.pointsPerQuestion}
             name="pointsPerQuestion"
             onChange={handleQuizChange}
+            className="form-control"
           />
-          <div className={styles["option-label"]}>
+          <div className={styles["option-label"]} style={{ marginTop: "20px" }}>
             <label>{isLanguageEnglish ? "Access" : "Dostępność quizu"}</label>
           </div>
           <div>
@@ -548,7 +526,7 @@ export default function QuizCreator() {
         >
           <div className={styles.option}>
             <div className={styles["option-label"]}>
-              <img src={questionType} alt="" />
+              <img src={questionType} alt="" className="w-25" />
               <label>
                 {isLanguageEnglish ? "Question type" : "Typ pytania"}
               </label>
@@ -574,7 +552,7 @@ export default function QuizCreator() {
           </div>
           <div className={styles.option}>
             <div className={styles["option-label"]}>
-              <img src={timer} alt="" />
+              <img src={timer} alt="" className="w-25" />
               <label>{isLanguageEnglish ? "Time limit" : "Limit czasu"}</label>
             </div>
             <select
@@ -633,7 +611,7 @@ export default function QuizCreator() {
           </div>
           <div className={styles.option}>
             <div className={styles["option-label"]}>
-              <img src={answerOptions} alt="" />
+              <img src={answerOptions} alt="" className="w-25" />
               <label>
                 {isLanguageEnglish ? "Answer options" : "Opcje odpowiedzi"}
               </label>

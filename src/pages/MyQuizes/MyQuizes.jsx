@@ -6,12 +6,12 @@ import styles from "./MyQuizes.module.css";
 import { history } from "../../App";
 
 export default function MyQuizes() {
-  const user = JSON.parse(localStorage.getItem("profile"));
+  const user = JSON.parse(localStorage.getItem("user"));
   const dispatch = useDispatch();
   const isLanguageEnglish = true;
   const [quizData, setQuizData] = useState({
     name: "",
-    creatorName: `${user?.result.firstName} ${user?.result.lastName}`,
+    creatorName: `${user?.name}`,
     backgroundImage: "",
     description: "",
     pointsPerQuestion: 1,
@@ -22,7 +22,7 @@ export default function MyQuizes() {
   const [isQuizPublic, setIsQuizPublic] = useState(true);
 
   useEffect(() => {
-    dispatch(getTeacherQuizes(user.result._id));
+    dispatch(getTeacherQuizes(user._id));
   }, [dispatch]);
 
   const { quizes } = useSelector((state) => state.quiz);
@@ -35,67 +35,94 @@ export default function MyQuizes() {
     setQuizData({ ...quizData, [e.target.name]: e.target.value });
   };
   return (
-    <div className={styles["quizes-list"]}>
-      <div className={styles["quiz-settings"]}>
-        <h2>{isLanguageEnglish ? "Create new quiz" : "Stwórz nowy quiz"}</h2>
-        <div className={styles["quiz-form"]}>
-          <div className={styles["option-label"]}>
-            <label>{isLanguageEnglish ? "Title" : "Nazwa"}</label>
-          </div>
-          <input
-            value={quizData.name}
-            type="text"
-            name="name"
-            onChange={handleQuizChange}
-          />
-          <div className={styles["option-label"]}>
-            <label>{isLanguageEnglish ? "Description" : "Opis"}</label>
-          </div>
-          <input
-            value={quizData.description}
-            type="text"
-            name="description"
-            onChange={handleQuizChange}
-          />
-          <div className={styles["option-buttons"]}>
-            <button
-              onClick={() => {
-                setIsQuizPublic(true);
-                setQuizData({ ...quizData, isPublic: true });
-              }}
-              className={styles["option-button"]}
+    <div
+      className="wrapper"
+      style={{
+        backgroundColor: "#8BC6EC",
+        backgroundImage: "linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%)",
+
+        height: "60vh",
+        marginTop: "-10px",
+      }}
+    >
+      <div className={styles["quizes-list"]}>
+        <div className={styles["quiz-settings"]}>
+          <h2>{isLanguageEnglish ? "Create new quiz" : "Stwórz nowy quiz"}</h2>
+          <div className={styles["quiz-form"]}>
+            <div className={styles["option-label"]}>
+              <label className="text-white fw-bold">
+                {isLanguageEnglish ? "Title" : "Nazwa"}
+              </label>
+            </div>
+            <input
+              value={quizData.name}
+              type="text"
+              name="name"
+              onChange={handleQuizChange}
+              className="form-control"
               style={{
-                backgroundColor: isQuizPublic ? "rgb(19, 104, 206)" : "inherit",
-                color: isQuizPublic ? "white" : "rgb(110, 110, 110)",
+                width: "98%",
               }}
-            >
-              {isLanguageEnglish ? "Public" : "Publiczny"}
-            </button>
-            <button
-              onClick={() => {
-                setIsQuizPublic(false);
-                setQuizData({ ...quizData, isPublic: false });
-              }}
-              className={styles["option-button"]}
+            />
+            <div className={styles["option-label"]}>
+              <label className="text-white fw-bold">
+                {isLanguageEnglish ? "Description" : "Opis"}
+              </label>
+            </div>
+            <input
+              value={quizData.description}
+              type="text"
+              name="description"
+              onChange={handleQuizChange}
+              className="form-control"
               style={{
-                backgroundColor: isQuizPublic ? "inherit" : "rgb(19, 104, 206)",
-                color: isQuizPublic ? "rgb(110, 110, 110)" : "white",
+                width: "98%",
               }}
+            />
+            <div className={styles["option-buttons"]}>
+              <button
+                onClick={() => {
+                  setIsQuizPublic(true);
+                  setQuizData({ ...quizData, isPublic: true });
+                }}
+                className={styles["option-button"]}
+                style={{
+                  backgroundColor: isQuizPublic
+                    ? "rgb(19, 104, 206)"
+                    : "inherit",
+                  color: isQuizPublic ? "white" : "rgb(110, 110, 110)",
+                }}
+              >
+                {isLanguageEnglish ? "Public" : "Publiczny"}
+              </button>
+              <button
+                onClick={() => {
+                  setIsQuizPublic(false);
+                  setQuizData({ ...quizData, isPublic: false });
+                }}
+                className={styles["option-button"]}
+                style={{
+                  backgroundColor: isQuizPublic
+                    ? "inherit"
+                    : "rgb(19, 104, 206)",
+                  color: isQuizPublic ? "rgb(110, 110, 110)" : "white",
+                }}
+              >
+                {isLanguageEnglish ? "Private" : "Prywatny"}
+              </button>
+            </div>
+            <button
+              onClick={handleQuizSubmit}
+              className={styles["submit-button"]}
             >
-              {isLanguageEnglish ? "Private" : "Prywatny"}
+              {isLanguageEnglish ? "Create new quiz" : "Stwórz nowy quiz"}
             </button>
           </div>
-          <button
-            onClick={handleQuizSubmit}
-            className={styles["submit-button"]}
-          >
-            {isLanguageEnglish ? "Create new quiz" : "Stwórz nowy quiz"}
-          </button>
         </div>
+        {quizes.map((quiz) => (
+          <MyQuiz key={quiz._id} quiz={quiz} />
+        ))}
       </div>
-      {quizes.map((quiz) => (
-        <MyQuiz key={quiz._id} quiz={quiz} />
-      ))}
     </div>
   );
 }

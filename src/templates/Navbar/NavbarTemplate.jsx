@@ -38,22 +38,18 @@ class NavbarTemplate extends Component {
               alignItems: "center",
             }}
           >
-            <NavLink
-              to="/play"
-              className={({ isActive }) =>
-                isActive ? "nav-link bg-white text-dark" : "nav-link"
-              }
-            >
-              Play
-            </NavLink>
-            <NavLink
-              to="/signup"
-              className={({ isActive }) =>
-                isActive ? "nav-link bg-white text-dark" : "nav-link"
-              }
-            >
-              Sign Up
-            </NavLink>
+            {!isLoggedIn ? (
+              <NavLink
+                to="/signup"
+                className={({ isActive }) =>
+                  isActive ? "nav-link bg-white text-dark" : "nav-link"
+                }
+              >
+                Sign Up
+              </NavLink>
+            ) : (
+              ""
+            )}
             {!isLoggedIn ? (
               <NavLink
                 to="/login"
@@ -76,9 +72,14 @@ class NavbarTemplate extends Component {
                 >
                   Create
                 </button>
-                <ul className="dropdown-menu">
+                <ul
+                  className="dropdown-menu"
+                  style={{
+                    zIndex: 10,
+                  }}
+                >
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="/quizes/create">
                       Kahoot!
                     </a>
                   </li>
@@ -134,19 +135,23 @@ class NavbarTemplate extends Component {
             )}
 
             {/* Presentation Button  */}
-            <NavLink
-              to="/myquizes"
-              className="p-2"
-              style={{
-                backgroundColor: "#196CFF",
-                color: "#fff",
-                border: "1px solid #196CFF",
-                borderRadius: "2px",
-                textDecoration: "none",
-              }}
-            >
-              My Presentation
-            </NavLink>
+            {isLoggedIn ? (
+              <NavLink
+                to="/quizes"
+                className="p-2"
+                style={{
+                  backgroundColor: "#196CFF",
+                  color: "#fff",
+                  border: "1px solid #196CFF",
+                  borderRadius: "2px",
+                  textDecoration: "none",
+                }}
+              >
+                My Presentation
+              </NavLink>
+            ) : (
+              ""
+            )}
             {/* Presentation Button  */}
           </div>
         </header>

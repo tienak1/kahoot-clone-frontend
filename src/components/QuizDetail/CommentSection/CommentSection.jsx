@@ -12,7 +12,8 @@ const CommentSection = ({ quiz }) => {
   const [comments, setComments] = useState(quiz?.comments);
   const classes = useStyles();
   const commentsRef = useRef();
-  const isLanguageEnglish = useSelector((state) => state.language.isEnglish);
+  //const isLanguageEnglish = useSelector((state) => state.language.isEnglish);
+  let isLanguageEnglish = true;
 
   const handleComment = async () => {
     const newComments = await dispatch(
