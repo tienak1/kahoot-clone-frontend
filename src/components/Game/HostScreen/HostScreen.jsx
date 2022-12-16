@@ -48,6 +48,7 @@ export default function HostScreen() {
   const [currentLeaderboard, setCurrentLeaderboard] = useState(
     leaderboard?.currentLeaderboard[0]
   );
+  let isLanguageEnglish = true;
 
   useEffect(() => {
     dispatch(getGame(id));

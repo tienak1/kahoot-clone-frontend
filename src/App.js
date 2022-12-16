@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   Routes,
@@ -24,21 +24,31 @@ import NavbarTemplate from "./templates/Navbar/NavbarTemplate";
 export const history = createBrowserHistory();
 
 export default function App() {
-  const dispatch = useDispatch();
-  // useEffect(() => {
-  //   const socket = io("http://localhost:3000");
-  //   socket.on("connection", () => {
-  //     console.log(`You are connected with id: ${socket.id}`);
-  //   });
-  //   dispatch(createSocket(socket));
-  //   return () => socket.disconnect();
-  // }, [dispatch]);
-
   // const socket = io("http://localhost:3001");
-  // socket.on("connection", () => {
-  //   console.log(`You are connected with id: ${socket.id}`);
-  // });
-  // socket.emit("user connected");
+  // // Room State
+  // const [room, setRoom] = useState("");
+  // // Message State
+  // const [message, setMessage] = useState("");
+  // const [messageReceived, setMessageReceived] = useState("");
+
+  // const joinRoom = () => {
+  //   if (room) socket.emit("join_room", room);
+  // };
+
+  // const sendMessage = () => {
+  //   socket.emit("send_message", { message, room });
+  // };
+
+  // useEffect(() => {
+  //   socket.on("receive_message", (data) => setMessageReceived(data.message));
+  // }, [socket]);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const socket = io("http://localhost:3001");
+    dispatch(createSocket(socket));
+    return () => socket.disconnect();
+  }, [dispatch]);
 
   return (
     <HistoryRouter history={history}>
@@ -53,15 +63,17 @@ export default function App() {
           {/* Route for teacher, assistant  */}
           <Route path="/creategroup" element={<Group />} />
           <Route path="/group" element={<Group />} />
-
           {/* Quiz Route  */}
+          {/* Display all quizes */}
           <Route path="/quizes" exact element={<Quizes />} />
+          {/* Find quizes  */}
           <Route path="/quizes/search" exact element={<Quizes />} />
+
           <Route path="/quizes/:id" exact element={<QuizDetail />} />
+          <Route path="/quizes/create" element={<QuizCreator />} />
           <Route path="/myquizes/:id" exact element={<QuizCreator />} />
           <Route path="/myquizes" exact element={<MyQuizes />} />
           {/* Quiz Route  */}
-
           {/* Route for teacher, assistant  */}
         </Route>
         {/* Route for student,player  */}
@@ -71,5 +83,23 @@ export default function App() {
         {/* Route for student  */}
       </Routes>
     </HistoryRouter>
+    // <div>
+    //   <input
+    //     placeholder="Room Number"
+    //     onChange={(e) => setRoom(e.target.value)}
+    //   />
+    //   <button className="btn btn-primary" onClick={joinRoom}>
+    //     Join Room
+    //   </button>
+    //   <input
+    //     placeholder="Message..."
+    //     onChange={(e) => setMessage(e.target.value)}
+    //   />
+    //   <button className="btn btn-secondary" onClick={sendMessage}>
+    //     Send Message
+    //   </button>
+    //   <h1>Message:</h1>
+    //   {messageReceived}
+    // </div>
   );
 }

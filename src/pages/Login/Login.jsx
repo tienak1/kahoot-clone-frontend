@@ -90,8 +90,6 @@ class Login extends Component {
       return <Navigate to="/" />; // TODO: redirect to home page
     }
 
-    console.log("isLoggedIn", isLoggedIn);
-
     return (
       <div className="container-fluid" style={{ backgroundColor: "#eaeaea" }}>
         <div className="row">

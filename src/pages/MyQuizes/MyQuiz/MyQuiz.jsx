@@ -10,6 +10,7 @@ import { history } from "../../../App";
 import { createLeaderboard } from "../../../actions/leaderboard";
 
 export default function MyQuiz({ quiz }) {
+  if (!localStorage.getItem("user")) history.push("/");
   const dispatch = useDispatch();
   let isLanguageEnglish = false;
   const socket = useSelector((state) => state.socket.socket);

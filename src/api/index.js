@@ -11,12 +11,14 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
+// USER
 export const fetchUsers = () => API.get("/user");
 export const createUser = (newUser) => API.post("/user", newUser);
 export const updateUser = (id, updatedUser) =>
   API.patch(`/user/${id}`, updatedUser);
 export const deleteUser = (id) => API.delete(`/user/${id}`);
 
+// QUIZES
 export const fetchQuizes = () => API.get("/quizes");
 export const fetchPublicQuizes = (page) =>
   API.get(`/quizes/public?page=${page}`);
@@ -29,7 +31,7 @@ export const fetchQuizesBySearch = (searchQuery) =>
 export const fetchTeacherQuizes = (teacherId) =>
   API.get(`/quizes/teacher/${teacherId}`);
 export const fetchQuestions = (quizId) => API.get(`/quizes/${quizId}`);
-export const createQuiz = (newQuiz) => API.post("/quizes", newQuiz);
+export const createQuiz = (newQuiz) => API.post("/quizes/create", newQuiz);
 export const createQuestion = (quizId, newQuestion) =>
   API.post(`/quizes/${quizId}/questions`, newQuestion);
 export const updateQuestion = (quizId, questionId, updatedQuestion) =>
@@ -42,17 +44,20 @@ export const commentQuiz = (comment, id) =>
   API.post(`/quizes/${id}/commentQuiz`, { comment });
 export const fetchQuiz = (id) => API.get(`/quizes/${id}`, id);
 
+// GAME
 export const createGame = (newGame) => API.post("/games", newGame);
 export const fetchGame = (id) => API.get(`/games/${id}`, id);
 export const addPlayer = (gameId, playerId) =>
   API.patch(`/games/${gameId}/players`, { playerId });
 
+// PLAYER RESULTS
 export const createPlayerResult = (newPlayerResult) =>
   API.post("/playerResults", newPlayerResult);
 export const fetchPlayerResult = (id) => API.get(`/playerResults/${id}`, id);
 export const addAnswer = (newAnswer, id) =>
   API.patch(`/playerResults/${id}/answers`, { newAnswer });
 
+// LEADERBOARD
 export const createLeaderboard = (newLeaderboard) =>
   API.post("/leaderboard", newLeaderboard);
 export const fetchLeaderboard = (id) => API.get(`/leaderboard/${id}`, id);
@@ -63,7 +68,7 @@ export const updateQuestionLeaderboard = (questionResult, id) =>
 export const updateCurrentLeaderboard = (result, id) =>
   API.patch(`/leaderboard/${id}/currentleaderboard`, result);
 
-const AUTH_API = axios.create({ baseURL: "http://localhost:4000/api/auth" });
+// const AUTH_API = axios.create({ baseURL: "http://localhost:4000/api/auth" });
 
-export const login = (formData) => AUTH_API.post("/login", formData);
-export const register = (formData) => AUTH_API.post("/register", formData);
+// export const login = (formData) => AUTH_API.post("/login", formData);
+// export const register = (formData) => AUTH_API.post("/register", formData);

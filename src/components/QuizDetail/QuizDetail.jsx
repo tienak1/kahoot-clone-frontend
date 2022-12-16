@@ -14,9 +14,10 @@ import CommentSection from "./CommentSection/CommentSection";
 import { getQuiz, getQuizesBySearch } from "../../actions/quiz";
 import useStyles from "./style";
 
-const Post = () => {
+const QuizDetail = () => {
   const { quiz, quizes, isLoading } = useSelector((state) => state.quiz);
-  const isLanguageEnglish = useSelector((state) => state.language.isEnglish);
+  //const isLanguageEnglish = useSelector((state) => state.language.isEnglish);
+  const isLanguageEnglish = true;
   const dispatch = useDispatch();
   const classes = useStyles();
   const { id } = useParams();
@@ -107,4 +108,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default QuizDetail;

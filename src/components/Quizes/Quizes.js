@@ -32,6 +32,8 @@ export default function Quizes() {
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
 
+  if (!localStorage.getItem("user")) history.push("/");
+
   const searchPost = () => {
     if (search.trim() !== "" || tags.length !== 0) {
       console.log(search.trim());

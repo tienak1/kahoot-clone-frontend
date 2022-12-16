@@ -1,5 +1,7 @@
+import axios from "axios";
 import React from "react";
 import AdItem from "../../components/AdItem/AdItem";
+import QuizCreator from "../../components/QuizCreator/QuizCreator";
 import "./Home.module.css";
 
 export default function Home() {
@@ -22,18 +24,7 @@ export default function Home() {
     <div className="container-fluid bg-dark">
       <div className="row">
         {renderAdItem()}
-        {/* <div className="col-6">
-          <AdItem />
-        </div>
-        <div className="col-6">
-          <AdItem />
-        </div>
-        <div className="col-6">
-          <AdItem />
-        </div>
-        <div className="col-6">
-          <AdItem />
-        </div> */}
+        <QuizCreator />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import * as api from "../api";
+import * as api from "../api/index";
 import {
   FETCH_ALL_QUIZES,
   FETCH_PUBLIC_QUIZES,
