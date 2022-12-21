@@ -5,7 +5,9 @@ import Footer from "../../components/Footer/Footer";
 
 class NavbarTemplate extends Component {
   render() {
-    let { isLoggedIn } = this.props;
+    //let { isLoggedIn } = this.props;
+    let isLoggedIn = false;
+    if (localStorage.getItem("user")) isLoggedIn = true;
     return (
       <div>
         <header
@@ -79,7 +81,7 @@ class NavbarTemplate extends Component {
                   }}
                 >
                   <li>
-                    <a className="dropdown-item" href="/quizes/create">
+                    <a className="dropdown-item" href="/myquizes">
                       Kahoot!
                     </a>
                   </li>

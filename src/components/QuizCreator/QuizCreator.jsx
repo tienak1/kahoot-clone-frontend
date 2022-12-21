@@ -93,7 +93,7 @@ export default function QuizCreator() {
 
   const handleQuizSubmit = (e) => {
     dispatch(updateQuiz(quiz._id, quizData));
-    history.push(`/myquizes`);
+    history.push(`/quizes`);
   };
 
   const handleQuizChange = (e) => {
