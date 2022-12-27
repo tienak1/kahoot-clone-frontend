@@ -29,6 +29,8 @@ export default function Quizes() {
   const page = query.get("page") || 1;
   const searchQuery = query.get("searchQuery");
 
+  console.log("quizes", quizes);
+
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
 

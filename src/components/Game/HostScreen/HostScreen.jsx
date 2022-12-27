@@ -164,7 +164,7 @@ export default function HostScreen() {
     }
   };
 
-  console.log(playerList);
+  //console.log(playerList);
 
   return (
     <div className={styles.page}>
@@ -220,7 +220,7 @@ export default function HostScreen() {
               {isLanguageEnglish ? "Leaderboard" : "Tablica wyników"}
             </h1>
             <ol>
-              {currentLeaderboard.leaderboardList.map((player) => (
+              {currentLeaderboard?.leaderboardList.map((player) => (
                 <li>
                   {playerList
                     .filter((x) => x.id === player.playerId)

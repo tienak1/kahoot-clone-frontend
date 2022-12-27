@@ -13,6 +13,7 @@ import Question from "./Question/Question";
 import CommentSection from "./CommentSection/CommentSection";
 import { getQuiz, getQuizesBySearch } from "../../actions/quiz";
 import useStyles from "./style";
+import { history } from "../../App";
 
 const QuizDetail = () => {
   const { quiz, quizes, isLoading } = useSelector((state) => state.quiz);
@@ -80,7 +81,7 @@ const QuizDetail = () => {
         </div>
       </div>
       {quiz.questionList.length > 0 && (
-        <div>
+        <div onClick={() => history.push(`/myquizes/${quiz.id}`)}>
           <Typography gutterBottom variant="h5">
             {isLanguageEnglish ? "Question list:" : "Lista pytań:"}
           </Typography>

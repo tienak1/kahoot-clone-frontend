@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Quiz.module.css";
-import { likeQuiz } from "../../../actions/quiz";
+import { likeQuiz, deleteQuiz } from "../../../actions/quiz";
 import { history } from "../../../App";
 import moment from "moment";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
@@ -9,7 +9,7 @@ import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
 
 export default function Quiz({ quiz }) {
   const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem("profile"));
+  const user = JSON.parse(localStorage.getItem("user"));
   const isLanguageEnglish = true;
   const openQuizDetailsPage = (e) => {
     history.push(`/quizes/${quiz._id}`);
@@ -62,7 +62,10 @@ export default function Quiz({ quiz }) {
         <div
           onClick={openQuizDetailsPage}
           className={styles["quiz-image"]}
-          style={{ backgroundImage: "url('" + quiz.backgroundImage + "')" }}
+          style={{
+            backgroundImage: "url('" + quiz.backgroundImage + "')",
+            cursor: "pointer",
+          }}
         ></div>
         <h3 className={styles["quiz-question-number"]}>
           {isLanguageEnglish ? "Questions:" : "Pytania:"}{" "}
@@ -81,6 +84,13 @@ export default function Quiz({ quiz }) {
         >
           <Likes />
         </button>
+        <button
+          className="btn btn-danger"
+          onClick={() => dispatch(deleteQuiz(quiz._id))}
+        >
+          Delete
+        </button>
+        <button className="btn btn-warning">Present</button>
       </div>
     </div>
   );

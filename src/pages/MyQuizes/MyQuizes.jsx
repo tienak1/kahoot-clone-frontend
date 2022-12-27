@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTeacherQuizes, createQuiz } from "../../actions/quiz";
+import {
+  getTeacherQuizes,
+  createQuiz,
+  getPublicQuizes,
+} from "../../actions/quiz";
 import MyQuiz from "./MyQuiz/MyQuiz";
 import styles from "./MyQuizes.module.css";
 import { history } from "../../App";
@@ -9,6 +13,7 @@ export default function MyQuizes() {
   const user = JSON.parse(localStorage.getItem("user"));
   const dispatch = useDispatch();
   const isLanguageEnglish = true;
+
   const [quizData, setQuizData] = useState({
     name: "",
     creatorName: `${user?.name}`,
@@ -23,9 +28,12 @@ export default function MyQuizes() {
 
   useEffect(() => {
     dispatch(getTeacherQuizes(user._id));
+    dispatch(getPublicQuizes(1));
   }, [dispatch]);
 
-  const { quizes } = useSelector((state) => state.quiz);
+  const { quizes } = useSelector((state) => {
+    return state.quiz;
+  });
 
   const handleQuizSubmit = () => {
     dispatch(createQuiz(quizData, history));
@@ -34,6 +42,7 @@ export default function MyQuizes() {
   const handleQuizChange = (e) => {
     setQuizData({ ...quizData, [e.target.name]: e.target.value });
   };
+
   return (
     <div
       className="wrapper"
@@ -41,7 +50,7 @@ export default function MyQuizes() {
         backgroundColor: "#8BC6EC",
         backgroundImage: "linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%)",
 
-        height: "60vh",
+        height: "80vh",
         marginTop: "-10px",
       }}
     >
@@ -119,7 +128,7 @@ export default function MyQuizes() {
             </button>
           </div>
         </div>
-        {quizes.map((quiz) => (
+        {quizes?.map((quiz) => (
           <MyQuiz key={quiz._id} quiz={quiz} />
         ))}
       </div>

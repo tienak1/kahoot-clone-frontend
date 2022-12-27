@@ -13,7 +13,12 @@ import {
   COMMENT_QUIZ,
 } from "../constants/actionType";
 
-const reducer = (state = { isLoading: true, quizes: [] }, action) => {
+const initialState = {
+  isLoading: true,
+  quizes: [],
+};
+
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case START_LOADING:
       return { ...state, isLoading: true };
