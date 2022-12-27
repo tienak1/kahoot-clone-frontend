@@ -14,8 +14,6 @@ export default function MyQuiz({ quiz }) {
   const dispatch = useDispatch();
   const isLanguageEnglish = true;
   const socket = useSelector((state) => state.socket.socket);
-  const playerList = [],
-    playerResultList = [];
 
   const openQuizPage = (e) => {
     history.push(`/myquizes/${quiz._id}`);

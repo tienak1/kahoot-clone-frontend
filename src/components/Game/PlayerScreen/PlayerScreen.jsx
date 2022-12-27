@@ -13,9 +13,9 @@ import { CircularProgress } from "@material-ui/core";
 export default function PlayerScreen() {
   const socket = useSelector((state) => state.socket.socket);
   //const isLanguageEnglish = useSelector((state) => state.language.isEnglish);
-  let isLanguageEnglish = false;
+  let isLanguageEnglish = true;
   const dispatch = useDispatch();
-  const { playerResult } = useSelector((state) => state.playerResults);
+  const { playerResult } = useSelector((state) => state.playerResult);
   const [result, setResult] = useState(playerResult?.answers[0]);
 
   const [isQuestionAnswered, setIsQuestionAnswered] = useState(false);

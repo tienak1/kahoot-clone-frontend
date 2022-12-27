@@ -13,9 +13,7 @@ export default function MyQuizes() {
   const user = JSON.parse(localStorage.getItem("user"));
   const dispatch = useDispatch();
   const isLanguageEnglish = true;
-  const { quizes } = useSelector((state) => {
-    return state.quiz;
-  });
+
   const [quizData, setQuizData] = useState({
     name: "",
     creatorName: `${user?.name}`,
@@ -33,6 +31,10 @@ export default function MyQuizes() {
     dispatch(getPublicQuizes(1));
   }, [dispatch]);
 
+  const { quizes } = useSelector((state) => {
+    return state.quiz;
+  });
+
   const handleQuizSubmit = () => {
     dispatch(createQuiz(quizData, history));
   };
@@ -40,6 +42,7 @@ export default function MyQuizes() {
   const handleQuizChange = (e) => {
     setQuizData({ ...quizData, [e.target.name]: e.target.value });
   };
+
   return (
     <div
       className="wrapper"

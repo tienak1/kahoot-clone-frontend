@@ -4,7 +4,7 @@ import styles from "./WaitingRoom.module.css";
 
 export default function WaitingRoom({ pin, socket }) {
   const [playerList, setPlayerList] = useState([]);
-  let isLanguageEnglish = false;
+  let isLanguageEnglish = true;
 
   useEffect(() => {
     socket.on("player-added", (player) => {
