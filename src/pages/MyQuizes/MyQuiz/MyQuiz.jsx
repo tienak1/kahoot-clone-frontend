@@ -12,8 +12,11 @@ import { createLeaderboard } from "../../../actions/leaderboard";
 export default function MyQuiz({ quiz }) {
   if (!localStorage.getItem("user")) history.push("/");
   const dispatch = useDispatch();
-  let isLanguageEnglish = false;
+  const isLanguageEnglish = true;
   const socket = useSelector((state) => state.socket.socket);
+  const playerList = [],
+    playerResultList = [];
+
   const openQuizPage = (e) => {
     history.push(`/myquizes/${quiz._id}`);
   };
@@ -23,8 +26,11 @@ export default function MyQuiz({ quiz }) {
       quizId: quiz._id,
       isLive: true,
       pin: String(Math.floor(Math.random() * 9000) + 1000),
+      userId: JSON.parse(localStorage.getItem("user"))._id,
     };
+    console.log("ADD GAME", history);
     const newGame = await dispatch(createGame(gameData, history));
+
     let leaderboardData = { gameId: newGame._id, playerResultList: [] };
 
     const newLeaderboard = await dispatch(createLeaderboard(leaderboardData));
@@ -32,7 +38,12 @@ export default function MyQuiz({ quiz }) {
   };
 
   return (
-    <div className={styles["quiz-card"]}>
+    <div
+      className={styles["quiz-card"]}
+      style={{
+        width: "900px",
+      }}
+    >
       <div className={styles["image-container"]}>
         <h3 className={styles["quiz-creator"]}>{quiz.creatorName}</h3>
         <h3 className={styles["quiz-date"]}>

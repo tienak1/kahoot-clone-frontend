@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Outlet, NavLink, Navigate } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 
 class NavbarTemplate extends Component {
   render() {
-    //let { isLoggedIn } = this.props;
     let isLoggedIn = false;
     if (localStorage.getItem("user")) isLoggedIn = true;
     return (
@@ -40,6 +39,7 @@ class NavbarTemplate extends Component {
               alignItems: "center",
             }}
           >
+            {isLoggedIn ? <NavLink to="/games/joingame">Play</NavLink> : ""}
             {!isLoggedIn ? (
               <NavLink
                 to="/signup"

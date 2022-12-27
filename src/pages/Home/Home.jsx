@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import AdItem from "../../components/AdItem/AdItem";
 import QuizCreator from "../../components/QuizCreator/QuizCreator";

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
   Routes,
@@ -20,29 +20,11 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Registration from "./pages/Registration/Registration";
 import NavbarTemplate from "./templates/Navbar/NavbarTemplate";
+import Test from "./pages/Test/Test";
 
 export const history = createBrowserHistory();
 
 export default function App() {
-  // const socket = io("http://localhost:3001");
-  // // Room State
-  // const [room, setRoom] = useState("");
-  // // Message State
-  // const [message, setMessage] = useState("");
-  // const [messageReceived, setMessageReceived] = useState("");
-
-  // const joinRoom = () => {
-  //   if (room) socket.emit("join_room", room);
-  // };
-
-  // const sendMessage = () => {
-  //   socket.emit("send_message", { message, room });
-  // };
-
-  // useEffect(() => {
-  //   socket.on("receive_message", (data) => setMessageReceived(data.message));
-  // }, [socket]);
-
   const dispatch = useDispatch();
   useEffect(() => {
     const socket = io("http://localhost:3001");
@@ -75,6 +57,7 @@ export default function App() {
           {/* Create new Quizes  */}
           <Route path="/myquizes" exact element={<MyQuizes />} />
           {/* Route for teacher, assistant  */}
+          <Route path="/test" exact element={<Test />} />
         </Route>
         {/* Route for student,player  */}
         <Route path="/games/joingame" exact element={<JoinGame />} />

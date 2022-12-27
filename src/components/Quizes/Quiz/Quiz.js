@@ -9,7 +9,7 @@ import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
 
 export default function Quiz({ quiz }) {
   const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem("profile"));
+  const user = JSON.parse(localStorage.getItem("user"));
   const isLanguageEnglish = true;
   const openQuizDetailsPage = (e) => {
     history.push(`/quizes/${quiz._id}`);
@@ -90,6 +90,7 @@ export default function Quiz({ quiz }) {
         >
           Delete
         </button>
+        <button className="btn btn-warning">Present</button>
       </div>
     </div>
   );
