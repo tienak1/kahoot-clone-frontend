@@ -5,8 +5,11 @@ import triangle from "../../../assets/triangle.svg";
 import circle from "../../../assets/circle.svg";
 import square from "../../../assets/square.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { addAnswer, getPlayerResult } from "../../../actions/playerResult";
-
+import {
+  addAnswer,
+  getPlayerResult,
+  createPlayerResult,
+} from "../../../actions/playerResult";
 import Answer from "../Answer/Answer";
 import { CircularProgress } from "@material-ui/core";
 
@@ -15,9 +18,9 @@ export default function PlayerScreen() {
   //const isLanguageEnglish = useSelector((state) => state.language.isEnglish);
   let isLanguageEnglish = true;
   const dispatch = useDispatch();
-  const { playerResult } = useSelector((state) => state.playerResult);
-  const [result, setResult] = useState(playerResult?.answers[0]);
-
+  const { playerResults } = useSelector((state) => state.playerResult);
+  console.log(playerResults);
+  const [result, setResult] = useState(playerResults?.answers[0]);
   const [isQuestionAnswered, setIsQuestionAnswered] = useState(false);
   const [isPreviewScreen, setIsPreviewScreen] = useState(false);
   const [isQuestionScreen, setIsQuestionScreen] = useState(false);
@@ -26,7 +29,6 @@ export default function PlayerScreen() {
   const [answerTime, setAnswerTime] = useState(0);
   const [questionData, setQuestionData] = useState();
   const [correctAnswerCount, setCorrectAnswerCount] = useState(1);
-
   const [answer, setAnswer] = useState({
     questionIndex: 0,
     answers: [],
@@ -88,7 +90,7 @@ export default function PlayerScreen() {
 
   const sendAnswer = async () => {
     const updatedPlayerResult = await dispatch(
-      addAnswer(answer, playerResult._id)
+      addAnswer(answer, playerResults._id)
     );
     console.log(
       updatedPlayerResult.answers[updatedPlayerResult.answers.length - 1]
@@ -104,7 +106,7 @@ export default function PlayerScreen() {
     };
     let score = updatedPlayerResult.score;
     socket.emit("send-answer-to-host", data, score);
-    dispatch(getPlayerResult(playerResult._id));
+    dispatch(getPlayerResult(playerResults._id));
   };
 
   const checkAnswer = (name) => {

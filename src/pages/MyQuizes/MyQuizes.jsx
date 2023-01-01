@@ -6,8 +6,8 @@ import {
   getPublicQuizes,
 } from "../../actions/quiz";
 import MyQuiz from "./MyQuiz/MyQuiz";
-import styles from "./MyQuizes.module.css";
 import { history } from "../../App";
+import "../../assets/scss/components/MyQuizes.scss";
 
 export default function MyQuizes() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -44,21 +44,14 @@ export default function MyQuizes() {
   };
 
   return (
-    <div
-      className="wrapper"
-      style={{
-        backgroundColor: "#8BC6EC",
-        backgroundImage: "linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%)",
-
-        height: "80vh",
-        marginTop: "-10px",
-      }}
-    >
-      <div className={styles["quizes-list"]}>
-        <div className={styles["quiz-settings"]}>
-          <h2>{isLanguageEnglish ? "Create new quiz" : "Stwórz nowy quiz"}</h2>
-          <div className={styles["quiz-form"]}>
-            <div className={styles["option-label"]}>
+    <div className="wrapper">
+      <div className="quizes-list">
+        <div className="quiz-settings">
+          <h2>
+            {isLanguageEnglish ? "Create new presentation" : "Stwórz nowy quiz"}
+          </h2>
+          <div className="quiz-form">
+            <div className="option-label">
               <label className="text-white fw-bold">
                 {isLanguageEnglish ? "Title" : "Nazwa"}
               </label>
@@ -73,7 +66,7 @@ export default function MyQuizes() {
                 width: "98%",
               }}
             />
-            <div className={styles["option-label"]}>
+            <div className="option-label">
               <label className="text-white fw-bold">
                 {isLanguageEnglish ? "Description" : "Opis"}
               </label>
@@ -88,13 +81,13 @@ export default function MyQuizes() {
                 width: "98%",
               }}
             />
-            <div className={styles["option-buttons"]}>
+            <div className="option-buttons">
               <button
                 onClick={() => {
                   setIsQuizPublic(true);
                   setQuizData({ ...quizData, isPublic: true });
                 }}
-                className={styles["option-button"]}
+                className="option-button"
                 style={{
                   backgroundColor: isQuizPublic
                     ? "rgb(19, 104, 206)"
@@ -109,7 +102,7 @@ export default function MyQuizes() {
                   setIsQuizPublic(false);
                   setQuizData({ ...quizData, isPublic: false });
                 }}
-                className={styles["option-button"]}
+                className="option-button"
                 style={{
                   backgroundColor: isQuizPublic
                     ? "inherit"
@@ -120,11 +113,10 @@ export default function MyQuizes() {
                 {isLanguageEnglish ? "Private" : "Prywatny"}
               </button>
             </div>
-            <button
-              onClick={handleQuizSubmit}
-              className={styles["submit-button"]}
-            >
-              {isLanguageEnglish ? "Create new quiz" : "Stwórz nowy quiz"}
+            <button onClick={handleQuizSubmit} className="submit-button">
+              {isLanguageEnglish
+                ? "Create new presentation"
+                : "Stwórz nowy quiz"}
             </button>
           </div>
         </div>

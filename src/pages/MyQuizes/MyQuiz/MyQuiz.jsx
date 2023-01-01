@@ -8,6 +8,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { history } from "../../../App";
 import { createLeaderboard } from "../../../actions/leaderboard";
+import { PlayCircleFilled } from "@ant-design/icons";
 
 export default function MyQuiz({ quiz }) {
   if (!localStorage.getItem("user")) history.push("/");

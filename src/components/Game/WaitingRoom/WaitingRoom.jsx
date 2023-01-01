@@ -31,7 +31,7 @@ export default function WaitingRoom({ pin, socket }) {
           {playerList.length > 0 ? (
             <ol>
               {playerList.map((player) => (
-                <li>
+                <li key={player._id}>
                   <mark>{player.userName}</mark>
                   <small>{isLanguageEnglish ? "Student" : "Uczeń"}</small>
                 </li>

@@ -1,3 +1,13 @@
+.wrapper {
+  background: rgb(238, 174, 202);
+  background: linear-gradient(
+    120deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(0, 148, 232, 1) 100%
+  );
+  margin-top: -10px;
+}
+
 .quizes-list {
   margin: 1.5rem;
   display: flex;
