@@ -92,6 +92,7 @@ export default function QuizCreator() {
   };
 
   const handleQuizSubmit = (e) => {
+    console.log(quizData);
     dispatch(updateQuiz(quiz._id, quizData));
     history.push(`/myquizes`);
   };

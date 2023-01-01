@@ -65,6 +65,7 @@ export default function Quizes() {
         className={classes.appBarSearch}
         position="static"
         color="inherit"
+        style={{ width: "50%" }}
       >
         <TextField
           onKeyDown={handleKeyPress}
@@ -72,7 +73,7 @@ export default function Quizes() {
           variant="outlined"
           label={
             isLanguageEnglish
-              ? "Search quizes by name"
+              ? "Search presentation by name"
               : "Szukaj quizów po nazwie"
           }
           fullWidth
@@ -86,7 +87,7 @@ export default function Quizes() {
           onDelete={(chip) => handleDeleteChip(chip)}
           label={
             isLanguageEnglish
-              ? "Search quizes by tags"
+              ? "Search presentation by tags"
               : "Szukaj quizów po kategoriach"
           }
           variant="outlined"
@@ -96,6 +97,7 @@ export default function Quizes() {
           className={classes.searchButton}
           variant="contained"
           color="primary"
+          style={{ backgroundColor: "#F9F871" }}
         >
           {isLanguageEnglish ? "Search" : "Szukaj"}
         </Button>

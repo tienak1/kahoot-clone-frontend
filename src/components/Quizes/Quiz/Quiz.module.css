@@ -8,6 +8,9 @@
   width: 75%;
   margin: 20px;
   transition: transform 200ms ease-in;
+  background-color: #e8efff;
+  height: 50%;
+  border: 5px solid red;
 }
 
 .card-body {
@@ -16,11 +19,13 @@
   align-items: flex-start;
   justify-content: space-around;
   padding: 10px;
+  border: 5px solid black;
 }
 
 .image-container {
   position: relative;
   color: white;
+  border: 5px solid black;
 }
 
 .quiz-image {
@@ -58,12 +63,11 @@
 .quiz-title {
   color: black;
   font-weight: 900;
-  font-size: 30px;
+  font-size: 22px;
 }
 
 .quiz-description {
   color: black;
-  font-size: 20px;
 }
 
 .like-button {

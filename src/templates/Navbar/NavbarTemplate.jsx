@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Outlet, NavLink } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
+import "../../assets/scss/components/NavbarTemplate.scss";
 
 class NavbarTemplate extends Component {
+  menuToggle() {
+    const toggleMenu = document.querySelector(".menu");
+    toggleMenu.classList.toggle("active");
+  }
   render() {
     let isLoggedIn = false;
     if (localStorage.getItem("user")) isLoggedIn = true;
@@ -39,7 +44,6 @@ class NavbarTemplate extends Component {
               alignItems: "center",
             }}
           >
-            {isLoggedIn ? <NavLink to="/games/joingame">Play</NavLink> : ""}
             {!isLoggedIn ? (
               <NavLink
                 to="/signup"
@@ -65,96 +69,36 @@ class NavbarTemplate extends Component {
               ""
             )}
             {isLoggedIn ? (
-              <div className="dropdown">
-                <button
-                  className="btn btn-create dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Create
-                </button>
-                <ul
-                  className="dropdown-menu"
-                  style={{
-                    zIndex: 10,
-                  }}
-                >
-                  <li>
-                    <a className="dropdown-item" href="/myquizes">
-                      Kahoot!
-                    </a>
-                  </li>
-                  <li>
-                    <NavLink
-                      to="/creategroup"
-                      className={({ isActive }) =>
-                        isActive ? "nav-link bg-white text-dark" : "nav-link"
-                      }
-                    >
-                      Group
-                    </NavLink>
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              ""
-            )}
-            {isLoggedIn ? (
-              <div
-                className="user-wrapper"
-                style={{
-                  marginLeft: "12px",
-                  fontSize: "20px",
-                  backgroundColor: "rgb(19, 104, 206)",
-                  padding: "6px 12px",
-                  borderRadius: "50%",
-                  color: "#fff",
-                }}
-              >
-                <i className="fa-solid fa-user"></i>
-              </div>
-            ) : (
-              ""
-            )}
-            {isLoggedIn ? (
-              <button
-                className="text-white bg-dark"
-                style={{
-                  margin: "0 10px",
-                  padding: "10px 20px",
-                  borderRadius: "30px",
-                }}
-                onClick={() => {
-                  localStorage.removeItem("user");
-                  window.location.href = "http://localhost:3000";
-                }}
-              >
-                Log Out
-              </button>
-            ) : (
-              ""
-            )}
-
-            {/* Presentation Button  */}
-            {isLoggedIn ? (
-              <NavLink
-                to="/quizes"
-                className="p-2"
-                style={{
-                  backgroundColor: "#196CFF",
-                  color: "#fff",
-                  border: "1px solid #196CFF",
-                  borderRadius: "2px",
-                  textDecoration: "none",
-                }}
-              >
-                My Presentation
+              <NavLink to="/games/joingame" className="btn-play">
+                Play
               </NavLink>
             ) : (
               ""
             )}
-            {/* Presentation Button  */}
+            {isLoggedIn ? (
+              <div className="user-wrapper">
+                <div class="dropdown">
+                  <button class="dropbtn">Dropdown</button>
+                  <div class="dropdown-content">
+                    <a href="/">My Profile</a>
+                    <NavLink to="/myquizes">Create Presentation</NavLink>
+                    <NavLink to="/group">Create Group</NavLink>
+                    <NavLink to="/quizes">My Presentation</NavLink>
+                    <NavLink
+                      href="/"
+                      onClick={() => {
+                        localStorage.removeItem("user");
+                        window.location.href = "http://localhost:3000";
+                      }}
+                    >
+                      Log Out
+                    </NavLink>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </header>
         <div className="content">

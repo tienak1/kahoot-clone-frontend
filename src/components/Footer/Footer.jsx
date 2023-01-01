@@ -1,4 +1,10 @@
 import styles from "./Footer.module.css";
+import {
+  FacebookOutlined,
+  TwitterOutlined,
+  InstagramOutlined,
+  LinkedinOutlined,
+} from "@ant-design/icons";
 
 function Footer() {
   const isLanguageEnglish = true;
@@ -57,10 +63,26 @@ function Footer() {
           <div className={styles["footer-column"]}>
             <h4>{isLanguageEnglish ? "Follow us" : "Śledź nas"}</h4>
             <div className={styles["footer-social-links"]}>
-              <a href="/">FacebookIcon</a>
-              <a href="/">TwitterIcon</a>
-              <a href="/">InstagramIcon</a>
-              <a href="/">LinkedInIcon</a>
+              <a href="/">
+                <FacebookOutlined
+                  style={{ fontSize: "24px", margin: "20px 8px" }}
+                />
+              </a>
+              <a href="/">
+                <TwitterOutlined
+                  style={{ fontSize: "24px", margin: "20px 8px" }}
+                />
+              </a>
+              <a href="/">
+                <InstagramOutlined
+                  style={{ fontSize: "24px", margin: "20px 8px" }}
+                />
+              </a>
+              <a href="/">
+                <LinkedinOutlined
+                  style={{ fontSize: "24px", margin: "20px 8px" }}
+                />
+              </a>
             </div>
           </div>
         </div>

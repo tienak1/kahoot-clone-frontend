@@ -20,7 +20,6 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Registration from "./pages/Registration/Registration";
 import NavbarTemplate from "./templates/Navbar/NavbarTemplate";
-import Test from "./pages/Test/Test";
 
 export const history = createBrowserHistory();
 
@@ -40,10 +39,8 @@ export default function App() {
           {/* Route for all user  */}
           <Route path="/signup" element={<Registration />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Home />} />
           {/* Route for all user  */}
           {/* Route for teacher, assistant  */}
-          <Route path="/creategroup" element={<Group />} />
           <Route path="/group" element={<Group />} />
           {/* Quiz Routes  */}
           {/* Display all Quizes  */}
@@ -57,13 +54,13 @@ export default function App() {
           {/* Create new Quizes  */}
           <Route path="/myquizes" exact element={<MyQuizes />} />
           {/* Route for teacher, assistant  */}
-          <Route path="/test" exact element={<Test />} />
         </Route>
         {/* Route for student,player  */}
         <Route path="/games/joingame" exact element={<JoinGame />} />
         <Route path="/games/host/:id" exact element={<HostScreen />} />
         <Route path="/games/player/:id" exact element={<PlayerScreen />} />
         {/* Route for student  */}
+        <Route path="*" element={<Home />} />
       </Routes>
     </HistoryRouter>
     // <div>

@@ -164,8 +164,6 @@ export default function HostScreen() {
     }
   };
 
-  //console.log(playerList);
-
   return (
     <div className={styles.page}>
       {!isGameStarted && (
@@ -199,7 +197,7 @@ export default function HostScreen() {
               {isLanguageEnglish ? "Question result" : "Wynik pytania"}
             </h1>
             <ol>
-              {questionResult.questionResultList.map((player) => (
+              {questionResult?.questionResultList.map((player) => (
                 <li>
                   {playerList
                     .filter((x) => x.id === player.playerId)
