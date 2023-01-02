@@ -73,69 +73,37 @@ export default function Quiz({ quiz }) {
     socket.emit("init-game", newGame, newLeaderboard);
   };
   return (
-    // <div className={styles["quiz-card"]}>
-    //   <div className={styles["image-container"]}>
-    //     <h3 className={styles["quiz-creator"]}>{quiz.creatorName}</h3>
-    //     <h3 className={styles["quiz-date"]}>
-    //       {moment(quiz.dateCreated).fromNow()}
-    //     </h3>
-    //     <div
-    //       onClick={openQuizDetailsPage}
-    //       className={styles["quiz-image"]}
-    //       style={{
-    //         backgroundImage: "url('" + quiz.backgroundImage + "')",
-    //         cursor: "pointer",
-    //       }}
-    //     ></div>
-    //     <h3 className={styles["quiz-question-number"]}>
-    //       {isLanguageEnglish ? "Questions:" : "Pytania:"}{" "}
-    //       {quiz.numberOfQuestions}
-    //     </h3>
-    //   </div>
-    //   <div className={styles["card-body"]}>
-    //     <h4 className={styles["quiz-tags"]}>
-    //       {quiz.tags.map((tag) => `#${tag} `)}
-    //     </h4>
-    //     <h2 className={styles["quiz-title"]}>{quiz.name}</h2>
-    //     <small className={styles["quiz-description"]}>{quiz.description}</small>
-    //     <button
-    //       className={styles["like-button"]}
-    //       onClick={() => dispatch(likeQuiz(quiz._id))}
-    //     >
-    //       <Likes />
-    //     </button>
-    //     <button
-    //       className="btn btn-danger"
-    //       onClick={() => dispatch(deleteQuiz(quiz._id))}
-    //     >
-    //       Delete
-    //     </button>
-    //   </div>
-    // </div>
-    <div className="container">
-      <div
-        className="row quiz-card align-items-center"
-        style={{ border: "2px solid #eee" }}
-      >
-        <div className="col-1">
-          <PlayCircleFilled style={{ fontSize: "40px" }} />
-        </div>
-        <div className="col-4" onClick={openQuizDetailsPage}>
-          <h2>{quiz.name}</h2>
-          <small>{quiz.description}</small>
-        </div>
-        <div className="col-1">
-          <p>{quiz.numberOfQuestions} slides</p>
-        </div>
-        <div className="col-3">
-          <p>created at {moment(quiz.dateCreated).fromNow()}</p>
-        </div>
-        <div className="col-2">
-          <p>owner: me</p>
-        </div>
-        <div className="col-1">
-          <DeleteFilled style={{ fontSize: "40px", color: "#EE0B0B" }} />
-        </div>
+    <div className={styles["quiz-card"]}>
+      <div className={styles["image-container"]}>
+        <h3 className={styles["quiz-creator"]}>{quiz.creatorName}</h3>
+        <h3 className={styles["quiz-date"]}>
+          {moment(quiz.dateCreated).fromNow()}
+        </h3>
+        <div
+          onClick={openQuizDetailsPage}
+          className={styles["quiz-image"]}
+          style={{
+            backgroundImage: "url('" + quiz.backgroundImage + "')",
+            cursor: "pointer",
+          }}
+        ></div>
+        <h3 className={styles["quiz-question-number"]}>
+          {isLanguageEnglish ? "Questions:" : "Pytania:"}{" "}
+          {quiz.numberOfQuestions}
+        </h3>
+      </div>
+      <div className={styles["card-body"]}>
+        <h4 className={styles["quiz-tags"]}>
+          {quiz.tags.map((tag) => `#${tag} `)}
+        </h4>
+        <h2 className={styles["quiz-title"]}>{quiz.name}</h2>
+        <small className={styles["quiz-description"]}>{quiz.description}</small>
+        <button
+          className={styles["like-button"]}
+          onClick={() => dispatch(likeQuiz(quiz._id))}
+        >
+          <Likes />
+        </button>
       </div>
     </div>
   );

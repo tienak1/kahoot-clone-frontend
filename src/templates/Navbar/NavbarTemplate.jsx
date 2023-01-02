@@ -82,8 +82,7 @@ class NavbarTemplate extends Component {
                   <div class="dropdown-content">
                     <a href="/">My Profile</a>
                     <NavLink to="/myquizes">Create Presentation</NavLink>
-                    <NavLink to="/group">Create Group</NavLink>
-                    <NavLink to="/quizes">My Presentation</NavLink>
+                    <NavLink to="/group">My Group</NavLink>
                     <NavLink
                       href="/"
                       onClick={() => {

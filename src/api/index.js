@@ -39,7 +39,8 @@ export const updateQuestion = (quizId, questionId, updatedQuestion) =>
 export const updateQuiz = (id, updatedQuiz) =>
   API.patch(`/quizes/${id}`, updatedQuiz);
 export const deleteQuiz = (id) => API.delete(`/quizes/${id}`);
-export const likeQuiz = (id) => API.patch(`/quizes/${id}/likeQuiz`);
+export const likeQuiz = (id, userId) =>
+  API.patch(`/quizes/${id}/likeQuiz/${userId}`);
 export const commentQuiz = (comment, id) =>
   API.post(`/quizes/${id}/commentQuiz`, { comment });
 export const fetchQuiz = (id) => API.get(`/quizes/${id}`, id);

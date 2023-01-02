@@ -1,28 +1,46 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import AdItem from "../../components/AdItem/AdItem";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getQuizes } from "../../actions/quiz";
+import AdItem from "../../components/Quizes/AdItem/AdItem";
 import "./Home.module.css";
 
 export default function Home() {
-  const { playerResults } = useSelector((state) => state.playerResult);
-  console.log(playerResults);
-  const arrayImage = [
-    "./img/xmas1.jpg",
-    "./img/xmas2.jpg",
-    "./img/xmas3.jpg",
-    "./img/xmas4.jpg",
-  ];
+  const dispatch = useDispatch();
+  const { quizes } = useSelector((state) => state.quiz);
+  useSelector((state) => console.log(state));
+  console.log("HOME ", quizes);
+  useEffect(() => {
+    dispatch(getQuizes());
+  }, []);
   const renderAdItem = () => {
-    return arrayImage.map((item, index) => {
-      return (
-        <div className="col-6" key={index}>
-          <AdItem image={item} key={index} />
-        </div>
-      );
-    });
+    return quizes.map((item) => (
+      <div className="col-6">
+        <AdItem quiz={item} key={item.index} />
+      </div>
+    ));
   };
   return (
     <div className="container-fluid bg-dark">
+      <div className="row">
+        <form className="search w-75 my-2">
+          <input
+            placeholder="Search here by name.."
+            className="form-control my-1"
+          />
+          <input
+            placeholder="Search here by tag..."
+            className="form-control my-1"
+          />
+          <button
+            className="btn btn-primary"
+            type="submit"
+            style={{ margin: "0 auto" }}
+          >
+            Search
+          </button>
+        </form>
+      </div>
       <div className="row">{renderAdItem()}</div>
     </div>
   );

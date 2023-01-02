@@ -15,12 +15,13 @@ import {
 import useStyles from "./style";
 import { getQuizesBySearch } from "../../actions/quiz";
 import Pagination from "../Pagination/Pagination";
+import { memo } from "react";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-export default function Quizes() {
+function Quizes() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { quizes, isLoading } = useSelector((state) => state.quiz);
@@ -28,8 +29,6 @@ export default function Quizes() {
   const query = useQuery();
   const page = query.get("page") || 1;
   const searchQuery = query.get("searchQuery");
-
-  console.log("quizes", quizes);
 
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
@@ -115,3 +114,5 @@ export default function Quizes() {
     </div>
   );
 }
+
+export default memo(Quizes);

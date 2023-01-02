@@ -119,9 +119,9 @@ export const updateQuiz = (id, quiz) => async (dispatch) => {
 //   }
 // };
 
-export const likeQuiz = (quizId) => async (dispatch) => {
+export const likeQuiz = (quizId, userId) => async (dispatch) => {
   try {
-    const { data } = await api.likeQuiz(quizId);
+    const { data } = await api.likeQuiz(quizId, userId);
     dispatch({ type: LIKE_QUIZ, payload: data });
   } catch (error) {
     console.log(error);
