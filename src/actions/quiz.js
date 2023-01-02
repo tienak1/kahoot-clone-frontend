@@ -40,7 +40,6 @@ export const getPublicQuizes = (page) => async (dispatch) => {
 };
 
 export const getQuizesBySearch = (searchQuery) => async (dispatch) => {
-  debugger;
   try {
     dispatch({ type: START_LOADING });
     const { data } = await api.fetchQuizesBySearch(searchQuery);

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Quiz from "./Quiz/Quiz";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { history } from "../../App";
@@ -16,6 +15,7 @@ import useStyles from "./style";
 import { getQuizesBySearch } from "../../actions/quiz";
 import Pagination from "../Pagination/Pagination";
 import { memo } from "react";
+import AdItem from "./AdItem/AdItem";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -104,7 +104,7 @@ function Quizes() {
       {isLoading ? (
         <CircularProgress />
       ) : (
-        quizes.map((quiz) => <Quiz key={quiz._id} quiz={quiz} />)
+        quizes.map((quiz) => <AdItem key={quiz._id} quiz={quiz} />)
       )}
       {!searchQuery && !tags.length && (
         <Paper className={classes.pagination} elevation={6}>

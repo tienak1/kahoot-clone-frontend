@@ -25,7 +25,7 @@ export const fetchPublicQuizes = (page) =>
 export const fetchQuizesBySearch = (searchQuery) =>
   API.get(
     `/quizes/search?searchQuery=${searchQuery.search || "none"}&tags=${
-      searchQuery.tags
+      searchQuery.tags || "none"
     }`
   );
 export const fetchTeacherQuizes = (teacherId) =>
