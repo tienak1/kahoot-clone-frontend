@@ -2,12 +2,12 @@ import React from "react";
 import { useEffect } from "react";
 import { memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllGroup } from "../../actions/group";
+import { deleteGroup, getAllGroup } from "../../actions/group";
 import "../../assets/scss/components/GroupList.scss";
 
 function GroupList(props) {
   const { group } = useSelector((state) => state.group);
-  console.log(group);
+  const user = JSON.parse(localStorage.getItem("user"));
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllGroup());
@@ -19,7 +19,13 @@ function GroupList(props) {
           return (
             <div className="card-group card-group-1">
               <h3>{item.groupName}</h3>
-              <p className="card-group__exit">
+              <p
+                className="card-group__exit"
+                style={{ cursor: "pointer" }}
+                onClick={() =>
+                  dispatch(deleteGroup({ groupId: item._id, userId: user._id }))
+                }
+              >
                 <i class="fa-solid fa-trash"></i>
               </p>
               <h2 className="card-group__title">{item.description}</h2>

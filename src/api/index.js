@@ -21,6 +21,8 @@ export const deleteUser = (id) => API.delete(`/user/${id}`);
 // GROUP
 export const getAllGroup = () => API.get("/group");
 export const createNewGroup = (data) => API.post("/group", data);
+export const deleteGroup = ({ groupId, userId }) =>
+  API.delete(`/group/${groupId}/deleteGroup/${userId}`);
 
 // QUIZES
 export const fetchQuizes = () => API.get("/quizes");

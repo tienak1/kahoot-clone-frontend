@@ -40,3 +40,4 @@ export const CREATE_SOCKET = "CREATE_SOCKET";
 
 export const GET_GROUP = "GET_GROUP";
 export const CREATE_NEW_GROUP = "CREATE_NEW_GROUP";
+export const DELETE_GROUP = "DELETE_GROUP";
