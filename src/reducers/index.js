@@ -7,6 +7,7 @@ import playerResult from "./playerResult";
 import leaderboard from "./leaderboard";
 import socket from "./socket";
 import user from "./user";
+import group from "./group";
 
 export default combineReducers({
   auth,
@@ -17,4 +18,5 @@ export default combineReducers({
   leaderboard,
   socket,
   user,
+  group,
 });

@@ -18,6 +18,10 @@ export const updateUser = (id, updatedUser) =>
   API.patch(`/user/${id}`, updatedUser);
 export const deleteUser = (id) => API.delete(`/user/${id}`);
 
+// GROUP
+export const getAllGroup = () => API.get("/group");
+export const createNewGroup = (data) => API.post("/group", data);
+
 // QUIZES
 export const fetchQuizes = () => API.get("/quizes");
 export const fetchPublicQuizes = (page) =>

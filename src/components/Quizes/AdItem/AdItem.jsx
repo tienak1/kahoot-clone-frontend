@@ -93,7 +93,14 @@ function AdItem(props) {
               <button className="btn btn-success me-2" onClick={addGame}>
                 Present
               </button>
-              <button className="btn btn-success mx-2">Edit</button>
+              <button
+                className="btn btn-success mx-2"
+                onClick={() => {
+                  history.push(`/myquizes/${quiz._id}`);
+                }}
+              >
+                Edit
+              </button>
               <button
                 className="btn btn-danger mx-2"
                 onClick={() => dispatch(deleteQuiz(quiz._id))}

@@ -9,6 +9,7 @@ import "./Home.module.css";
 import history from "../../App";
 
 export default function Home() {
+  const user = JSON.parse(localStorage.getItem("user"));
   const dispatch = useDispatch();
   const { quizes } = useSelector((state) => state.quiz);
   const [search, setSearch] = useState("");
@@ -37,27 +38,33 @@ export default function Home() {
   };
   return (
     <div className="container-fluid bg-dark">
-      <div className="row">
-        <form className="search w-75 my-2">
-          <input
-            placeholder="Search here by name.."
-            className="form-control my-1"
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          {/* <input
+      {user ? (
+        <>
+          <div className="row">
+            <form className="search w-75 my-2">
+              <input
+                placeholder="Search here by name.."
+                className="form-control my-1"
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              {/* <input
             placeholder="Search here by tag..."
             className="form-control my-1"
           /> */}
-          <button
-            className="btn btn-primary"
-            style={{ margin: "0 auto" }}
-            onClick={() => searchPost()}
-          >
-            Search
-          </button>
-        </form>
-      </div>
-      <div className="row">{renderAdItem()}</div>
+              <button
+                className="btn btn-primary"
+                style={{ margin: "0 auto" }}
+                onClick={() => searchPost()}
+              >
+                Search
+              </button>
+            </form>
+          </div>
+          <div className="row">{renderAdItem()}</div>
+        </>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
