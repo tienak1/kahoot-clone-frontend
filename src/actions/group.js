@@ -4,6 +4,7 @@ import {
   DELETE_GROUP,
   GET_GROUP,
 } from "../constants/actionType";
+import history from "../App";
 
 export const getAllGroup = () => async (dispatch) => {
   try {
@@ -27,6 +28,7 @@ export const deleteGroup = (groupId) => async (dispatch) => {
   try {
     const { data } = await api.deleteGroup(groupId);
     dispatch({ type: DELETE_GROUP, payload: data });
+    alert("Group deleted successfully");
     window.location.reload();
   } catch (error) {
     console.log(error);
