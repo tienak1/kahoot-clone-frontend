@@ -18,6 +18,14 @@ export const updateUser = (id, updatedUser) =>
   API.patch(`/user/${id}`, updatedUser);
 export const deleteUser = (id) => API.delete(`/user/${id}`);
 
+// GROUP
+export const getAllGroup = () => API.get("/group");
+export const createNewGroup = (data) => API.post("/group", data);
+export const deleteGroup = ({ groupId, userId }) =>
+  API.delete(`/group/${groupId}/deleteGroup/${userId}`);
+export const addMember = ({ userId, groupName, role }) =>
+  API.patch(`/group/addMember`, { userId, groupName, role });
+
 // QUIZES
 export const fetchQuizes = () => API.get("/quizes");
 export const fetchPublicQuizes = (page) =>
@@ -25,7 +33,7 @@ export const fetchPublicQuizes = (page) =>
 export const fetchQuizesBySearch = (searchQuery) =>
   API.get(
     `/quizes/search?searchQuery=${searchQuery.search || "none"}&tags=${
-      searchQuery.tags
+      searchQuery.tags || "none"
     }`
   );
 export const fetchTeacherQuizes = (teacherId) =>
@@ -39,7 +47,8 @@ export const updateQuestion = (quizId, questionId, updatedQuestion) =>
 export const updateQuiz = (id, updatedQuiz) =>
   API.patch(`/quizes/${id}`, updatedQuiz);
 export const deleteQuiz = (id) => API.delete(`/quizes/${id}`);
-export const likeQuiz = (id) => API.patch(`/quizes/${id}/likeQuiz`);
+export const likeQuiz = (id, userId) =>
+  API.patch(`/quizes/${id}/likeQuiz/${userId}`);
 export const commentQuiz = (comment, id) =>
   API.post(`/quizes/${id}/commentQuiz`, { comment });
 export const fetchQuiz = (id) => API.get(`/quizes/${id}`, id);
