@@ -10,13 +10,16 @@ function ListMember(props) {
   // Lấy tất cả users
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user);
+  console.log("users", users);
   const getUserById = (userId) => {
     return users.find((user) => user._id === userId);
   };
+  console.log("members", members);
   const newMembers = members.map((member) => {
     const userFind = getUserById(member.id);
     return { ...member, name: userFind?.name };
   });
+  console.log(newMembers);
   useEffect(() => {
     dispatch(getUsers());
   }, []);
