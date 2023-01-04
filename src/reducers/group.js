@@ -1,4 +1,5 @@
 import {
+  ADD_MEMBER,
   CREATE_NEW_GROUP,
   DELETE_GROUP,
   GET_GROUP,
@@ -15,6 +16,8 @@ const reducer = (state = initialState, action) => {
     case CREATE_NEW_GROUP:
       return { ...state, group: action.payload };
     case DELETE_GROUP:
+      return { ...state, group: action.payload };
+    case ADD_MEMBER:
       return { ...state, group: action.payload };
     default:
       return state;

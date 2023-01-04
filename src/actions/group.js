@@ -34,3 +34,14 @@ export const deleteGroup = (groupId) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const addMember = (addData) => async (dispatch) => {
+  try {
+    const { data } = await api.addMember(addData);
+    dispatch({ type: CREATE_NEW_GROUP, payload: addData });
+    alert("Member added successfully");
+    window.location.reload();
+  } catch (error) {
+    console.log(error);
+  }
+};

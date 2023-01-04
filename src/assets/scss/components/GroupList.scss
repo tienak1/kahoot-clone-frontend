@@ -8,7 +8,7 @@
   margin: 20px;
   padding: 20px;
   width: 500px;
-  min-height: 200px;
+  min-height: 300px;
   display: grid;
   grid-template-rows: 20px 50px 1fr 50px;
   border-radius: 10px;
@@ -45,8 +45,21 @@
 }
 
 .card-group__exit {
+  grid-row: 2/2;
+  justify-self: end;
+  &:hover {
+    opacity: 0.6;
+    cursor: pointer;
+  }
+}
+
+.card-group__add {
   grid-row: 1/2;
   justify-self: end;
+  &:hover {
+    opacity: 0.6;
+    cursor: pointer;
+  }
 }
 
 .card-group__icon {

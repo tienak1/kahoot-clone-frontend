@@ -23,6 +23,8 @@ export const getAllGroup = () => API.get("/group");
 export const createNewGroup = (data) => API.post("/group", data);
 export const deleteGroup = ({ groupId, userId }) =>
   API.delete(`/group/${groupId}/deleteGroup/${userId}`);
+export const addMember = ({ userId, groupName, role }) =>
+  API.patch(`/group/addMember`, { userId, groupName, role });
 
 // QUIZES
 export const fetchQuizes = () => API.get("/quizes");

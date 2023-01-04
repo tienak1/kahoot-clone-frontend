@@ -6,6 +6,8 @@ import { getAllGroup } from "../../actions/group";
 import GroupList from "../../components/GroupList/GroupList";
 import "../../assets/scss/components/Group.scss";
 import GroupCreate from "../../components/GroupCreate/GroupCreate";
+import GroupDetail from "../../components/GroupDetail/GroupDetail";
+import ListUser from "../../components/ListUser/ListUser";
 
 export default function Group() {
   return (
@@ -45,19 +47,21 @@ export default function Group() {
             id="contact"
           />
           <div className="page contact-page">
-            <div className="page-contents">
-              <p>
-                Eaque accusamus magnam error unde nam, atque provident omnis
-                fugiat quam necessitatibus vel nulla sed quibusdam fuga
-                veritatis assumenda alias quidem asperiores?
-              </p>
+            <div className="page-contents w-100">
+              <div className="row">
+                <div className="col-12">
+                  <GroupDetail />
+                </div>
+              </div>
             </div>
           </div>
           <label className="nav" htmlFor="contact">
-            <span>Contact</span>
+            <span>Add Member</span>
           </label>
         </div>
       </div>
+
+      {/* TEST THỬ ĐI NÈ  */}
     </div>
   );
 }
