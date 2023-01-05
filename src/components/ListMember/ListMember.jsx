@@ -2,9 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeRoleOfMember, getAllGroup } from "../../actions/group";
+import {
+  changeRoleOfMember,
+  deleteMemberFromGroup,
+  getAllGroup,
+} from "../../actions/group";
 import { getUsers } from "../../actions/user";
-import { deleteMemberFromGroup } from "../../api";
 import "../../assets/scss/components/ListMember.scss";
 
 function ListMember(props) {
@@ -21,22 +24,28 @@ function ListMember(props) {
   });
   // Change role of members
   const user = JSON.parse(localStorage.getItem("user"));
+
   const handleChangeRole = ({ groupId, memberId, newRole }) => {
     if (groupItem.owner !== user._id) {
       alert("You must be owner of the group to change role of this member");
       return;
     }
-    // if (memberId === user._id) {
-    //   alert("You cannot delete yourself from the group");
-    //   return;
-    // }
     const data = { groupId: groupId, memberId: memberId, newRole: newRole };
-    console.log("data ", data);
     dispatch(changeRoleOfMember(data));
   };
 
+  // Delete a member from the group
   const handleDeleteMember = ({ groupId, memberId }) => {
-    console.log("Nothing");
+    if (groupItem.owner !== user._id) {
+      alert("You must be owner of the group to delete this member");
+      return;
+    }
+    if (memberId === user._id) {
+      alert("You cannot delete yourself from the group");
+      return;
+    }
+    const dataDelete = { groupId: groupId, memberId: memberId };
+    dispatch(deleteMemberFromGroup(dataDelete));
   };
   useEffect(() => {
     dispatch(getUsers());
@@ -68,7 +77,13 @@ function ListMember(props) {
           <span>
             <button
               className="btn btn-danger ms-3"
-              onChange={(e) => handleDeleteMember()}
+              onClick={() => {
+                const data = {
+                  groupId: groupItem._id,
+                  memberId: member.id,
+                };
+                handleDeleteMember(data);
+              }}
             >
               Delete
             </button>

@@ -62,7 +62,7 @@ export const changeRoleOfMember = (updatedData) => async (dispatch) => {
 export const deleteMemberFromGroup = (deleteData) => async (dispatch) => {
   try {
     const { data } = await api.deleteMemberFromGroup(deleteData);
-    dispatch({ type: DELETE_MEMBER_FROM_GROUP, payload: deleteData });
+    dispatch({ type: DELETE_MEMBER_FROM_GROUP, payload: data });
     alert("Member deleted successfully");
     window.location.reload();
   } catch (error) {
