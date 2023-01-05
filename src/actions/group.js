@@ -1,7 +1,9 @@
 import * as api from "../api/index";
 import {
+  CHANGE_ROLE,
   CREATE_NEW_GROUP,
   DELETE_GROUP,
+  DELETE_MEMBER_FROM_GROUP,
   GET_GROUP,
 } from "../constants/actionType";
 import history from "../App";
@@ -40,6 +42,28 @@ export const addMember = (addData) => async (dispatch) => {
     const { data } = await api.addMember(addData);
     dispatch({ type: CREATE_NEW_GROUP, payload: addData });
     alert("Member added successfully");
+    window.location.reload();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const changeRoleOfMember = (updatedData) => async (dispatch) => {
+  try {
+    const { data } = await api.changeRole(updatedData);
+    dispatch({ type: CHANGE_ROLE, payload: data });
+    alert("Role changed successfully");
+    window.location.reload();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteMemberFromGroup = (deleteData) => async (dispatch) => {
+  try {
+    const { data } = await api.deleteMemberFromGroup(deleteData);
+    dispatch({ type: DELETE_MEMBER_FROM_GROUP, payload: deleteData });
+    alert("Member deleted successfully");
     window.location.reload();
   } catch (error) {
     console.log(error);

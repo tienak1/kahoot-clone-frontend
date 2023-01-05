@@ -1,7 +1,9 @@
 import {
   ADD_MEMBER,
+  CHANGE_ROLE,
   CREATE_NEW_GROUP,
   DELETE_GROUP,
+  DELETE_MEMBER_FROM_GROUP,
   GET_GROUP,
 } from "../constants/actionType";
 
@@ -18,6 +20,10 @@ const reducer = (state = initialState, action) => {
     case DELETE_GROUP:
       return { ...state, group: action.payload };
     case ADD_MEMBER:
+      return { ...state, group: action.payload };
+    case CHANGE_ROLE:
+      return { ...state, group: action.payload };
+    case DELETE_MEMBER_FROM_GROUP:
       return { ...state, group: action.payload };
     default:
       return state;

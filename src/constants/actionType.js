@@ -42,3 +42,5 @@ export const GET_GROUP = "GET_GROUP";
 export const CREATE_NEW_GROUP = "CREATE_NEW_GROUP";
 export const DELETE_GROUP = "DELETE_GROUP";
 export const ADD_MEMBER = "ADD_MEMBER";
+export const CHANGE_ROLE = "CHANGE_ROLE";
+export const DELETE_MEMBER_FROM_GROUP = "DELETE_MEMBER_FROM_GROUP";

@@ -33,7 +33,7 @@ const GroupDetail = () => {
                       {item.description}
                     </small>
                     <p>
-                      <ListMember members={item.members} />
+                      <ListMember members={item.members} groupItem={item} />
                     </p>
                     <p>{"   "}</p>
                     <p>{"   "}</p>
