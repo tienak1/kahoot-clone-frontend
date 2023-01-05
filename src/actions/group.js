@@ -5,6 +5,7 @@ import {
   DELETE_GROUP,
   DELETE_MEMBER_FROM_GROUP,
   GET_GROUP,
+  INVITE_MEMBER,
 } from "../constants/actionType";
 import history from "../App";
 
@@ -65,6 +66,17 @@ export const deleteMemberFromGroup = (deleteData) => async (dispatch) => {
     dispatch({ type: DELETE_MEMBER_FROM_GROUP, payload: data });
     alert("Member deleted successfully");
     window.location.reload();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const inviteMember = (inviteData) => async (dispatch) => {
+  try {
+    const { data } = await api.inviteMember(inviteData);
+    dispatch({ type: INVITE_MEMBER, payload: data });
+    alert("You have joined this group");
+    history.push("/group");
   } catch (error) {
     console.log(error);
   }

@@ -20,6 +20,7 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Registration from "./pages/Registration/Registration";
 import NavbarTemplate from "./templates/Navbar/NavbarTemplate";
+import JoinGroup from "./components/JoinGroup/JoinGroup";
 
 export const history = createBrowserHistory();
 
@@ -54,6 +55,10 @@ export default function App() {
           {/* Create new Quizes  */}
           <Route path="/myquizes" exact element={<MyQuizes />} />
           {/* Route for teacher, assistant  */}
+          <Route path="/group" element={<Group />} />
+          <Route path="/group/join">
+            <Route path=":groupId" element={<JoinGroup />} />
+          </Route>
         </Route>
         {/* Route for student,player  */}
         <Route path="/games/joingame" exact element={<JoinGame />} />

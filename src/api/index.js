@@ -29,6 +29,8 @@ export const changeRole = ({ groupId, memberId, newRole }) =>
   API.patch(`/group/changeRole`, { groupId, memberId, newRole });
 export const deleteMemberFromGroup = ({ groupId, memberId }) =>
   API.delete(`/group/${groupId}/deleteMember/${memberId}`);
+export const inviteMember = ({ groupId, memberId }) =>
+  API.put(`/group/${groupId}/invite`, { memberId });
 
 // QUIZES
 export const fetchQuizes = () => API.get("/quizes");

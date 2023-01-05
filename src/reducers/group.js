@@ -5,6 +5,7 @@ import {
   DELETE_GROUP,
   DELETE_MEMBER_FROM_GROUP,
   GET_GROUP,
+  INVITE_MEMBER,
 } from "../constants/actionType";
 
 const initialState = {
@@ -24,6 +25,8 @@ const reducer = (state = initialState, action) => {
     case CHANGE_ROLE:
       return { ...state, group: action.payload };
     case DELETE_MEMBER_FROM_GROUP:
+      return { ...state, group: action.payload };
+    case INVITE_MEMBER:
       return { ...state, group: action.payload };
     default:
       return state;
