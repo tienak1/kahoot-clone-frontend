@@ -21,7 +21,6 @@ function ListMember(props) {
   });
   // Change role of members
   const user = JSON.parse(localStorage.getItem("user"));
-
   const handleChangeRole = ({ groupId, memberId, newRole }) => {
     if (groupItem.owner !== user._id) {
       alert("You must be owner of the group to change role of this member");
@@ -32,9 +31,11 @@ function ListMember(props) {
     //   return;
     // }
     const data = { groupId: groupId, memberId: memberId, newRole: newRole };
+    console.log("data ", data);
     dispatch(changeRoleOfMember(data));
   };
-  const handleDeleteMember = ({ groupId, memberId, newRole }) => {
+
+  const handleDeleteMember = ({ groupId, memberId }) => {
     console.log("Nothing");
   };
   useEffect(() => {
@@ -51,7 +52,7 @@ function ListMember(props) {
               class="form-select form-select-lg"
               onChange={(e) => {
                 const data = {
-                  groupId: member.id,
+                  groupId: groupItem._id,
                   memberId: member.id,
                   newRole: e.target.value,
                 };
