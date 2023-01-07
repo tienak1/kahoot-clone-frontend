@@ -32,6 +32,10 @@ export const deleteMemberFromGroup = ({ groupId, memberId }) =>
 export const inviteMember = ({ groupId, memberId }) =>
   API.put(`/group/${groupId}/invite`, { memberId });
 
+// PRESENTATION
+export const createNewPresentation = ({ presentationName, description }) =>
+  API.post(`/presentation`, { presentationName, description });
+
 // QUIZES
 export const fetchQuizes = () => API.get("/quizes");
 export const fetchPublicQuizes = (page) =>

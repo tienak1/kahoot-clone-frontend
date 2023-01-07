@@ -21,16 +21,18 @@ import Login from "./pages/Login/Login";
 import Registration from "./pages/Registration/Registration";
 import NavbarTemplate from "./templates/Navbar/NavbarTemplate";
 import JoinGroup from "./components/JoinGroup/JoinGroup";
+import Presentaion from "./pages/Presentation/Presentaion";
+import PresentationDetail from "./pages/Presentation/PresentationDetail";
 
 export const history = createBrowserHistory();
 
 export default function App() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    const socket = io("http://localhost:3001");
-    dispatch(createSocket(socket));
-    return () => socket.disconnect();
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const socket = io("http://localhost:3001");
+  //   dispatch(createSocket(socket));
+  //   return () => socket.disconnect();
+  // }, [dispatch]);
 
   return (
     <HistoryRouter history={history}>
@@ -59,6 +61,10 @@ export default function App() {
           <Route path="/group/join">
             <Route path=":groupId" element={<JoinGroup />} />
           </Route>
+          <Route path="/presentation" exact element={<Presentaion />}>
+            <Route path=":presentationId" element={<PresentationDetail />} />
+          </Route>
+          <Route path="/presentation/test" element={<PresentationDetail />} />
         </Route>
         {/* Route for student,player  */}
         <Route path="/games/joingame" exact element={<JoinGame />} />

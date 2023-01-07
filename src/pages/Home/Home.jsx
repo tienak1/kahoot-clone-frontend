@@ -27,15 +27,6 @@ export default function Home() {
     ));
   };
 
-  const searchPost = () => {
-    if (search.trim() !== "") {
-      console.log(search.trim());
-      dispatch(getQuizesBySearch({ search: search }));
-      //history.push(`/quizes/search?searchQuery=${search || "none"}`);
-    } else {
-      history.push("/quizes");
-    }
-  };
   return (
     <div className="container-fluid bg-dark">
       {user ? (
@@ -44,23 +35,15 @@ export default function Home() {
             <form className="search w-75 my-2">
               <input
                 placeholder="Search here by name.."
-                className="form-control my-1"
+                className="form-control my-1 h-100"
                 onChange={(e) => setSearch(e.target.value)}
               />
-              {/* <input
-            placeholder="Search here by tag..."
-            className="form-control my-1"
-          /> */}
-              <button
-                className="btn btn-primary"
-                style={{ margin: "0 auto" }}
-                onClick={() => searchPost()}
-              >
-                Search
-              </button>
             </form>
           </div>
-          <div className="row">{renderAdItem()}</div>
+          <div className="row">
+            <h2 className="text-white text-center my-2">My Group</h2>
+            {renderAdItem()}
+          </div>
         </>
       ) : (
         ""
