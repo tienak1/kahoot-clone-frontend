@@ -1,85 +1,156 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import {
-  Routes,
-  Route,
-  unstable_HistoryRouter as HistoryRouter,
-} from "react-router-dom";
-import { io } from "socket.io-client";
-import { createSocket } from "./actions/socket";
-import { createBrowserHistory } from "history";
-import HostScreen from "./components/Game/HostScreen/HostScreen";
-import JoinGame from "./components/Game/JoinGame/JoinGame";
-import PlayerScreen from "./components/Game/PlayerScreen/PlayerScreen";
-import QuizCreator from "./components/QuizCreator/QuizCreator";
-import QuizDetail from "./components/QuizDetail/QuizDetail";
-import Quizes from "./components/Quizes/Quizes";
-import MyQuizes from "./pages/MyQuizes/MyQuizes";
-import Group from "./pages/Group/Group";
-import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
-import Registration from "./pages/Registration/Registration";
-import NavbarTemplate from "./templates/Navbar/NavbarTemplate";
+import "./App.css";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 
-export const history = createBrowserHistory();
+import { SnackbarProvider } from "notistack";
+import Fade from "@mui/material/Fade";
 
-export default function App() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const socket = io("http://localhost:3001");
-    dispatch(createSocket(socket));
-    return () => socket.disconnect();
-  }, [dispatch]);
+import Header from "./components/Header/Header";
+import CssBaseline from "@mui/material/CssBaseline";
 
-  return (
-    <HistoryRouter history={history}>
-      <Routes>
-        <Route path="" element={<NavbarTemplate />}>
-          <Route path="" element={<Home />} />
-          {/* Route for all user  */}
-          <Route path="/signup" element={<Registration />} />
-          <Route path="/login" element={<Login />} />
-          {/* Route for all user  */}
-          {/* Route for teacher, assistant  */}
-          <Route path="/group" element={<Group />} />
-          {/* Quiz Routes  */}
-          {/* Display all Quizes  */}
-          <Route path="/quizes" exact element={<Quizes />} />
-          {/* Search Quiz  */}
-          <Route path="/quizes/search" exact element={<Quizes />} />
-          {/* View Quiz Details  */}
-          <Route path="/quizes/:id" exact element={<QuizDetail />} />
-          {/* Edit Question  */}
-          <Route path="/myquizes/:id" exact element={<QuizCreator />} />
-          {/* Create new Quizes  */}
-          <Route path="/myquizes" exact element={<MyQuizes />} />
-          {/* Route for teacher, assistant  */}
-        </Route>
-        {/* Route for student,player  */}
-        <Route path="/games/joingame" exact element={<JoinGame />} />
-        <Route path="/games/host/:id" exact element={<HostScreen />} />
-        <Route path="/games/player/:id" exact element={<PlayerScreen />} />
-        {/* Route for student  */}
-        <Route path="*" element={<Home />} />
-      </Routes>
-    </HistoryRouter>
-    // <div>
-    //   <input
-    //     placeholder="Room Number"
-    //     onChange={(e) => setRoom(e.target.value)}
-    //   />
-    //   <button className="btn btn-primary" onClick={joinRoom}>
-    //     Join Room
-    //   </button>
-    //   <input
-    //     placeholder="Message..."
-    //     onChange={(e) => setMessage(e.target.value)}
-    //   />
-    //   <button className="btn btn-secondary" onClick={sendMessage}>
-    //     Send Message
-    //   </button>
-    //   <h1>Message:</h1>
-    //   {messageReceived}
-    // </div>
-  );
+import HomePage from "./pages";
+import SignUpPage from "./pages/sigup";
+import LoginPage from "./pages/login";
+import MePage from "./pages/me";
+import GroupListPage from "./pages/group";
+import GroupDetailPage from "./pages/group/detail";
+import VerificationPage from "./pages/verification";
+import GroupCreatePage from "./pages/group/create";
+import LoggedPageWrapper from "./components/LoggedPageWrapper";
+import PresentationDetailPage from "./pages/presentation/detail";
+import Error from "./components/Error/Error";
+import JoinGroup from "./components/JoinGroup/JoinGroup";
+import PresentationListPage from "./pages/presentation";
+import JoiningPage from "./components/Viewer/JoiningPage";
+
+function App() {
+    // const [user, setUser] = useState<ICurrentUser>({
+    // 	name: '',
+    // 	role: '',
+    // 	username: '',
+    //   });
+
+    //   useEffect(() => {
+    // 	const checkUser = async () => {
+    // 	  const token = getCookie('session_token');
+    // 	  if (token !== null) {
+    // 		const userData = await axios.get(
+    // 		  `${process.env.REACT_APP_BACKEND_URL}/account/checkToken`,
+    // 		  {
+    // 			headers: {
+    // 			  Authorization: `Bearer ${token}`,
+    // 			},
+    // 		  }
+    // 		);
+
+    // 		setUser({
+    // 		  name: `${userData.data.firstname} ${userData.data.lastname}`,
+    // 		  role: userData.data.role,
+    // 		  username: userData.data.username,
+    // 		});
+    // 	  }
+    // 	};
+
+    // 	checkUser().catch((err) => console.log(err));
+    //   }, []);
+    return (
+        <SnackbarProvider
+            autoHideDuration={3000}
+            anchorOrigin={{
+                horizontal: "right",
+                vertical: "top",
+            }}
+            TransitionComponent={Fade}
+        >
+            <CssBaseline />
+
+            <BrowserRouter>
+                <Routes>
+                    <Route exact path="/" element={
+                        <div className="back-ground">
+                            <HomePage />
+                        </div>
+                    }></Route>
+                    <Route
+                        exact
+                        path="/signup"
+                        element={<SignUpPage />}
+                    ></Route>
+                    <Route
+                        exact
+                        path="/login"
+                        element={<LoginPage />}
+                    ></Route>
+                    <Route
+                        exact
+                        path="/me"
+                        element={
+                            <LoggedPageWrapper>
+                                <MePage></MePage>
+                            </LoggedPageWrapper>
+                        }
+                    ></Route>
+                    <Route
+                        exact
+                        path="/group"
+                        element={
+                            <LoggedPageWrapper>
+                                <GroupListPage></GroupListPage>
+                            </LoggedPageWrapper>
+                        }
+                    ></Route>
+                    <Route
+                        exact
+                        path="/group/create"
+                        element={
+                            <LoggedPageWrapper>
+                                <GroupCreatePage></GroupCreatePage>
+                            </LoggedPageWrapper>
+                        }
+                    ></Route>
+                    <Route
+                        exact
+                        path="/group/:id"
+                        element={
+                            <LoggedPageWrapper>
+                                <GroupDetailPage></GroupDetailPage>
+                            </LoggedPageWrapper>
+                        }
+                    ></Route>
+                    <Route
+                        exact
+                        path="/group/invite/:inviteCode"
+                        element={
+                            <LoggedPageWrapper>
+                                <JoinGroup></JoinGroup>
+                            </LoggedPageWrapper>
+                        }
+                    ></Route>
+                    <Route
+                        exact
+                        path="/account/:id/verify/:token"
+                        element={<VerificationPage></VerificationPage>}
+                    ></Route>
+                    <Route exact path='/presentation' element={(
+                        <LoggedPageWrapper>
+                            <PresentationListPage></PresentationListPage>
+                        </LoggedPageWrapper>
+                    )}></Route>
+                    <Route exact path='/presentation/join/:shareCode' element={(
+                        <JoiningPage></JoiningPage>
+                    )}></Route>
+                    <Route exact path='/presentation/:id' element={(
+                        <LoggedPageWrapper>
+                            <PresentationDetailPage></PresentationDetailPage>
+                        </LoggedPageWrapper>
+                    )}></Route>
+                    <Route
+                        path="*"
+                        element={<div className="back-ground"><Error></Error></div>}
+                    ></Route>
+                </Routes>
+            </BrowserRouter>
+        </SnackbarProvider>
+    );
 }
+
+export default App;
