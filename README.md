@@ -14,7 +14,7 @@
 3. Project will start add `localhost:3000`
 
 # Đăng nhập (email/password)
-- miniankayusaki@gmail.com/1234
+- tminhbao2001@gmail.com/123456
 
 # Cách dùng component LoggedPageWrapper
 Trong TRANG nào mà cần đăng nhập để vào thì bọc trang đó bằng component LoggedPageWrapper như cách đã làm trong file App.js
