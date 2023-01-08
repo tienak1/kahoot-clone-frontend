@@ -17,7 +17,7 @@ const renderCustomBarLabel = ({ x, y, width, value }) => {
         <text
             x={x + width / 2}
             y={y}
-            fill="#666"
+            fill="#999"
             textAnchor="middle"
             dy={-6}
         >{`${value}`}</text>
