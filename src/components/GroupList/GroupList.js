@@ -17,14 +17,14 @@ import jpgTemplate from "../../background.jpg";
 import { groupList } from "../../service/GroupService";
 import InPageLoading from "../PageLoading/InPageLoading";
 import InviteGroupDialog from "../InviteGroupDialog/InviteGroupDialog";
-import { AppContext } from "../../context/AppContext";
+import { AppContext } from '../../context/AppContext';
 
 import "../../App.css";
 // let names = [];
 // let descriptions = [];
 
 export default function GroupList() {
-    const { user } = useContext(AppContext);
+    const { user } = useContext(AppContext)
     const [groups, setGroups] = useState([]);
     const [loading, setLoading] = useState(true);
     const [inviteGroup, setInviteGroup] = useState(null);
@@ -53,12 +53,10 @@ export default function GroupList() {
                     // }
                     item.members.map((mem) => {
                         if (user.accountID === mem.accountID) {
-                            setOwner((oldValue) => {
-                                return [...oldValue, mem.role];
-                            });
+                            setOwner((oldValue) => { return [...oldValue, mem.role] });
                         }
-                    });
-                });
+                    })
+                })
             }
 
             setLoading(false);
@@ -70,7 +68,8 @@ export default function GroupList() {
 
     const handleClickDetail = (url) => {
         navigate(url);
-    };
+    }
+
 
     if (loading) {
         return <InPageLoading></InPageLoading>;
@@ -88,7 +87,11 @@ export default function GroupList() {
     };
 
     return (
-        <Stack component="main" direction="column" spacing={2}>
+        <Stack
+            component="main"
+            direction="column"
+            spacing={2}
+        >
             {/* Hero unit */}
             <Typography
                 component="h1"
@@ -99,18 +102,17 @@ export default function GroupList() {
             >
                 Danh sách nhóm
             </Typography>
-            <a
-                href="/group/create"
-                className="btn-hover color-1"
+            <a  href='/group/create'
+                className='btn-hover color-1'
                 style={{
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "center",
-                    fontSize: "1.3rem",
+                    alignItems:"center",
+                    fontSize:"1.3rem",
                     margin: "1.5rem auto",
                 }}
             >
-                Tạo nhóm mới
+                    Tạo nhóm mới
             </a>
             {groups.length === 0 ? (
                 <Typography
@@ -130,53 +132,48 @@ export default function GroupList() {
                     sx={{
                         maxWidth: "70%",
                         marginX: "auto !important",
-                        paddingBottom: "2rem",
+                        paddingBottom: "2rem"
                     }}
                 >
                     <Grid container spacing={4}>
                         {groups.map((item, index) => (
                             <Grid item key={index} xs={12} sm={6} md={4}>
-                                <Card
+                                <Card 
                                     sx={{
                                         height: "100%",
                                         display: "flex",
                                         flexDirection: "column",
                                         cursor: "pointer",
                                     }}
-                                    onClick={() => {
-                                        handleClickDetail(item.detailURL);
-                                    }}
+                                    onClick={()=>{handleClickDetail(item.detailURL)}}
+
                                 >
                                     {owner[index] === "OWNER" ? (
                                         <Box bgcolor="#F7944D">
-                                            <Typography
-                                                fontFamily="PatrickHand"
-                                                color="white"
-                                            >
+
+                                            <Typography fontFamily="PatrickHand" color="white">
                                                 OWNER
                                             </Typography>
                                         </Box>
                                     ) : owner[index] === "COOWNER" ? (
                                         <Box bgcolor="#7439db">
-                                            <Typography
-                                                fontFamily="PatrickHand"
-                                                color="white"
-                                            >
+
+                                            <Typography fontFamily="PatrickHand" color="white">
                                                 COOWNER
                                             </Typography>
                                         </Box>
                                     ) : (
                                         <Box bgcolor="#C66FBC">
-                                            <Typography
-                                                fontFamily="PatrickHand"
-                                                color="white"
-                                            >
+
+                                            <Typography fontFamily="PatrickHand" color="white">
                                                 MEMBER
                                             </Typography>
                                         </Box>
                                     )}
 
-                                    <CardMedia alt="random">
+                                    <CardMedia
+                                        alt="random"
+                                    >
                                         <img src={jpgTemplate} />
                                     </CardMedia>
                                     <CardContent sx={{ flexGrow: 1 }}>
@@ -191,6 +188,7 @@ export default function GroupList() {
                                         <Typography fontFamily="PatrickHand">
                                             Mô tả: {item.description}
                                         </Typography>
+
                                     </CardContent>
                                     <CardActions
                                         style={{ justifyContent: "center" }}
@@ -226,6 +224,7 @@ export default function GroupList() {
                                         >
                                             Mời
                                         </Button>
+                                        
                                     </CardActions>
                                 </Card>
                             </Grid>
@@ -234,11 +233,14 @@ export default function GroupList() {
                     <InviteGroupDialog
                         open={!!inviteGroup}
                         setOpen={setInviteGroup}
-                        onClose={handleInviteDialogClose}
+                        onClose={
+                            handleInviteDialogClose
+                        }
                         inviteGroup={inviteGroup}
                     ></InviteGroupDialog>
                 </Box>
             )}
         </Stack>
+
     );
 }

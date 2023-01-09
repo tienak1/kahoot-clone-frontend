@@ -119,7 +119,6 @@ const PresentationDetailPage = () => {
         }
     };
 
-    // Handle User Submit Answer
     const handleUserSubmit = (data) => {
         if (data.slide) {
             setPresentation((prev) => {
@@ -128,7 +127,6 @@ const PresentationDetailPage = () => {
                 const slideID = slide.slideID;
                 const n = slides.length;
                 for (let i = 0; i < n; i++) {
-                    console.log("detail", slides[i]);
                     if (slides[i].slideID === slideID) {
                         if (slides[i].type === SLIDE_TYPE.MULTIPLE_CHOICE) {
                             slides[i].content = slide;
@@ -232,6 +230,7 @@ const PresentationDetailPage = () => {
     useEffect(() => {
         try {
             socket.connect();
+
             socket.on(SOCKET_TYPE.SUBMIT_ANSWER, handleUserSubmit);
         } catch (error) {
             console.log(error);

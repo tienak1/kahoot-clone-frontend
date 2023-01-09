@@ -1,4 +1,5 @@
-.form-container .create-group-form {
+.form-container
+.create-group-form {
     display: flex;
     flex-direction: column;
     /* align-items: center; */
@@ -9,8 +10,10 @@
         width: 600px;
         padding: 0rem 3rem 0rem 3rem;
         border: 10px solid;
-        border-image-slice: 1;
-        border-width: 5px;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-image-source: linear-gradient(79deg, #7439db, #C66FBC 48%, #F7944D);
+
         border-radius: 10px;
         margin: 5rem 0rem 0rem 0rem;
     }
@@ -19,20 +22,20 @@
 .form-title {
     font-size: 40px;
     color: white;
-    font-family: "PatrickHand";
+    font-family: 'PatrickHand';
 }
 
 .form-label {
     color: white;
     font-size: 18px;
-    font-family: "PatrickHand";
+    font-family: 'PatrickHand';
     text-align: left;
     padding: 0.25rem 0;
 }
 
 .form-input {
     font-size: 18px;
-    font-family: "PatrickHand";
+    font-family: 'PatrickHand';
     margin: 0.5rem 0;
     padding: 1rem;
     border: none;
@@ -41,7 +44,8 @@
 
 .form-textarea {
     font-size: 18px;
-    font-family: "PatrickHand";
+
+    font-family: 'PatrickHand';
     resize: none;
     margin: 0.5rem 0;
     height: 100px;
@@ -60,4 +64,4 @@
     /* margin-top: 2rem; */
     display: flex;
     justify-content: center;
-}
+  }
