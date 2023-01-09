@@ -82,7 +82,6 @@ const ViewerScreen = ({ presentation }) => {
     }, [currentSlide]);
 
     useEffect(() => {
-        console.log("here");
         if (presentation && presentation.slides && presentation.slides.length) {
             if (
                 !currentSlide ||

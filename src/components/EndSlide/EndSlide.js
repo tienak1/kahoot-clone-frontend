@@ -15,7 +15,8 @@ const EndSlide = () => {
             }}
         >
             <h1 style={{ fontSize: "28px" }}>
-                Bản trình bày đã kết thúc. Cảm ơn bạn đã tham gia.
+                Bản trình bày đã kết thúc. Cảm ơn bạn đã tham gia
+                <i className="fa fa-heart"></i>
             </h1>
         </Box>
     );
