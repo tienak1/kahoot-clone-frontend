@@ -10,6 +10,7 @@ import {
     Tooltip,
     ResponsiveContainer,
 } from "recharts";
+import { SLIDE_TYPE } from "../../service/PersentationService";
 
 // const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}];
 const renderCustomBarLabel = ({ x, y, width, value }) => {
@@ -17,7 +18,7 @@ const renderCustomBarLabel = ({ x, y, width, value }) => {
         <text
             x={x + width / 2}
             y={y}
-            fill="#999"
+            fill="#666"
             textAnchor="middle"
             dy={-6}
         >{`${value}`}</text>
@@ -26,7 +27,7 @@ const renderCustomBarLabel = ({ x, y, width, value }) => {
 
 const Slide = ({ slide }) => {
     const data = useMemo(() => {
-        return [...slide.content.option];
+        return [...slide?.content.option];
     }, [slide]);
 
     return (

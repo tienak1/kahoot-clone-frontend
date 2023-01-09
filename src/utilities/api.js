@@ -2,7 +2,7 @@ import { API_STATUS, HTTP_METHOD } from "../config/common";
 import queryString from "query-string";
 import { getToken } from "./cookies";
 
-export const API_HOST = "http://localhost:3330"; // BE HOST
+export const API_HOST = "http://localhost:3330";
 
 export const makeRequest = async (method, url, data, option = {}) => {
     let res = null;

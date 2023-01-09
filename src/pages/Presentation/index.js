@@ -52,9 +52,9 @@ const PresentationListPage = () => {
     const navigate = useNavigate();
 
     const handleClickCreate = async () => {
+        // Tạo ra một bản trình bày mới (toanh), mặc định là multiple choice
         const res = await create();
         console.log(res);
-
         const id = res.data[0].presentationID;
         navigate("/presentation/" + id);
     };
