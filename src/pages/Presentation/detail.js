@@ -74,6 +74,7 @@ const PresentationDetailPage = () => {
         });
     };
 
+    // add slide
     const addSlide = async () => {
         setNewSlideLoading(true);
         const res = await createSlide({
@@ -97,9 +98,9 @@ const PresentationDetailPage = () => {
         setSelectedSlideID(slide.slideID);
     };
 
+    // update slide - truyền vào 1 cái slide đã cập nhật
     const updateSelectedSlide = (slide) => {
         if (slide) {
-            console.log(slide);
             setPresentation((prev) => {
                 const result = cloneDeep(prev);
                 console.log(result == prev, result === prev);
@@ -284,7 +285,7 @@ const PresentationDetailPage = () => {
                     changeSlidesOrder={changeSlidesOrder}
                     changeSelectedSlide={changeSelectedSlide}
                     addSlide={addSlide}
-                    updateSelectedSlide={updateSelectedSlide}
+                    updateSelectedSlide={updateSelectedSlide} // update selected slide
                     handleRemoveSlide={handleRemoveSlide}
                     screen={screen}
                     changeCurrentSlideID={changeCurrentSlideID}

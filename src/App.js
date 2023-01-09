@@ -65,21 +65,21 @@ function App() {
 
             <BrowserRouter>
                 <Routes>
-                    <Route exact path="/" element={
-                        <div className="back-ground">
-                            <HomePage />
-                        </div>
-                    }></Route>
+                    <Route
+                        exact
+                        path="/"
+                        element={
+                            <div className="back-ground">
+                                <HomePage />
+                            </div>
+                        }
+                    ></Route>
                     <Route
                         exact
                         path="/signup"
                         element={<SignUpPage />}
                     ></Route>
-                    <Route
-                        exact
-                        path="/login"
-                        element={<LoginPage />}
-                    ></Route>
+                    <Route exact path="/login" element={<LoginPage />}></Route>
                     <Route
                         exact
                         path="/me"
@@ -130,22 +130,36 @@ function App() {
                         path="/account/:id/verify/:token"
                         element={<VerificationPage></VerificationPage>}
                     ></Route>
-                    <Route exact path='/presentation' element={(
-                        <LoggedPageWrapper>
-                            <PresentationListPage></PresentationListPage>
-                        </LoggedPageWrapper>
-                    )}></Route>
-                    <Route exact path='/presentation/join/:shareCode' element={(
-                        <JoiningPage></JoiningPage>
-                    )}></Route>
-                    <Route exact path='/presentation/:id' element={(
-                        <LoggedPageWrapper>
-                            <PresentationDetailPage></PresentationDetailPage>
-                        </LoggedPageWrapper>
-                    )}></Route>
+                    <Route
+                        exact
+                        path="/presentation"
+                        element={
+                            <LoggedPageWrapper>
+                                <PresentationListPage></PresentationListPage>
+                            </LoggedPageWrapper>
+                        }
+                    ></Route>
+                    <Route
+                        exact
+                        path="/presentation/join/:shareCode"
+                        element={<JoiningPage></JoiningPage>}
+                    ></Route>
+                    <Route
+                        exact
+                        path="/presentation/:id"
+                        element={
+                            <LoggedPageWrapper>
+                                <PresentationDetailPage></PresentationDetailPage>
+                            </LoggedPageWrapper>
+                        }
+                    ></Route>
                     <Route
                         path="*"
-                        element={<div className="back-ground"><Error></Error></div>}
+                        element={
+                            <div className="back-ground">
+                                <Error></Error>
+                            </div>
+                        }
                     ></Route>
                 </Routes>
             </BrowserRouter>
