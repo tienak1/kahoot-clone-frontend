@@ -13,6 +13,7 @@ import {
 import { useState } from "react";
 
 const SlideShow = ({ slide }) => {
+    // component đê trình chiếu
     if (slide.content.heading || slide.content.subHeading) {
         var dataHeading = [];
         dataHeading.push(slide.content.heading);

@@ -231,7 +231,6 @@ const PresentationDetailPage = () => {
     useEffect(() => {
         try {
             socket.connect();
-
             socket.on(SOCKET_TYPE.SUBMIT_ANSWER, handleUserSubmit);
         } catch (error) {
             console.log(error);

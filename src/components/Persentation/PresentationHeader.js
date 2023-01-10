@@ -15,9 +15,14 @@ import { useForm } from "react-hook-form";
 import SharePresentationDialog from "../SharePresentationDialog/SharePresentationDialog";
 import { useState } from "react";
 
-const PresentationHeader = ({ presentation, changetitle, isSaving, screen, changeSelectedSlide }) => {
+const PresentationHeader = ({
+    presentation,
+    changetitle,
+    isSaving,
+    screen,
+    changeSelectedSlide,
+}) => {
     const [sharePresentation, setSharePresentation] = useState(null);
-
 
     const handleShareDialogClose = () => {
         setSharePresentation(null);
@@ -29,15 +34,17 @@ const PresentationHeader = ({ presentation, changetitle, isSaving, screen, chang
         changetitle(data.title);
     };
 
+    // trình chiếu
     const onSlideShow = () => {
         const n = presentation.slides.length;
         for (let i = 0; i < n; i++) {
-            if(presentation.slides[i].slideID === presentation.currentSlideID)
-            {
+            if (
+                presentation.slides[i].slideID === presentation.currentSlideID
+            ) {
                 changeSelectedSlide(presentation.slides[i]);
             }
         }
-    }
+    };
 
     return (
         <Stack
@@ -128,7 +135,7 @@ const PresentationHeader = ({ presentation, changetitle, isSaving, screen, chang
                             display: "flex",
                             flexDirection: "row",
                             alignItems: "center",
-                            backgroundColor: "#7439db"
+                            backgroundColor: "#7439db",
                         }}
                         variant="contained"
                         size="small"
@@ -146,7 +153,7 @@ const PresentationHeader = ({ presentation, changetitle, isSaving, screen, chang
                             textTransform: "none",
                             fontFamily: "PatrickHand",
                             fontSize: "1.3rem",
-                            backgroundColor: "#F7944D"
+                            backgroundColor: "#F7944D",
                         }}
                         variant="contained"
                         color="success"
