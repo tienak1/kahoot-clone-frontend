@@ -37,10 +37,11 @@ export const ViewerGetPresentation = async ({ inviteCode }) => {
     return makeRequest(HTTP_METHOD.GET, `${JOIN_URI}/${inviteCode}`);
 };
 
-export const submitAnswer = async ({ slideID, option }) => {
+export const submitAnswer = async ({ slideID, option, presentationID }) => {
     return makeRequest(HTTP_METHOD.POST, `${JOIN_URI}/submit`, {
         slideID,
         option,
+        presentationID,
     });
 };
 

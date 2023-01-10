@@ -23,6 +23,7 @@ const socket = io(SOCKET_URL, {
     transports: ["websocket"],
 });
 
+// page của viewer, chọn lựa chọn
 const ViewerScreen = ({ presentation }) => {
     const [currentSlide, setCurrentSlide] = useState(null);
     const [value, setValue] = useState(null);
@@ -48,6 +49,7 @@ const ViewerScreen = ({ presentation }) => {
         const res = await submitAnswer({
             slideID: currentSlide.slideID,
             option: value,
+            presentationID: currentSlide.presentationID,
         });
         console.log(res);
         if (res.status === API_STATUS.OK) {
@@ -82,7 +84,6 @@ const ViewerScreen = ({ presentation }) => {
     }, [currentSlide]);
 
     useEffect(() => {
-        console.log("here");
         if (presentation && presentation.slides && presentation.slides.length) {
             if (
                 !currentSlide ||
@@ -126,6 +127,10 @@ const ViewerScreen = ({ presentation }) => {
     if (isWaitingScreen) {
         return <WaitingSlide></WaitingSlide>;
     }
+
+    console.log("Viewer Screen: current Slide", currentSlide);
+    // chưa lấy được cái heading với subheading
+    console.log("Viewer Screen", slideContent);
 
     return (
         <Box
