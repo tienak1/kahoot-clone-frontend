@@ -142,7 +142,11 @@ function App() {
                     <Route
                         exact
                         path="/presentation/join/:shareCode"
-                        element={<JoiningPage></JoiningPage>}
+                        element={
+                            <LoggedPageWrapper>
+                                <JoiningPage></JoiningPage>
+                            </LoggedPageWrapper>
+                        }
                     ></Route>
                     <Route
                         exact

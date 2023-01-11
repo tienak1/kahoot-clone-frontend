@@ -17,6 +17,8 @@ import WaitingSlide from "../WaitingSlide/WaitingSlide";
 import CircularProgress from "@mui/material/CircularProgress";
 import { API_STATUS } from "../../config/common";
 import EndSlide from "../EndSlide/EndSlide";
+import { useContext } from "react";
+import { AppContext } from "../../context/AppContext";
 
 const socket = io(SOCKET_URL, {
     autoConnect: false,
@@ -25,6 +27,7 @@ const socket = io(SOCKET_URL, {
 
 // page của viewer, chọn lựa chọn
 const ViewerScreen = ({ presentation }) => {
+    const { user } = useContext(AppContext);
     const [currentSlide, setCurrentSlide] = useState(null);
     const [value, setValue] = useState(null);
     const [isWaitingScreen, setIsWaitingScreen] = useState(false);
@@ -50,6 +53,7 @@ const ViewerScreen = ({ presentation }) => {
             slideID: currentSlide.slideID,
             option: value,
             presentationID: currentSlide.presentationID,
+            accountID: user.accountID,
         });
         console.log(res);
         if (res.status === API_STATUS.OK) {
