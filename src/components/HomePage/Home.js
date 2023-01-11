@@ -1,21 +1,37 @@
+import { Grid } from "@mui/material";
 import React from "react";
-// import { Button } from "@mui/material";
-// import { styled } from '@mui/system';
-
-import cssStyle from "./Home.module.css";
 
 const Home = () => {
     return (
-        <div>
-            <div className={`${cssStyle["title"]}`}>
-                <h1>Chào mừng đến với Cattoot</h1>
-                <a href="/login">
-                    <button className="btn-hover color-1">Đăng nhập</button>
-                </a>
-                <a href="/signup">
-                    <button className="btn-hover color-1">Tạo tài khoản</button>
-                </a>
-            </div>
+        <div
+            style={{
+                backgroundImage: "url(./mentibackground.jpg)",
+                backgroundSize: "cover",
+            }}
+        >
+            <div style={{ width: "90vw", height: "90vh", color: "#fff" }}></div>
+            <a href="/login">
+                <button
+                    className="button-1"
+                    style={{
+                        padding: "10px",
+                        margin: "10px",
+                    }}
+                >
+                    LOGIN
+                </button>
+            </a>
+            <a href="/signup">
+                <button
+                    className="button-1"
+                    style={{
+                        padding: "10px",
+                        margin: "10px",
+                    }}
+                >
+                    REGISTER
+                </button>
+            </a>
         </div>
     );
 };
