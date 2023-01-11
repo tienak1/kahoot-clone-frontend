@@ -41,12 +41,12 @@ const PageLoading = () => {
         >
             {/* <CircularProgress /> */}
             <img
-                src={require("../../background.gif")}
+                src={require("../../loading.gif")}
                 alt="loading..."
                 style={{ height: "220px", width: "220px" }}
             />
             <Box className={`${classes["loading-text"]}`}>
-                Đang tải {dots.join(" ")}
+                Loading {dots.join(" ")}
             </Box>
         </Stack>
     );
