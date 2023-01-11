@@ -37,10 +37,17 @@ export const ViewerGetPresentation = async ({ inviteCode }) => {
     return makeRequest(HTTP_METHOD.GET, `${JOIN_URI}/${inviteCode}`);
 };
 
-export const submitAnswer = async ({ slideID, option }) => {
+export const submitAnswer = async ({
+    slideID,
+    option,
+    presentationID,
+    accountID,
+}) => {
     return makeRequest(HTTP_METHOD.POST, `${JOIN_URI}/submit`, {
         slideID,
         option,
+        presentationID,
+        accountID,
     });
 };
 
@@ -57,4 +64,11 @@ export const createSlide = async ({ presentationID }) => {
 
 export const deletePresentation = async ({ presentationID }) => {
     return makeRequest(HTTP_METHOD.POST, `${URI}/delete`, { presentationID });
+};
+
+export const displayResult = async ({ presentationID, slideID }) => {
+    return makeRequest(HTTP_METHOD.POST, `${URI}/display-result`, {
+        presentationID,
+        slideID,
+    });
 };

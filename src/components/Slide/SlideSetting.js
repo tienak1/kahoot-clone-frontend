@@ -16,15 +16,34 @@ import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import "./contextmenu.css";
 import { useToast } from "../../hook/useToast";
-import { StoreMallDirectory } from "@mui/icons-material";
+import { LeaderboardOutlined, StoreMallDirectory } from "@mui/icons-material";
 import { useMemo } from "react";
+import { displayResult } from "../../service/PersentationService";
+import { getAllAccount } from "../../service/AccountService";
+import { Modal } from "antd";
+import { isContentEditable } from "@testing-library/user-event/dist/utils/edit/isContentEditable";
 const SlideSetting = ({ slide, handleChangeSlide }) => {
     const { register, handleSubmit, setValue, getValues, control } = useForm();
-
     const toast = useToast();
+    const [slideResult, setSlideResult] = useState([]);
+
+    // ANTD MODAL
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+    // ANTD MODAL
+
     const warningDelete = () => {
         toast.warning("Không thể xóa lựa chọn này");
     };
+
     const slideContent = useMemo(() => {
         return slide.content;
     }, [slide]);
@@ -111,6 +130,19 @@ const SlideSetting = ({ slide, handleChangeSlide }) => {
         newSlide.type = slideType;
         handleChangeSlide(newSlide);
     };
+
+    const handleDisplayResult = async () => {
+        const res = await displayResult({
+            presentationID: slide.presentationID,
+            slideID: slide.slideID,
+        });
+        const resUser = await getAllAccount();
+        const listUser = resUser.data; //{fullname,accountID} - array
+        const listOption = res.data[0].option; //{id,option:[{key,value,submitBy:[{accountID, _id}]}]} - array
+        setSlideResult(res.data[0].option);
+    };
+
+    if (isModalOpen) handleDisplayResult();
 
     return (
         <React.Fragment>
@@ -338,9 +370,34 @@ const SlideSetting = ({ slide, handleChangeSlide }) => {
                             <p>Thêm lựa chọn</p>
                         </Button>
                     </Box>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                    >
+                        <Button
+                            sx={{
+                                width: "90%",
+                                margin: "10px",
+                                textTransform: "none",
+                                fontFamily: "PatrickHand",
+                                fontSize: "1.3rem",
+                                backgroundColor: "red",
+                            }}
+                            variant="contained"
+                            size="small"
+                            onClick={showModal}
+                        >
+                            <LeaderboardOutlined
+                                sx={{ marginRight: "0.5rem" }}
+                            ></LeaderboardOutlined>
+                            <p>Xem kết quả</p>
+                        </Button>
+                    </Box>
                 </Box>
             )}
-
             {/* HEADING  */}
             {slideType === "HEADING" && (
                 <Box>
@@ -519,6 +576,25 @@ const SlideSetting = ({ slide, handleChangeSlide }) => {
                     />
                 </Box>
             )}
+            <Modal
+                title="Basic Modal"
+                open={isModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+            >
+                {slideResult.map((item) => (
+                    <>
+                        <p>{item.key}</p>
+                        <span>
+                            {item.submitBy.map((itemSubmit) => (
+                                <span>
+                                    {itemSubmit.accountID && "submit by: Hải"}
+                                </span>
+                            ))}
+                        </span>
+                    </>
+                ))}
+            </Modal>
         </React.Fragment>
     );
 };

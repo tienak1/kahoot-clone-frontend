@@ -13,6 +13,13 @@ import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 
 import { nextSlide } from "../../service/PersentationService";
+import { SOCKET_TYPE, SOCKET_URL } from "../../config";
+import { io } from "socket.io-client";
+
+const socket = io(SOCKET_URL, {
+    autoConnect: false,
+    transports: ["websocket"],
+});
 
 const PresentationBody = ({
     presentation,
@@ -38,6 +45,18 @@ const PresentationBody = ({
             console.log(error);
         }
     };
+
+    useEffect(() => {
+        try {
+            socket.connect();
+            socket.emit(SOCKET_TYPE.RELOAD_PRESENTATION, presentation);
+        } catch (error) {
+            console.log(error);
+        }
+        return () => {
+            socket.disconnect();
+        };
+    });
 
     return (
         <Grid
@@ -148,6 +167,7 @@ const PresentationBody = ({
                                 <Button disabled="true" />
                             )}
 
+                            {/* Cập nhật ở màn hình giữa  */}
                             <SlideShow slide={selectedSlide}></SlideShow>
 
                             {selectedSlide.slideOrder + 1 <

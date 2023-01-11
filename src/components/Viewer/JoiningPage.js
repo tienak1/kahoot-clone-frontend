@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react'
-import { useParams } from 'react-router';
-import { API_STATUS } from '../../config/common';
-import { ViewerGetPresentation } from '../../service/PersentationService';
-import Error from '../Error/Error';
-import PageLoading from '../PageLoading/PageLoading';
-import ViewerScreen from './ViewerScreen';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router";
+import { API_STATUS } from "../../config/common";
+import { ViewerGetPresentation } from "../../service/PersentationService";
+import Error from "../Error/Error";
+import PageLoading from "../PageLoading/PageLoading";
+import ViewerScreen from "./ViewerScreen";
 import { SOCKET_TYPE, SOCKET_URL } from "../../config";
 import io from "socket.io-client";
 import { useToast } from "../../hook/useToast";
@@ -14,12 +14,13 @@ const socket = io(SOCKET_URL, {
     transports: ["websocket"],
 });
 
+// Page để join vào presentation (loading loading)
 const JoiningPage = () => {
     const [loading, setLoading] = useState(true);
     const [validUrl, setValidUrl] = useState(false);
     const [presentation, setPresentation] = useState(false);
     const param = useParams();
-    
+
     const toast = useToast();
 
     const handelChangePresentation = (data) => {
@@ -27,14 +28,15 @@ const JoiningPage = () => {
         const pre = data.presentation || [];
         setPresentation(pre);
         // toast.info("Người chủ trì đã thay đổi nội dung")
-
-    }
+    };
 
     useEffect(() => {
         try {
             socket.connect();
-
-            socket.on(SOCKET_TYPE.CHANGE_PRESENTATION, handelChangePresentation);
+            socket.on(
+                SOCKET_TYPE.CHANGE_PRESENTATION,
+                handelChangePresentation
+            );
         } catch (error) {
             console.log(error);
         }
@@ -48,15 +50,14 @@ const JoiningPage = () => {
         const verifyJoinLink = async () => {
             try {
                 const res = await ViewerGetPresentation({
-                    inviteCode: param.shareCode
-                })
+                    inviteCode: param.shareCode,
+                });
                 // console.log(res);
                 if (res.status === API_STATUS.OK) {
                     setLoading(false);
                     setValidUrl(true);
                     setPresentation(res.data[0]);
-                }
-                else{
+                } else {
                     setLoading(false);
                     setValidUrl(false);
                 }
@@ -69,17 +70,15 @@ const JoiningPage = () => {
         verifyJoinLink();
     }, [param]);
 
-    if(loading){
-        return <PageLoading></PageLoading>
+    if (loading) {
+        return <PageLoading></PageLoading>;
     }
 
-    if(!validUrl){
-        return <Error></Error>
+    if (!validUrl) {
+        return <Error></Error>;
     }
 
-    return (
-        <ViewerScreen presentation={presentation}></ViewerScreen>
-    )
-}
+    return <ViewerScreen presentation={presentation}></ViewerScreen>;
+};
 
-export default JoiningPage
+export default JoiningPage;

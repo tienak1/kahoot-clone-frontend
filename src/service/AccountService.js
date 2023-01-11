@@ -6,8 +6,8 @@ const ACCOUNT_URI = "/account";
 const GROUP_MEMBER_ROLE = {
     OWNER: "OWNER",
     COOWNER: "COOWNER",
-    MEMBER: "MEMBER"
-}
+    MEMBER: "MEMBER",
+};
 export const login = async ({ email, password }) => {
     const res = await makeRequest(HTTP_METHOD.POST, ACCOUNT_URI + "/login", {
         email,
@@ -90,11 +90,18 @@ export const getMe = () => {
 };
 
 export const updateName = ({ fullname }) => {
-    return makeRequest(HTTP_METHOD.POST, ACCOUNT_URI + "/me", {fullname});
+    return makeRequest(HTTP_METHOD.POST, ACCOUNT_URI + "/me", { fullname });
 };
 
 export const updatePassword = ({ password, newPassword }) => {
-    console.log(password)
-    console.log(newPassword)
-    return makeRequest(HTTP_METHOD.POST, ACCOUNT_URI + "/me/change-password", {password, newPassword});
+    console.log(password);
+    console.log(newPassword);
+    return makeRequest(HTTP_METHOD.POST, ACCOUNT_URI + "/me/change-password", {
+        password,
+        newPassword,
+    });
+};
+
+export const getAllAccount = () => {
+    return makeRequest(HTTP_METHOD.GET, ACCOUNT_URI + "/");
 };
