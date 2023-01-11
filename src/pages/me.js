@@ -1,10 +1,8 @@
-import React from 'react'
+import React from "react";
 import PersonalPage from "../components/PersonalPage/PersonalPage.js";
 
 const MePage = () => {
-  return (
-    <PersonalPage/>
-  )
-}
+    return <PersonalPage />;
+};
 
-export default MePage
+export default MePage;

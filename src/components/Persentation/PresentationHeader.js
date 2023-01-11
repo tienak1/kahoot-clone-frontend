@@ -117,12 +117,12 @@ const PresentationHeader = ({
                                 sx={{ color: "#a7a7a7" }}
                                 size={20}
                             ></CircularProgress>
-                            <p>Đang lưu</p>
+                            <p>Saving</p>
                         </>
                     ) : (
                         <>
                             <CheckIcon color="success"></CheckIcon>
-                            <p>Đã lưu</p>
+                            <p>Saved</p>
                         </>
                     )}
 
@@ -144,7 +144,7 @@ const PresentationHeader = ({
                         }}
                     >
                         <ShareIcon sx={{ marginRight: "0.5rem" }}></ShareIcon>
-                        Chia sẻ
+                        Share
                     </Button>
 
                     <Button
@@ -164,7 +164,7 @@ const PresentationHeader = ({
                         <PlayArrowIcon
                             sx={{ marginRight: "0.5rem" }}
                         ></PlayArrowIcon>
-                        Bắt đầu trình chiếu
+                        Present
                     </Button>
                 </Stack>
                 <SharePresentationDialog

@@ -173,7 +173,7 @@ const LoginForm = () => {
 
     return (
         <div className={`${cssStyle["form-container"]}`}>
-            <h2 className={`${cssStyle["form-title"]}`}>Đăng nhập</h2>
+            <h2 className={`${cssStyle["form-title"]}`}>Login</h2>
             <form
                 className={`${cssStyle["login-form"]}`}
                 onSubmit={handleSubmit(onSubmit)}
@@ -232,7 +232,7 @@ const LoginForm = () => {
                     }}
                 />
                 <TextField
-                    label="Mật khẩu"
+                    label="Password"
                     type="password"
                     fullWidth
                     required
@@ -279,7 +279,7 @@ const LoginForm = () => {
                 )}
                 <div className={`${cssStyle["btn-center"]}`}>
                     <button
-                        className="btn-hover color-1"
+                        className="button-1"
                         type="submit"
                         disabled={loading}
                         style={{
@@ -287,6 +287,7 @@ const LoginForm = () => {
                                 backgroundColor: "grey",
                                 backgroundImage: "unset",
                                 boxShadow: "unset",
+                                marginBottom: "8px",
                             }),
                         }}
                     >
@@ -297,7 +298,7 @@ const LoginForm = () => {
                                 alignItems="center"
                                 justifyContent="center"
                             >
-                                <Box>Đang đăng nhập</Box>
+                                <Box>Loading</Box>
                                 <CircularProgress
                                     size={20}
                                     sx={{
@@ -306,7 +307,7 @@ const LoginForm = () => {
                                 />
                             </Stack>
                         ) : (
-                            "Đăng nhập"
+                            "LOGIN"
                         )}
                     </button>
                 </div>
@@ -318,7 +319,7 @@ const LoginForm = () => {
                         margin: "0",
                     }}
                 >
-                    ------------ hoặc ------------
+                    ------------ OR ------------
                 </Typography>
                 <div
                     className={`${cssStyle["btn-center"]}`}
@@ -336,7 +337,7 @@ const LoginForm = () => {
                     margin: "1rem 0 0 0",
                 }}
             >
-                Chưa có tài khoản? <Link href="/signup">Đăng ký ngay</Link>
+                No account? <Link href="/signup">Create one</Link>
             </Typography>
         </div>
     );

@@ -41,7 +41,7 @@ const SlideSetting = ({ slide, handleChangeSlide }) => {
     // ANTD MODAL
 
     const warningDelete = () => {
-        toast.warning("Không thể xóa lựa chọn này");
+        toast.warning("Cannot delete this choice");
     };
 
     const slideContent = useMemo(() => {
@@ -91,7 +91,7 @@ const SlideSetting = ({ slide, handleChangeSlide }) => {
         // console.log(getValues(`option-${index1}`));
         const newSlide = slide;
         const n = slideContent.option.length;
-        const data = { key: `Lựa chọn ${n + 1}`, value: 0 };
+        const data = { key: `Choice ${n + 1}`, value: 0 };
         newSlide.content.option.push(data);
         console.log(newSlide.content);
         handleChangeSlide(newSlide);
@@ -367,7 +367,7 @@ const SlideSetting = ({ slide, handleChangeSlide }) => {
                             onClick={onAddOption}
                         >
                             <AddIcon sx={{ marginRight: "0.5rem" }}></AddIcon>
-                            <p>Thêm lựa chọn</p>
+                            <p>Add Option</p>
                         </Button>
                     </Box>
                     <Box
@@ -393,7 +393,7 @@ const SlideSetting = ({ slide, handleChangeSlide }) => {
                             <LeaderboardOutlined
                                 sx={{ marginRight: "0.5rem" }}
                             ></LeaderboardOutlined>
-                            <p>Xem kết quả</p>
+                            <p>View Result</p>
                         </Button>
                     </Box>
                 </Box>

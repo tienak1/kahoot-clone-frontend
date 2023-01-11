@@ -65,7 +65,7 @@ const PresentationListPage = () => {
             presentationID: item.presentationID,
         });
         if (res.status === API_STATUS.OK) {
-            toast.success("Xóa bản trình bài thành công");
+            toast.success("Delete presentation successfully");
             setPresentationList((prev) => {
                 return prev.filter(
                     (p) => p.presentationID !== item.presentationID
@@ -73,7 +73,7 @@ const PresentationListPage = () => {
             });
         } else {
             console.log(res);
-            toast.error("Xóa thất bại");
+            toast.error("Deleted failed");
         }
         setIsLoading(false);
     };
@@ -128,7 +128,7 @@ const PresentationListPage = () => {
                 color="white"
                 fontFamily="PatrickHand"
             >
-                Danh sách bản trình bày
+                Presentation
             </Typography>
             <div
                 style={{
@@ -139,14 +139,14 @@ const PresentationListPage = () => {
                 }}
             >
                 <button
-                    className="btn-hover color-1"
+                    className="button-1 color-1"
                     style={{ margin: "0px 10px" }}
                     onClick={handleClickCreate}
                 >
-                    Tạo bản trình bày mới
+                    Create
                 </button>
 
-                {/* <button className='btn-hover color-1' style={{ margin: "0px 10px" }} onClick={handleOpen}>
+                {/* <button className='button-1 color-1' style={{ margin: "0px 10px" }} onClick={handleOpen}>
                     Tham gia
                 </button> */}
             </div>
@@ -162,7 +162,7 @@ const PresentationListPage = () => {
                     fontFamily="PatrickHand"
                     fontSize="30px"
                 >
-                    Bạn chưa có bản trình bày nào (◕︵◕)
+                    You don't have any presentations available
                 </Typography>
             ) : (
                 <Box
@@ -228,7 +228,7 @@ const PresentationListPage = () => {
                                                 handleDeletePresentation(item);
                                             }}
                                         >
-                                            Xóa
+                                            Delete
                                         </Button>
                                         {/* <InviteGroupDialog
                                         open={!!inviteGroup}
@@ -261,7 +261,7 @@ const PresentationListPage = () => {
                         fontFamily="PatrickHand"
                         color="black"
                     >
-                        Nhập link hoặc code
+                        Input link or code
                     </Typography>
                     <TextField fullWidth />
                 </Box>

@@ -34,13 +34,13 @@ const SharePresentationDialog = ({
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>
-                Chia sẻ bản trình bày{" "}
+                Share Presentation
                 <b>{sharePresentation ? sharePresentation.name : ""}</b>
             </DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    Mời tham gia xem và bình chọn trên bản trình bày thông qua
-                    đường liên kết dưới đây:
+                    {/* Mời tham gia xem và bình chọn trên bản trình bày thông qua
+                    đường liên kết dưới đây: */}
                 </DialogContentText>
                 <TextField
                     id="invite-link"

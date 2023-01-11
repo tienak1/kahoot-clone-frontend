@@ -11,7 +11,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { FullScreen } from "react-full-screen";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-
+import { getQuestionList } from "../../service/PersentationService";
 import { nextSlide } from "../../service/PersentationService";
 import { SOCKET_TYPE, SOCKET_URL } from "../../config";
 import { io } from "socket.io-client";
@@ -46,10 +46,19 @@ const PresentationBody = ({
         }
     };
 
+    const getQuestionListFromUser = async () => {
+        const res = await getQuestionList({
+            presentationID: presentation.presentationID,
+            isAnswered: false,
+        });
+        console.log(res.data);
+    };
+
     useEffect(() => {
         try {
             socket.connect();
             socket.emit(SOCKET_TYPE.RELOAD_PRESENTATION, presentation);
+            getQuestionListFromUser();
         } catch (error) {
             console.log(error);
         }
@@ -100,7 +109,7 @@ const PresentationBody = ({
                     ) : (
                         <AddIcon sx={{ marginRight: "0.5rem" }}></AddIcon>
                     )}
-                    <p>Thêm slide</p>
+                    <p>Add slide</p>
                 </Button>
                 <Box
                     sx={{
