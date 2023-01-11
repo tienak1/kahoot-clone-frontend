@@ -1,5 +1,4 @@
 import React from "react";
-
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {
@@ -11,6 +10,14 @@ import {
     ResponsiveContainer,
 } from "recharts";
 import { useState } from "react";
+import {
+    Grid,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemText,
+} from "@mui/material";
+import { getQuestionList } from "../../service/PersentationService";
 
 const SlideShow = ({ slide }) => {
     // component đê trình chiếu
@@ -81,6 +88,33 @@ const SlideShow = ({ slide }) => {
                     >
                         {slide.content.subHeading || ""}
                     </Typography>
+
+                    <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                            Question is not answered
+                            <List>
+                                <ListItem disablePadding>
+                                    <ListItemButton>
+                                        <ListItemText
+                                            primary="éc"
+                                            fontFamily="PatrickHand"
+                                        />
+                                    </ListItemButton>
+                                </ListItem>
+                                <ListItem disablePadding>
+                                    <ListItemButton>
+                                        <ListItemText
+                                            primary="Drafts"
+                                            fontFamily="PatrickHand"
+                                        />
+                                    </ListItemButton>
+                                </ListItem>
+                            </List>
+                        </Grid>
+                        <Grid item xs={6}>
+                            Question is answered
+                        </Grid>
+                    </Grid>
 
                     {/* <ResponsiveContainer>
                         <BarChart

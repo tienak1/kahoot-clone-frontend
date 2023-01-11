@@ -3,6 +3,7 @@ import { makeRequest } from "../utilities/api";
 
 const URI = "/presentation";
 const JOIN_URI = "/presentation-join";
+const QUESTION_URI = "/presentation/question";
 export const SLIDE_TYPE = {
     MULTIPLE_CHOICE: "MULTIPLE_CHOICE",
     PARAGRAPH: "PARAGRAPH",
@@ -48,6 +49,20 @@ export const submitAnswer = async ({
         option,
         presentationID,
         accountID,
+    });
+};
+
+export const sendQuestionToHost = async ({ question, presentationID }) => {
+    return makeRequest(HTTP_METHOD.POST, `${QUESTION_URI}`, {
+        question,
+        presentationID,
+    });
+};
+
+export const getQuestionList = async ({ presentationID, isAnswered }) => {
+    return makeRequest(HTTP_METHOD.GET, `${QUESTION_URI}`, {
+        presentationID,
+        isAnswered,
     });
 };
 

@@ -8,17 +8,24 @@ import {
     Button,
     Stack,
     Typography,
+    OutlinedInput,
+    TextField,
 } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import io from "socket.io-client";
 import { SOCKET_TYPE, SOCKET_URL } from "../../config";
-import { submitAnswer } from "../../service/PersentationService";
+import {
+    sendQuestionToHost,
+    submitAnswer,
+    submitQuestion,
+} from "../../service/PersentationService";
 import WaitingSlide from "../WaitingSlide/WaitingSlide";
 import CircularProgress from "@mui/material/CircularProgress";
 import { API_STATUS } from "../../config/common";
 import EndSlide from "../EndSlide/EndSlide";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
+import { Controller } from "react-hook-form";
 
 const socket = io(SOCKET_URL, {
     autoConnect: false,
@@ -30,6 +37,8 @@ const ViewerScreen = ({ presentation }) => {
     const { user } = useContext(AppContext);
     const [currentSlide, setCurrentSlide] = useState(null);
     const [value, setValue] = useState(null);
+    const [valueQuestion, setValueQuestion] = useState(null);
+    const [dataQuestion, setDataQuestion] = useState(null);
     const [isWaitingScreen, setIsWaitingScreen] = useState(false);
     const [isSubmiting, setIsSubmiting] = useState(false);
     const [isDone, setIsDone] = useState(false);
@@ -47,6 +56,9 @@ const ViewerScreen = ({ presentation }) => {
         setValue(event.target.value);
     };
 
+    const handleChangeQuestion = (event) =>
+        setValueQuestion(event.target.value);
+
     const handleSubmit = async () => {
         setIsSubmiting(true);
         const res = await submitAnswer({
@@ -57,6 +69,23 @@ const ViewerScreen = ({ presentation }) => {
         });
         console.log(res);
         if (res.status === API_STATUS.OK) {
+            if (res.data[0].isLastSlide) {
+                setIsDone(true);
+            }
+        }
+        setIsSubmiting(false);
+        setIsWaitingScreen(true);
+    };
+
+    const handleSubmitQuestion = async () => {
+        setIsSubmiting(true);
+        const res = await sendQuestionToHost({
+            question: valueQuestion,
+            presentationID: presentation.presentationID,
+        });
+        console.log(res);
+        if (res.status === API_STATUS.OK) {
+            setDataQuestion(res.data[0]);
             if (res.data[0].isLastSlide) {
                 setIsDone(true);
             }
@@ -87,10 +116,6 @@ const ViewerScreen = ({ presentation }) => {
         }
     }, [currentSlide]);
 
-    const handleRecieveNewPresentationSocket = (data) => {
-        console.log("View Screen: data", data);
-    };
-
     useEffect(() => {
         if (presentation && presentation.slides && presentation.slides.length) {
             if (
@@ -119,9 +144,8 @@ const ViewerScreen = ({ presentation }) => {
             );
             socket.on(SOCKET_TYPE.UPVOTE_QUESTION, handleUpvoteQuestionSocket);
             socket.on(SOCKET_TYPE.SUBMIT_QUESTION, handleRecieveQuestionSocket);
-            socket.on(
-                SOCKET_TYPE.RELOAD_PRESENTATION,
-                handleRecieveNewPresentationSocket
+            socket.emit(SOCKET_TYPE.SEND_QUESTION, dataQuestion, (socket) =>
+                console.log(socket)
             );
         } catch (error) {
             console.log(error);
@@ -140,11 +164,9 @@ const ViewerScreen = ({ presentation }) => {
         return <WaitingSlide></WaitingSlide>;
     }
 
-    console.log("Viewer Screen, currentSlide", currentSlide);
-
     return (
         <React.Fragment>
-            {currentSlide.content.heading ? (
+            {currentSlide?.content.heading ? (
                 <Box
                     sx={{
                         width: "100%",
@@ -178,9 +200,9 @@ const ViewerScreen = ({ presentation }) => {
                             color="white"
                             fontFamily="PatrickHand"
                         >
-                            {slideContent?.heading}
+                            {slideContent?.heading || slideContent?.paragraph}
                         </Typography>
-                        <FormControl>
+                        {/* <FormControl>
                             <RadioGroup
                                 aria-labelledby="demo-controlled-radio-buttons-group"
                                 name="controlled-radio-buttons-group"
@@ -234,9 +256,13 @@ const ViewerScreen = ({ presentation }) => {
                                     );
                                 })}
                             </RadioGroup>
-                        </FormControl>
+                        </FormControl> */}
+                        <TextField
+                            onBlur={handleChangeQuestion}
+                            value={valueQuestion}
+                        ></TextField>
                         <button
-                            onClick={handleSubmit}
+                            onClick={handleSubmitQuestion}
                             className="btn-hover color-1"
                             style={{
                                 fontSize: "1.5rem",
@@ -261,7 +287,7 @@ const ViewerScreen = ({ presentation }) => {
                                         sx={{ color: "#fff" }}
                                     />
                                 )}
-                                <div>Xác nhận</div>
+                                <div>Gửi câu hỏi</div>
                             </Stack>
                         </button>
                     </Stack>

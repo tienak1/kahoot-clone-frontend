@@ -120,8 +120,6 @@ const PresentationDetailPage = () => {
         }
     };
 
-    console.log("detail.js: presentation", presentation);
-
     const handleUserSubmit = (data) => {
         if (data.slide) {
             setPresentation((prev) => {
