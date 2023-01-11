@@ -29,7 +29,7 @@ const SignupForm = () => {
         const email = data.email;
         const fullname = data.name;
         const token = response.credential;
-        setLoading(true)
+        setLoading(true);
         const res = await googleSignup({ email, fullname, token });
         console.log(res);
         if (res.status === API_STATUS.OK) {
@@ -94,14 +94,14 @@ const SignupForm = () => {
 
     return (
         <div className={`${cssStyle["form-container"]}`}>
-            <h2 className={`${cssStyle["form-title"]}`}>Đăng ký</h2>
+            <h2 className={`${cssStyle["form-title"]}`}>Register</h2>
             <form
                 className={`${cssStyle["login-form"]}`}
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <TextField
                     autoFocus
-                    label="Họ tên"
+                    label="Full Name"
                     fullWidth
                     required
                     variant="standard"
@@ -185,7 +185,7 @@ const SignupForm = () => {
                     }}
                 />
                 <TextField
-                    label="Mật khẩu"
+                    label="Password"
                     type="password"
                     fullWidth
                     required
@@ -221,7 +221,7 @@ const SignupForm = () => {
                     }}
                 />
                 <TextField
-                    label="Nhập lại mật khẩu"
+                    label="Retype Password"
                     type="password"
                     fullWidth
                     required
@@ -245,7 +245,7 @@ const SignupForm = () => {
                     {...register("confirmPassword", {
                         validate: (value) =>
                             value === watch("password") ||
-                            "Mật khẩu không trùng khớp",
+                            "Password does not match",
                     })}
                     error={!!errors?.confirmPassword}
                     helperText={
@@ -273,7 +273,7 @@ const SignupForm = () => {
                 )}
                 <div className={`${cssStyle["btn-center"]}`}>
                     <button
-                        className="btn-hover color-1"
+                        className="button-1"
                         type="submit"
                         disabled={loading}
                         style={{
@@ -291,7 +291,7 @@ const SignupForm = () => {
                                 alignItems="center"
                                 justifyContent="center"
                             >
-                                <Box>Đang đăng ký</Box>
+                                <Box>Loading</Box>
                                 <CircularProgress
                                     size={20}
                                     sx={{
@@ -300,7 +300,7 @@ const SignupForm = () => {
                                 />
                             </Stack>
                         ) : (
-                            "Đăng ký"
+                            "Register"
                         )}
                     </button>
                 </div>
@@ -312,7 +312,7 @@ const SignupForm = () => {
                         margin: "0",
                     }}
                 >
-                    ------------ hoặc ------------
+                    ------------ OR ------------
                 </Typography>
                 <div
                     className={`${cssStyle["btn-center"]}`}
@@ -330,7 +330,7 @@ const SignupForm = () => {
                     margin: "1rem 0 0 0",
                 }}
             >
-                Đã có tài khoản? <Link href="/login">Đăng nhập ngay</Link>
+                Has account? <Link href="/login">Login now</Link>
             </Typography>
         </div>
     );
