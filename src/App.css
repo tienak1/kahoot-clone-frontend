@@ -93,7 +93,7 @@ a {
     background-color: #f082ac;
 }
 
-.btn-hover {
+.button-1 {
     width: 200px;
 
     font-size: 16px;
@@ -112,7 +112,7 @@ a {
     transition: all 0.4s ease-in-out;
 }
 
-.btn-hover:hover {
+.button-1:hover {
     background-position: 100% 0;
     moz-transition: all 0.4s ease-in-out;
     -o-transition: all 0.4s ease-in-out;
@@ -120,15 +120,15 @@ a {
     transition: all 0.4s ease-in-out;
 }
 
-.btn-hover:focus {
+.button-1:focus {
     outline: none;
 }
 
-.btn-hover.color-1 {
+/* .button-1.color-1 {
     background-color: #faade3;
     background-image: linear-gradient(to right, #852d91, #a3a1ff, #f24645);
     box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
-}
+} */
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,

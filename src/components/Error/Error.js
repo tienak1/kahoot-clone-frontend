@@ -1,7 +1,6 @@
-import React from 'react'
+import React from "react";
 
-import Typography from '@mui/material/Typography'
-
+import Typography from "@mui/material/Typography";
 
 const Error = () => {
     return (
@@ -13,8 +12,10 @@ const Error = () => {
             gutterBottom
             marginTop="4.5rem"
             fontFamily="PatrickHand"
-        >404</Typography>
-    )
-}
+        >
+            ERROR
+        </Typography>
+    );
+};
 
-export default Error
+export default Error;

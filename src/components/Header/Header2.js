@@ -1,38 +1,38 @@
-import React, { useContext, useState } from 'react'
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import cssStyle from "./Header.module.css"
-import CottageIcon from '@mui/icons-material/Cottage';
-import { AppContext } from '../../context/AppContext';
-import { logout } from '../../service/AccountService';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import cssStyle from "./Header.module.css";
+import CottageIcon from "@mui/icons-material/Cottage";
+import { AppContext } from "../../context/AppContext";
+import { logout } from "../../service/AccountService";
+import { useNavigate } from "react-router-dom";
 const pages = [
     {
-        text: "Nhóm của tôi",
+        text: "My Group",
         href: "/group",
     },
     {
-        text: "Bản trình bày",
+        text: "My Presentation",
         href: "/presentation",
     },
 ];
 const settings = [
     {
-        text: "Thông tin cá nhân",
+        text: "My Profile",
         href: "/me",
     },
     {
-        text: "Đăng xuất",
+        text: "Logout",
         href: "/logout",
     },
 ];
@@ -40,7 +40,7 @@ const settings = [
 const Header2 = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
-    const {user} = useContext(AppContext)
+    const { user } = useContext(AppContext);
     const navigate = useNavigate();
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -58,22 +58,28 @@ const Header2 = () => {
     };
 
     return (
-        <AppBar position="sticky" className={`${cssStyle.header}`} >
+        <AppBar position="sticky" className={`${cssStyle.header}`}>
             <Container maxWidth="100%">
                 <Toolbar disableGutters>
-                    <CottageIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    <CottageIcon
+                        sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+                    />
                     <Box
                         className={`${cssStyle.title}`}
                         sx={{
-                            display: { xs: 'none', md: 'flex' },
+                            display: { xs: "none", md: "flex" },
                             mr: 2,
                         }}
                     >
-
-                        Cattoot
+                        Menti Clone
                     </Box>
                     {/* ======= MOBILE HEADER ======== */}
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                    <Box
+                        sx={{
+                            flexGrow: 1,
+                            display: { xs: "flex", md: "none" },
+                        }}
+                    >
                         <IconButton
                             size="large"
                             aria-label="account of current user"
@@ -88,48 +94,69 @@ const Header2 = () => {
                             id="menu-appbar"
                             anchorEl={anchorElNav}
                             anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
+                                vertical: "bottom",
+                                horizontal: "left",
                             }}
                             keepMounted
                             transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
+                                vertical: "top",
+                                horizontal: "left",
                             }}
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
                             sx={{
-                                display: { xs: 'block', md: 'none' },
+                                display: { xs: "block", md: "none" },
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page.href} onClick={()=>{
-                                    navigate(page.href)
-                                    handleCloseNavMenu()
-                                }} >
-                                    <Typography textAlign="center" fontFamily="Kanit">{page.text}</Typography>
+                                <MenuItem
+                                    key={page.href}
+                                    onClick={() => {
+                                        navigate(page.href);
+                                        handleCloseNavMenu();
+                                    }}
+                                >
+                                    <Typography
+                                        textAlign="center"
+                                        fontFamily="Kanit"
+                                    >
+                                        {page.text}
+                                    </Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
                     </Box>
-                    <CottageIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    <CottageIcon
+                        sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
+                    />
                     <Box
                         className={`${cssStyle.title}`}
                         sx={{
-                            display: { xs: 'flex', md: 'none' },
+                            display: { xs: "flex", md: "none" },
                             flexGrow: 1,
                         }}
                     >
-                        Cattoot
+                        Menti Clone
                     </Box>
                     {/* ============================== */}
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                    <Box
+                        sx={{
+                            flexGrow: 1,
+                            display: { xs: "none", md: "flex" },
+                        }}
+                    >
                         {pages.map((page) => (
                             <Button
                                 key={page.href}
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block', fontFamily: 'Kanit', fontSize: '20px' }}
+                                sx={{
+                                    my: 2,
+                                    color: "white",
+                                    display: "block",
+                                    fontFamily: "Kanit",
+                                    fontSize: "20px",
+                                }}
                                 href={page.href}
                             >
                                 {page.text}
@@ -138,49 +165,56 @@ const Header2 = () => {
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        <Button 
-                            onClick={handleOpenUserMenu} 
+                        <Button
+                            onClick={handleOpenUserMenu}
                             sx={{
-                                p:0,
+                                p: 0,
                                 fontSize: "20px",
                                 color: "white",
-                                fontFamily: "Kanit"
+                                fontFamily: "Kanit",
                             }}
                         >
-                            Chào, {user.fullname}
+                            Hi, {user.fullname}
                         </Button>
                         <Menu
-                            sx={{ mt: '45px' }}
+                            sx={{ mt: "45px" }}
                             id="menu-appbar"
                             anchorEl={anchorElUser}
                             anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
+                                vertical: "top",
+                                horizontal: "right",
                             }}
                             keepMounted
                             transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
+                                vertical: "top",
+                                horizontal: "right",
                             }}
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
                             {settings.map((setting) => (
-                                <MenuItem key={setting.href} onClick={() => {
-                                    handleCloseUserMenu();
-                                    if (setting.href === "/logout") {
-                                        //Call API logout và redirect về login
-                                        logout()
-                                        navigate("/login")
-                                    }
-                                }} href={setting.href}>
+                                <MenuItem
+                                    key={setting.href}
+                                    onClick={() => {
+                                        handleCloseUserMenu();
+                                        if (setting.href === "/logout") {
+                                            //Call API logout và redirect về login
+                                            logout();
+                                            navigate("/login");
+                                        }
+                                    }}
+                                    href={setting.href}
+                                >
                                     <Typography textAlign="center">
                                         {setting.href === "/logout" ? (
-                                            <>
-                                                {setting.text}
-                                            </>
+                                            <>{setting.text}</>
                                         ) : (
-                                            <a href={setting.href} style={{ color: "black" }}>{setting.text}</a>
+                                            <a
+                                                href={setting.href}
+                                                style={{ color: "black" }}
+                                            >
+                                                {setting.text}
+                                            </a>
                                         )}
                                     </Typography>
                                 </MenuItem>
@@ -191,6 +225,6 @@ const Header2 = () => {
             </Container>
         </AppBar>
     );
-}
+};
 
-export default Header2
+export default Header2;

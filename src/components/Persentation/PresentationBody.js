@@ -109,7 +109,7 @@ const PresentationBody = ({
                     ) : (
                         <AddIcon sx={{ marginRight: "0.5rem" }}></AddIcon>
                     )}
-                    <p>Thêm slide</p>
+                    <p>Add slide</p>
                 </Button>
                 <Box
                     sx={{

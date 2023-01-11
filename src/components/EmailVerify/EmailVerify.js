@@ -40,12 +40,10 @@ const EmailVerify = () => {
                 <div>loading...</div>
             ) : validUrl ? (
                 <div>
-                    <h1 style={{ fontSize: "50px" }}>
-                        Xác minh email tài khoản thành công.
-                    </h1>
+                    <h1 style={{ fontSize: "50px" }}>Verify Successfully.</h1>
                     <Link to="/login">
                         <Button color="primary" variant="contained">
-                            Đăng nhập
+                            Login
                         </Button>
                     </Link>
                 </div>

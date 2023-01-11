@@ -55,7 +55,7 @@ export default function ChangePassForm(props) {
                 setIncorrectPass(false);
                 logout();
                 navigate("/login");
-                toast.success("Đổi mật khẩu thành công");
+                toast.success("Change password successfully");
             }
         } catch (err) {
             setLoading(false);
@@ -75,7 +75,7 @@ export default function ChangePassForm(props) {
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     <TextField
-                        label="Mật khẩu hiện tại"
+                        label="Old password"
                         type="password"
                         fullWidth
                         required
@@ -108,11 +108,11 @@ export default function ChangePassForm(props) {
                         onChange={handlePassChange}
                         error={!!incorrectPass}
                         helperText={
-                            incorrectPass ? "Mật khẩu không đúng" : null
+                            incorrectPass ? "Password is not right" : null
                         }
                     />
                     <TextField
-                        label="Mật khẩu mới"
+                        label="New Password"
                         type="password"
                         fullWidth
                         required
@@ -144,7 +144,7 @@ export default function ChangePassForm(props) {
                         {...register("newPassword")}
                     />
                     <TextField
-                        label="Nhập lại mật khẩu mới"
+                        label="Retype New Password"
                         type="password"
                         fullWidth
                         required
@@ -176,7 +176,7 @@ export default function ChangePassForm(props) {
                         {...register("confirmPassword", {
                             validate: (value) =>
                                 value === watch("newPassword") ||
-                                "Mật khẩu không trùng khớp",
+                                "Passwords do not match",
                         })}
                         error={!!errors?.confirmPassword}
                         helperText={
@@ -187,7 +187,7 @@ export default function ChangePassForm(props) {
                     />
                     <div className={`${cssStyle["btn-center"]}`}>
                         <button
-                            className="btn-hover color-1"
+                            className="button-1 color-1"
                             type="submit"
                             disabled={loading}
                             style={{
@@ -214,7 +214,7 @@ export default function ChangePassForm(props) {
                                     />
                                 </Stack>
                             ) : (
-                                "Đổi mật khẩu"
+                                "Change"
                             )}
                         </button>
                     </div>
@@ -223,7 +223,7 @@ export default function ChangePassForm(props) {
                     className={`${cssStyle["link-btn"]}`}
                     onClick={() => props.onFormSwitch("name")}
                 >
-                    Bạn muốn đổi tên
+                    Do you want to change name?
                 </button>
             </main>
         </ThemeProvider>

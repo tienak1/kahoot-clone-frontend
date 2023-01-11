@@ -263,7 +263,7 @@ const ViewerScreen = ({ presentation }) => {
                         ></TextField>
                         <button
                             onClick={handleSubmitQuestion}
-                            className="btn-hover color-1"
+                            className="button-1 color-1"
                             style={{
                                 fontSize: "1.5rem",
                                 marginLeft: "auto",
@@ -385,7 +385,7 @@ const ViewerScreen = ({ presentation }) => {
                         </FormControl>
                         <button
                             onClick={handleSubmit}
-                            className="btn-hover color-1"
+                            className="button-1 color-1"
                             style={{
                                 fontSize: "1.5rem",
                                 marginLeft: "auto",

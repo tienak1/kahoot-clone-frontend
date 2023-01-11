@@ -32,10 +32,10 @@ const CreateGroupForm = () => {
 
             console.log(res);
             if (res.status === API_STATUS.INVALID_INPUT) {
-                if (res.message === MESSAGE.MISSING_INPUT("Tên nhóm")) {
+                if (res.message === MESSAGE.MISSING_INPUT("Group Name")) {
                     toast.error(res.message);
                 }
-                if (res.message === MESSAGE.MISSING_INPUT("Mô tả nhóm")) {
+                if (res.message === MESSAGE.MISSING_INPUT("Description")) {
                     toast.error(res.message);
                 }
             }
@@ -60,13 +60,13 @@ const CreateGroupForm = () => {
     return (
         <div>
             <div className={`${cssStyle["form-container"]}`}>
-                <h2 className={`${cssStyle["form-title"]}`}>Tạo nhóm</h2>
+                <h2 className={`${cssStyle["form-title"]}`}>Create Group</h2>
                 <form
                     className={`${cssStyle["login-form"]}`}
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     <TextField
-                        label="Tên Nhóm"
+                        label="Group Name"
                         fullWidth
                         required
                         variant="outlined"
@@ -99,7 +99,7 @@ const CreateGroupForm = () => {
                         helperText={existedName ? MESSAGE.EXISTED_GROUP : null}
                     />
                     <TextField
-                        label="Mô Tả"
+                        label="Description"
                         rows={3}
                         multiline
                         required
@@ -145,7 +145,7 @@ const CreateGroupForm = () => {
                 )} */}
                     <div className={`${cssStyle["btn-center"]}`}>
                         <button
-                            className="btn-hover color-1"
+                            className="button-1 color-1"
                             type="submit"
                             style={{
                                 ...(loading && {
@@ -162,7 +162,7 @@ const CreateGroupForm = () => {
                                     alignItems="center"
                                     justifyContent="center"
                                 >
-                                    <Box>Đang tạo nhóm</Box>
+                                    <Box>Loading</Box>
                                     <CircularProgress
                                         size={20}
                                         sx={{
@@ -171,12 +171,12 @@ const CreateGroupForm = () => {
                                     />
                                 </Stack>
                             ) : (
-                                "Tạo nà (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧"
+                                "Create"
                             )}
                         </button>
                     </div>
                 </form>
-                {/* <button className="btn-hover color-background" >Already have an account? Login here.</button> */}
+                {/* <button className="button-1 color-background" >Already have an account? Login here.</button> */}
             </div>
         </div>
     );

@@ -11,8 +11,8 @@
         border: 10px solid;
         border-image-slice: 1;
         border-width: 5px;
-        border-image-source: linear-gradient(79deg, #7439db, #C66FBC 48%, #F7944D);
-
+        background-color: #badb9e;
+        border: none;
         border-radius: 10px;
         margin: 6rem 2rem;
     }
@@ -22,25 +22,25 @@
     font-size: 40px;
     padding: 10px;
     color: white;
-    font-family: 'PatrickHand';
+    font-family: "PatrickHand";
 }
 .name-text {
     padding: 0px 10px;
     font-size: 40px;
     color: white;
-    font-family: 'PatrickHand';
+    font-family: "PatrickHand";
 }
 .email-text {
     margin-bottom: 20px;
     font-size: 20px;
     color: white;
-    font-family: 'PatrickHand';
+    font-family: "PatrickHand";
 }
 
 .form-label {
     color: white;
     font-size: 18px;
-    font-family: 'PatrickHand';
+    font-family: "PatrickHand";
     font-weight: 100;
     text-align: left;
     padding: 0.25rem 0;
@@ -48,14 +48,14 @@
 
 .form-input {
     font-size: 18px;
-    font-family: 'PatrickHand';
+    font-family: "PatrickHand";
     margin: 0.5rem 0;
 }
 
 .form-textarea {
     font-size: 18px;
 
-    font-family: 'PatrickHand';
+    font-family: "PatrickHand";
     resize: none;
     margin: 0.5rem 0;
     height: 100px;
@@ -85,9 +85,9 @@
 }
 
 .link-btn {
-    font-family: 'Kanit';
+    font-family: "Kanit";
     font-size: 18px;
     background: none;
     color: white;
     text-decoration: underline;
-  }
+}

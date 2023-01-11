@@ -118,7 +118,7 @@ export default function GroupDetail() {
                 setDetail(res.data[0]);
                 setRow(res.data[0].members);
                 // window.location.reload();
-                toast.info("Xóa thành viên thành công");
+                toast.info("Delete member successfully");
             }
         } catch (err) {
             setLoading(false);
@@ -156,7 +156,7 @@ export default function GroupDetail() {
         const accountID = data.groupID;
         if (groupID && accountID && groupID === detail.groupID) {
             if (accountID == user.accountID) {
-                toast.info("Bạn đã bị xóa khỏi nhóm này !");
+                toast.info("You has been deleted from this group");
                 setTimeout(() => {
                     navigate("/group");
                 }, [2000]);
@@ -227,7 +227,7 @@ export default function GroupDetail() {
                 marginBottom="0rem"
                 fontFamily="PatrickHand"
             >
-                Nhóm: {detail.name}
+                Group: {detail.name}
             </Typography>
             <Typography
                 component="h1"
@@ -238,10 +238,10 @@ export default function GroupDetail() {
                 fontSize="2rem"
                 fontFamily="PatrickHand"
             >
-                Mô tả: {detail.description}
+                Description: {detail.description}
             </Typography>
             <button
-                className="btn-hover color-1"
+                className="button-1 color-1"
                 onClick={() => {
                     // handleClickInviteDialogOpen(
                     //     item.groupID
@@ -252,7 +252,7 @@ export default function GroupDetail() {
                     margin: "15px auto",
                 }}
             >
-                Gửi lời mời
+                Send Invite Link
             </button>
             <InviteGroupDialog
                 open={!!inviteGroup}
@@ -282,7 +282,7 @@ export default function GroupDetail() {
                                             color: "white",
                                         }}
                                     >
-                                        TÊN
+                                        NAME
                                     </TableCell>
                                     <TableCell
                                         sx={{
@@ -304,7 +304,7 @@ export default function GroupDetail() {
                                         }}
                                         align="left"
                                     >
-                                        VAI TRÒ
+                                        ROLE
                                     </TableCell>
                                 </TableRow>
                             </TableHead>
@@ -414,7 +414,7 @@ export default function GroupDetail() {
                                     type="submit"
                                     // onClick={handleClose}
                                 >
-                                    Xóa khỏi nhóm
+                                    Delete from this group
                                 </Button>
                             </Box>
                         </form>
@@ -430,7 +430,7 @@ export default function GroupDetail() {
                                 color="#F7944D"
                                 marginTop="20px"
                             >
-                                Đổi vai trò
+                                Change Role
                             </Typography>
                             <Box align="center">
                                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -442,7 +442,7 @@ export default function GroupDetail() {
                                             <TextField
                                                 select
                                                 fullWidth
-                                                label="Lựa chọn"
+                                                label="Select"
                                                 inputProps={register(
                                                     "role",
                                                     {}
