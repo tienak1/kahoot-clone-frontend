@@ -38,10 +38,12 @@ const SlideSetting = ({ slide, handleChangeSlide }) => {
     const handleCancel = () => {
         setIsModalOpen(false);
     };
+    // ANTD MODAL
 
     const warningDelete = () => {
         toast.warning("Không thể xóa lựa chọn này");
     };
+
     const slideContent = useMemo(() => {
         return slide.content;
     }, [slide]);
@@ -137,7 +139,6 @@ const SlideSetting = ({ slide, handleChangeSlide }) => {
         const resUser = await getAllAccount();
         const listUser = resUser.data; //{fullname,accountID} - array
         const listOption = res.data[0].option; //{id,option:[{key,value,submitBy:[{accountID, _id}]}]} - array
-
         setSlideResult(res.data[0].option);
     };
 
