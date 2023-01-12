@@ -87,3 +87,9 @@ export const displayResult = async ({ presentationID, slideID }) => {
         slideID,
     });
 };
+
+export const markAsAnsweredQuestion = async ({ questionID }) => {
+    return makeRequest(HTTP_METHOD.POST, `${QUESTION_URI}/answer`, {
+        questionID,
+    });
+};

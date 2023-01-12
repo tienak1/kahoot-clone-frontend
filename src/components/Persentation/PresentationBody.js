@@ -33,7 +33,6 @@ const PresentationBody = ({
     screen,
     changeCurrentSlideID,
 }) => {
-    const [listQuestion, setListQuestion] = useState([]);
     const handleSlideShowNextSlide = async (slide) => {
         changeSelectedSlide(slide);
         try {
@@ -47,19 +46,10 @@ const PresentationBody = ({
         }
     };
 
-    const getQuestionListFromUser = async () => {
-        const res = await getQuestionList({
-            presentationID: presentation.presentationID,
-            isAnswered: false,
-        });
-        setListQuestion(res.data);
-    };
-
     useEffect(() => {
         try {
             socket.connect();
             socket.emit(SOCKET_TYPE.RELOAD_PRESENTATION, presentation);
-            getQuestionListFromUser();
         } catch (error) {
             console.log(error);
         }
@@ -178,10 +168,7 @@ const PresentationBody = ({
                             )}
 
                             {/* Cập nhật ở màn hình giữa  */}
-                            <SlideShow
-                                slide={selectedSlide}
-                                listQuestion={listQuestion}
-                            ></SlideShow>
+                            <SlideShow slide={selectedSlide}></SlideShow>
 
                             {selectedSlide.slideOrder + 1 <
                             presentation.slides.length ? (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {
@@ -11,17 +11,29 @@ import {
 } from "recharts";
 import { useState } from "react";
 import {
+    Button,
     Grid,
     List,
     ListItem,
     ListItemButton,
     ListItemText,
 } from "@mui/material";
-import { getQuestionList } from "../../service/PersentationService";
+import {
+    getQuestionList,
+    markAsAnsweredQuestion,
+} from "../../service/PersentationService";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 
-const SlideShow = ({ slide, listQuestion }) => {
+const SlideShow = ({ slide }) => {
+    const [listQuestion, setListQuestion] = useState([]);
+    const getQuestionListFromUser = async () => {
+        const res = await getQuestionList({
+            presentationID: slide.presentationID,
+            isAnswered: false,
+        });
+        setListQuestion(res.data);
+    };
     // component đê trình chiếu
     if (slide.content.heading || slide.content.subHeading) {
         var dataHeading = [];
@@ -47,7 +59,15 @@ const SlideShow = ({ slide, listQuestion }) => {
         );
     };
 
-    console.log("Slide Show", listQuestion);
+    useEffect(() => {
+        getQuestionListFromUser();
+    }, [listQuestion]);
+
+    const handleAnswerQuestion = async (data) => {
+        console.log("Clicked đây nèeeeeee");
+        const res = await markAsAnsweredQuestion(data);
+        console.log("Slide Show: res.data", res.data);
+    };
     return (
         <React.Fragment>
             {(slide.content.heading && slide.content.subHeading) ||
@@ -93,19 +113,33 @@ const SlideShow = ({ slide, listQuestion }) => {
                     </Typography>
 
                     <Grid container spacing={2}>
-                        <Grid item xs={6}>
+                        <Grid item xs={3}>
                             <List>
+                                {/* <Typography variant>Questions are not answer</Typography> */}
                                 {listQuestion.map((item) => (
-                                    <ListItem disablePadding>
-                                        <ListItemButton>
+                                    <ListItem
+                                        disablePadding
+                                        style={{ backgroundColor: "#FFF6BD" }}
+                                    >
+                                        <ListItemButton
+                                            onClick={() =>
+                                                handleAnswerQuestion({
+                                                    questionID: item.questionID,
+                                                })
+                                            }
+                                        >
                                             <ListItemText
                                                 primary={item.question}
                                                 fontFamily="PatrickHand"
                                             />
                                             {item.isAnswered ? (
-                                                <CheckIcon></CheckIcon>
+                                                <Button>
+                                                    <CheckIcon />
+                                                </Button>
                                             ) : (
-                                                <CloseIcon />
+                                                <Button>
+                                                    <CloseIcon />
+                                                </Button>
                                             )}
                                         </ListItemButton>
                                     </ListItem>
