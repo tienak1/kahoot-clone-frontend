@@ -24,8 +24,8 @@ const WaitingSlide = () => {
                         margin: "0 auto",
                     }}
                 />
-                <h1 style={{ fontSize: "25px" }}>
-                    Vui lòng chờ người chủ trì chuyển sang slide tiếp theo.
+                <h1 style={{ fontSize: "25px", color: "#fff" }}>
+                    Waiting for the host change to next slide.
                 </h1>
             </Stack>
         </Box>

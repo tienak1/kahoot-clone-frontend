@@ -18,8 +18,10 @@ import {
     ListItemText,
 } from "@mui/material";
 import { getQuestionList } from "../../service/PersentationService";
+import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
 
-const SlideShow = ({ slide }) => {
+const SlideShow = ({ slide, listQuestion }) => {
     // component đê trình chiếu
     if (slide.content.heading || slide.content.subHeading) {
         var dataHeading = [];
@@ -45,6 +47,7 @@ const SlideShow = ({ slide }) => {
         );
     };
 
+    console.log("Slide Show", listQuestion);
     return (
         <React.Fragment>
             {(slide.content.heading && slide.content.subHeading) ||
@@ -91,29 +94,27 @@ const SlideShow = ({ slide }) => {
 
                     <Grid container spacing={2}>
                         <Grid item xs={6}>
-                            Question is not answered
                             <List>
-                                <ListItem disablePadding>
-                                    <ListItemButton>
-                                        <ListItemText
-                                            primary="éc"
-                                            fontFamily="PatrickHand"
-                                        />
-                                    </ListItemButton>
-                                </ListItem>
-                                <ListItem disablePadding>
-                                    <ListItemButton>
-                                        <ListItemText
-                                            primary="Drafts"
-                                            fontFamily="PatrickHand"
-                                        />
-                                    </ListItemButton>
-                                </ListItem>
+                                {listQuestion.map((item) => (
+                                    <ListItem disablePadding>
+                                        <ListItemButton>
+                                            <ListItemText
+                                                primary={item.question}
+                                                fontFamily="PatrickHand"
+                                            />
+                                            {item.isAnswered ? (
+                                                <CheckIcon></CheckIcon>
+                                            ) : (
+                                                <CloseIcon />
+                                            )}
+                                        </ListItemButton>
+                                    </ListItem>
+                                ))}
                             </List>
                         </Grid>
-                        <Grid item xs={6}>
+                        {/* <Grid item xs={6}>
                             Question is answered
-                        </Grid>
+                        </Grid> */}
                     </Grid>
 
                     {/* <ResponsiveContainer>

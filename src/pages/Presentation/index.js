@@ -174,7 +174,7 @@ const PresentationListPage = () => {
                 >
                     <Grid container spacing={4}>
                         {presentationList.map((item, index) => (
-                            <Grid item key={index} xs={12} sm={6} md={4}>
+                            <Grid item key={index} xs={12} sm={6} md={3}>
                                 <Card
                                     sx={{
                                         height: "100%",

@@ -14,8 +14,8 @@ const EndSlide = () => {
                 justifyContent: "center",
             }}
         >
-            <h1 style={{ fontSize: "28px" }}>
-                Bản trình bày đã kết thúc. Cảm ơn bạn đã tham gia.
+            <h1 style={{ fontSize: "28px", color: "#fff" }}>
+                The presentation is end. Thanks for joining
             </h1>
         </Box>
     );
