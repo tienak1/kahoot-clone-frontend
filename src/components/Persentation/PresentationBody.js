@@ -33,6 +33,7 @@ const PresentationBody = ({
     screen,
     changeCurrentSlideID,
 }) => {
+    const [listQuestion, setListQuestion] = useState([]);
     const handleSlideShowNextSlide = async (slide) => {
         changeSelectedSlide(slide);
         try {
@@ -51,7 +52,7 @@ const PresentationBody = ({
             presentationID: presentation.presentationID,
             isAnswered: false,
         });
-        console.log(res.data);
+        setListQuestion(res.data);
     };
 
     useEffect(() => {
@@ -177,7 +178,10 @@ const PresentationBody = ({
                             )}
 
                             {/* Cập nhật ở màn hình giữa  */}
-                            <SlideShow slide={selectedSlide}></SlideShow>
+                            <SlideShow
+                                slide={selectedSlide}
+                                listQuestion={listQuestion}
+                            ></SlideShow>
 
                             {selectedSlide.slideOrder + 1 <
                             presentation.slides.length ? (

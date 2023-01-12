@@ -16,6 +16,8 @@ import CottageIcon from "@mui/icons-material/Cottage";
 import { AppContext } from "../../context/AppContext";
 import { logout } from "../../service/AccountService";
 import { useNavigate } from "react-router-dom";
+import GroupsIcon from "@mui/icons-material/Groups";
+import CoPresentIcon from "@mui/icons-material/CoPresent";
 const pages = [
     {
         text: "My Group",
@@ -61,9 +63,6 @@ const Header2 = () => {
         <AppBar position="sticky" className={`${cssStyle.header}`}>
             <Container maxWidth="100%">
                 <Toolbar disableGutters>
-                    <CottageIcon
-                        sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-                    />
                     <Box
                         className={`${cssStyle.title}`}
                         sx={{
@@ -144,6 +143,7 @@ const Header2 = () => {
                         sx={{
                             flexGrow: 1,
                             display: { xs: "none", md: "flex" },
+                            marginLeft: "54%",
                         }}
                     >
                         {pages.map((page) => (

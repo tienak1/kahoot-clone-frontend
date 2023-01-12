@@ -171,7 +171,7 @@ const ViewerScreen = ({ presentation }) => {
                     sx={{
                         width: "100%",
                         padding: "4rem",
-                        background: "#202020",
+                        background: "#white",
                         flex: "1 1 auto",
                     }}
                 >
@@ -260,6 +260,7 @@ const ViewerScreen = ({ presentation }) => {
                         <TextField
                             onBlur={handleChangeQuestion}
                             value={valueQuestion}
+                            style={{ color: "#fff" }}
                         ></TextField>
                         <button
                             onClick={handleSubmitQuestion}
@@ -287,7 +288,7 @@ const ViewerScreen = ({ presentation }) => {
                                         sx={{ color: "#fff" }}
                                     />
                                 )}
-                                <div>Gửi câu hỏi</div>
+                                <div>Send Question</div>
                             </Stack>
                         </button>
                     </Stack>
@@ -308,7 +309,7 @@ const ViewerScreen = ({ presentation }) => {
                         color="white"
                         fontFamily="PatrickHand"
                     >
-                        Cattoot
+                        Menti
                     </Typography>
                     <Stack
                         direction="column"
@@ -342,8 +343,6 @@ const ViewerScreen = ({ presentation }) => {
                                                 border: "2px solid",
                                                 borderImageSlice: 1,
                                                 borderWidth: "2px",
-                                                borderImageSource:
-                                                    "linear-gradient(79deg, #7439db, #C66FBC 48%, #F7944D)",
                                                 marginY: "1rem",
                                                 "& .MuiRadio-root": {
                                                     color: "#fff",
@@ -409,7 +408,7 @@ const ViewerScreen = ({ presentation }) => {
                                         sx={{ color: "#fff" }}
                                     />
                                 )}
-                                <div>Xác nhận</div>
+                                <div>Submit</div>
                             </Stack>
                         </button>
                     </Stack>
